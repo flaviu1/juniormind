@@ -9,13 +9,13 @@ namespace Trains
         [TestMethod]
         public void TestMethod1()
         {
-            int CalculateDistance=DistanceBird(30,12000);
+            int total = CalculateDistance(12);
+            Assert.AreEqual(6, total );
         }
-        int DistanceBird(int speed, int distance)
-        {
-            int start = 1 / 4 * distance;
-            int speedTime = start * 60 / speed;
-            return 2 * start;
-        }
-    }
+        int CalculateDistance(int distance)
+             {
+                  int bird = 1/2 * distance;
+                  return bird;
+             }
+     }
 }
