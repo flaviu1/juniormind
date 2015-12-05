@@ -1,0 +1,5 @@
+C:\Users\flaviu\Documents\GitHub\juniormind\Trainss\Trainss\obj\Debug\Trainss.csprojResolveAssemblyReference.cache
+C:\Users\flaviu\Documents\GitHub\juniormind\Trainss\Trainss\bin\Debug\Trainss.dll
+C:\Users\flaviu\Documents\GitHub\juniormind\Trainss\Trainss\bin\Debug\Trainss.pdb
+C:\Users\flaviu\Documents\GitHub\juniormind\Trainss\Trainss\obj\Debug\Trainss.dll
+C:\Users\flaviu\Documents\GitHub\juniormind\Trainss\Trainss\obj\Debug\Trainss.pdb
