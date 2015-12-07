@@ -1,0 +1,5 @@
+C:\Users\flaviu\Documents\GitHub\juniormind\Goats\Goats\obj\Debug\Goats.csprojResolveAssemblyReference.cache
+C:\Users\flaviu\Documents\GitHub\juniormind\Goats\Goats\bin\Debug\Goats.dll
+C:\Users\flaviu\Documents\GitHub\juniormind\Goats\Goats\bin\Debug\Goats.pdb
+C:\Users\flaviu\Documents\GitHub\juniormind\Goats\Goats\obj\Debug\Goats.dll
+C:\Users\flaviu\Documents\GitHub\juniormind\Goats\Goats\obj\Debug\Goats.pdb
