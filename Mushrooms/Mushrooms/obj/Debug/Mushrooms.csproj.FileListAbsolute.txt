@@ -1,0 +1,5 @@
+C:\Users\flaviu\Documents\GitHub\juniormind\Mushrooms\Mushrooms\bin\Debug\Mushrooms.dll
+C:\Users\flaviu\Documents\GitHub\juniormind\Mushrooms\Mushrooms\bin\Debug\Mushrooms.pdb
+C:\Users\flaviu\Documents\GitHub\juniormind\Mushrooms\Mushrooms\obj\Debug\Mushrooms.csprojResolveAssemblyReference.cache
+C:\Users\flaviu\Documents\GitHub\juniormind\Mushrooms\Mushrooms\obj\Debug\Mushrooms.dll
+C:\Users\flaviu\Documents\GitHub\juniormind\Mushrooms\Mushrooms\obj\Debug\Mushrooms.pdb
