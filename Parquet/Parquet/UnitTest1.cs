@@ -10,13 +10,17 @@ namespace Parquet
         [TestMethod]
         public void TestMethod1()
         {
-            Assert.AreEqual(10, CalculateParquet(100, 100, 10, 100));
+            Assert.AreEqual(10,CalculateParquet(100, 100, 10, 100));
         }
 
-        int CalculateParquet(int lenghtRoom, int widthRoom, int lenghtParquet, int widthParquet)
+        float CalculateParquet(int lenghtRoom, int widthRoom, int lenghtParquet, int widthParquet)
         {
-            float Board = (lenghtRoom * widthRoom + (15 / 100) * lenghtRoom * widthRoom) / (lenghtParquet * widthParquet);
-            return (int)Board;
+
+            float squareFeet = (lenghtRoom * widthRoom);
+            float squareParquet = (lenghtParquet * widthParquet);
+            float loss = (15 / 100) * lenghtRoom * widthRoom;
+            float Board = (squareFeet + loss) / (squareParquet);
+            return Board;
         }
 
     }
