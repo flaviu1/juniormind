@@ -9,12 +9,11 @@ namespace Sports
         [TestMethod]
         public void TestMethod1()
         {
-            Assert.AreEqual(16,calculate(4));
-            Assert.AreEqual(49, calculate(7));
+            Assert.AreEqual(16,Calculate(4));
         }
-        int calculate(int Round)
+        int Calculate(int round)
         {
-            return Round * Round ;
+            return round * round ;
         }
     }
 }
