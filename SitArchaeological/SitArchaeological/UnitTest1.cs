@@ -10,6 +10,10 @@ namespace SitArchaeological
         public void TestMethod1()
         {
             Assert.AreEqual(12,CalculateAriaMinimum(0,0,3,0,0,4));
+        }
+        [TestMethod]
+        public void TestMethod2()
+        {
             Assert.AreEqual(35, CalculateAriaMinimum(0, 0, 5, 0, 0, 7));
         }
 
