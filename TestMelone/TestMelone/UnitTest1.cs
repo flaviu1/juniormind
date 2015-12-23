@@ -7,8 +7,14 @@ namespace TestMelone
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethod1()
+        public void MelonKilograms()
         {
+            Assert.AreEqual(5, CalculateMeloneForFriends(10));
+        }
+
+        int CalculateMeloneForFriends(int Kilograms)
+        {
+            return Kilograms/2;
         }
     }
 }
