@@ -7,23 +7,26 @@ namespace TestMelone
     public class UnitTest1
     {
         [TestMethod]
-        public void MelonKilograms()
-        {
-            Assert.AreEqual(5, CalculateMeloneForFriends(10));
-        }
-        [TestMethod]
         public void ForKilogramsEven()
         {
-            Assert.AreEqual(5, CalculateMeloneForFriends(10));
-        } 
+            Assert.AreEqual("yes", CalculateMeloneForFriends(10));
+        }
+        [TestMethod]
         public void ForOdd()
         {
-            Assert.AreEqual(1, CalculateMeloneForFriends(11));
+            Assert.AreEqual("not", CalculateMeloneForFriends(11));
         }
 
-        int CalculateMeloneForFriends(int Kilograms)
+        String CalculateMeloneForFriends(int Kilograms)
         {
-            return Kilograms/2;
+            if(Kilograms%2==0)
+            {
+                return "yes" ;
+            }
+            else
+            {
+                return "not";
+            }
         }
     }
 }
