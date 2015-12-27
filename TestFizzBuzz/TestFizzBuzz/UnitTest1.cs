@@ -9,10 +9,15 @@ namespace TestFizzBuzz
         [TestMethod]
         public void TestForDivizorWithThree()
         {
-            Assert.AreEqual("Fizz",CalculateDivizor(6);
+            Assert.AreEqual("Fizz",CalculateDivizor(6));
+        }
+        [TestMethod]
+        public void TestForDivizorWithFive()
+        {
+            Assert.AreEqual("Buzz", CalculateDivizor(10));
         }
 
-        string CalculateDivizor(int x)
+        string CalculateDivizor(int Number)
         {
             return "a";
         }
