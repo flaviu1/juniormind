@@ -7,8 +7,9 @@ namespace TestFizzBuzz
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethod1()
+        public void TestForDivizorWithThree()
         {
+            Assert.AreEqual("Fizz",CalculateDivizor(6);
         }
 
         string CalculateDivizor(int x)
