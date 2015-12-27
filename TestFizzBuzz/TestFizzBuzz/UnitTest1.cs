@@ -19,12 +19,15 @@ namespace TestFizzBuzz
         [TestMethod]
         public void TestForDivizorWithFiveEndThree()
         {
-            Assert.AreEqual("FizzBuzz", CalculateDivizor(15));
+            Assert.AreEqual("FizzBuzz", CalculateDivizor(30));
         }
 
-        string CalculateDivizor(int Number)
-        {
-            return "a";
-        }
+       String CalculateDivizor( int Number )
+        {   
+            if (Number % 3 == 0) return "Fizz" ;
+            if (Number % 5 == 0) return "Buzz" ;
+            if ((Number % 3 == 0) && (Number % 5 == 0)) return "FizzBuzz" ;
+            return "a"; //dc daca nu pun un retur imi da eroare? numa asa am reusit sa fac sa mearga sau daca pun un else
+        } 
     }
 }
