@@ -16,6 +16,11 @@ namespace TestFizzBuzz
         {
             Assert.AreEqual("Buzz", CalculateDivizor(10));
         }
+        [TestMethod]
+        public void TestForDivizorWithFiveEndThree()
+        {
+            Assert.AreEqual("FizzBuzz", CalculateDivizor(15));
+        }
 
         string CalculateDivizor(int Number)
         {
