@@ -9,24 +9,29 @@ namespace TestMelone
         [TestMethod]
         public void ForKilogramsEven()
         {
-            Assert.AreEqual("yes", CalculateMeloneForFriends(10));
+            Assert.AreEqual("yes", CalculateMeloneForFriends(20));
         }
         [TestMethod]
         public void ForOdd()
         {
             Assert.AreEqual("not", CalculateMeloneForFriends(11));
         }
-
-        String CalculateMeloneForFriends(int Kilograms)
+        [TestMethod]
+        public void casethree()
         {
-            if(Kilograms%2==0)
-            {
-                return "yes" ;
-            }
+            Assert.AreEqual("not", CalculateMeloneForFriends(30));
+        }
+
+        String CalculateMeloneForFriends(int kilograms)
+        {
+            kilograms = kilograms / 2;
+            if (kilograms % 2 != 0)
+                return "not";
             else
             {
-                return "not";
+                return "yes";
             }
+        
         }
     }
 }
