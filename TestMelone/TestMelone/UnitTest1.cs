@@ -19,12 +19,10 @@ namespace TestMelone
         [TestMethod]
         public void casethree()
         {
-            Assert.AreEqual("not", CalculateMeloneForFriends(30));
+            Assert.AreEqual("not", CalculateMeloneForFriends(5));
         }
-
         String CalculateMeloneForFriends(int kilograms)
         {
-            kilograms = kilograms / 2;
             if (kilograms % 2 != 0)
                 return "not";
             else
