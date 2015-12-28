@@ -9,25 +9,35 @@ namespace TestFizzBuzz
         [TestMethod]
         public void TestForDivizorWithThree()
         {
-            Assert.AreEqual("Fizz",CalculateDivizor(6));
+            Assert.AreEqual("Fizz", SolveFizzBuzz(6));
         }
         [TestMethod]
         public void TestForDivizorWithFive()
         {
-            Assert.AreEqual("Buzz", CalculateDivizor(10));
+            Assert.AreEqual("Buzz", SolveFizzBuzz(10));
         }
         [TestMethod]
         public void TestForDivizorWithFiveEndThree()
         {
-            Assert.AreEqual("FizzBuzz", CalculateDivizor(30));
+            Assert.AreEqual("FizzBuzz", SolveFizzBuzz(30));
+        }
+        [TestMethod]
+        public void TestForNotDividedEvenFiveThree()
+            {
+                Assert.AreEqual("it is not divisible with five and three", SolveFizzBuzz(4));
+        }
+        String SolveFizzBuzz(int number)
+       {
+            if ((IsDivisible(number, 3))&&(!(IsDivisible(number,5)))) return "Fizz" ;
+            if ((IsDivisible(number, 5)) && (!(IsDivisible(number, 3)))) return "Buzz";
+            if (IsDivisible(number, 3) && IsDivisible(number, 5)) return "FizzBuzz";
+            if (IsDivisible(number, 2)&&((!IsDivisible(number, 3)) && (!(IsDivisible(number, 5))))) return "it is not divisible with five and three";
+           return "a";
         }
 
-       String CalculateDivizor( int Number )
-        {   
-            if (Number % 3 == 0) return "Fizz" ;
-            if (Number % 5 == 0) return "Buzz" ;
-            if ((Number % 3 == 0) && (Number % 5 == 0)) return "FizzBuzz" ;
-            return "a"; //dc daca nu pun un retur imi da eroare? numa asa am reusit sa fac sa mearga sau daca pun un else
-        } 
+       bool IsDivisible(int number, int divisor)
+       {
+           return number % divisor == 0;
+       }
     }
 }
