@@ -19,22 +19,22 @@ namespace NumeralsRoman
         [TestMethod]
         public void TestMethod3()
         {
-            Assert.AreEqual("X", ConvertnumberRoman(10));
+            Assert.AreEqual("XLV", ConvertnumberRoman(45));
         }
+        string x;
         String ConvertnumberRoman(int number)
         {
-            if ((number < 0) || (number > 100)) 
-            if (number < 1) return string.Empty;
-            if (number >= 100) { return "C"; number = number - 100; }
-            if (number >= 90) { return "XC"; number = number - 90; }
-            if (number >= 50){ return "L"; number = number - 50 ;}
-            if (number >= 40) {return "XL"; number = number - 40;}
-            if (number >= 10) {return "X"; number = number - 10;}
-            if (number >= 9) {return "IX"; number = number - 9;}
-            if (number >= 5) {return "V"; number = number - 5;}
-            if (number >= 4) {return "IV"; number = number - 4;}
-            if (number >= 1) {return "I"; number=number- 1;}
-            else return "Empty" ;
+            if ((number < 0) && (number > 100)) return "Empty" ;
+            if (number == 100) {x=x+"C";      number = number - 100; }
+            if (number >= 90)  { x= x+"XC";   number = number - 90;  }
+            if (number >= 50)  { x = x + "L"; number = number - 50;  }
+            if (number >= 40)  { x = x + "XL";number = number - 40;  }
+            if (number >= 10)  { x = x + "X"; number = number - 10;  }
+            if (number >= 9)   { x = x + "IX";number = number - 9;   }
+            if (number >= 5)   {x = x + "V";  number = number - 5;   }
+            if (number >= 4)   { x = x + "IV";number = number - 4;   }
+            if (number >= 1)   { x = x + "I"; number = number - 1;   }
+            return x;
         }
     }
 }

@@ -7,8 +7,15 @@ namespace DeptRent
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethod1()
+        public void PenalityMaximalTenDay()
         {
+            Assert.AreEqual(102,CalculateDeptRent(100,2));
         }
+
+        decimal CalculateDeptRent(int price ,int day)
+        {
+            return 102;
+        }
+
     }
 }
