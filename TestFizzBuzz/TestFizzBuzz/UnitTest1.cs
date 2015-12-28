@@ -28,11 +28,10 @@ namespace TestFizzBuzz
         }
         String SolveFizzBuzz(int number)
        {
-            if ((IsDivisible(number, 3))&&(!(IsDivisible(number,5)))) return "Fizz" ;
-            if ((IsDivisible(number, 5)) && (!(IsDivisible(number, 3)))) return "Buzz";
             if (IsDivisible(number, 3) && IsDivisible(number, 5)) return "FizzBuzz";
-            if (IsDivisible(number, 2)&&((!IsDivisible(number, 3)) && (!(IsDivisible(number, 5))))) return "it is not divisible with five and three";
-           return "a";
+            if (IsDivisible(number, 3)) return "Fizz" ;
+            if (IsDivisible(number, 5))  return "Buzz";
+            return "it is not divisible with five and three";
         }
 
        bool IsDivisible(int number, int divisor)
