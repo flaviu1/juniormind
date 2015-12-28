@@ -24,12 +24,12 @@ namespace NumeralsRoman
         [TestMethod]
         public void TestMethod4()
         {
-            Assert.AreEqual("LXXVII", ConvertnumberRoman(77));
+            Assert.AreEqual("Empty", ConvertnumberRoman(101));
         }
         string x;
         String ConvertnumberRoman(int number)
-        {
-            if ((number < 0) && (number > 100)) return "Empty" ;
+        { 
+            if ((number < 0) || (number > 100)) return "Empty" ;
             if (number == 100) { x = x + "C";   number = number - 100; }
             if (number >= 90)  { x = x + "XC";  number = number - 90;  }
             if (number >= 50)  { x = x + "L";   number = number - 50;  }
