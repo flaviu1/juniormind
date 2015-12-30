@@ -9,13 +9,14 @@ namespace NumeralsRoman
         [TestMethod]
         public void TestMethod1()
         {
-            Assert.AreEqual("XCIX", ToRoman(99));
-            Assert.AreEqual("XCIX", IntToRoman(99));
+            Assert.AreEqual("MMMCMXCVIII", ToRoman(3998));
+            Assert.AreEqual("MMMCMXCVIII", IntToRoman(3998));
         }
         [TestMethod]
       public void TestMethod2()
         {
-            Assert.AreEqual("LXXVII", ToRoman(77));
+            Assert.AreEqual("DCCLXXVII", ToRoman(777));
+            Assert.AreEqual("DCCLXXVII", ToRoman(777));
           
         }
         public static string ToRoman(int number)
@@ -39,7 +40,17 @@ namespace NumeralsRoman
         }
          String IntToRoman(int number)
         {
-            return "XCIX";
+            string[] thou = { "", "M", "MM", "MMM" };
+            string[] hun = { "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM" };
+            string[] ten = { "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC" };
+            string[] ones = { "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" };
+            string roman = "";
+            roman += thou[(int)(number / 1000) % 10];
+            roman += hun[(int)(number / 100) % 10];
+            roman += ten[(int)(number / 10) % 10];
+            roman += ones[number % 10];
+
+            return roman;
         }
     }
 }
