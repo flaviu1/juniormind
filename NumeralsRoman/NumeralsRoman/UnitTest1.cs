@@ -10,40 +10,47 @@ namespace NumeralsRoman
         public void TestMethod1()
         {
             Assert.AreEqual("MMMCMXCVIII", ToRoman(3998));
+            Assert.AreEqual("MMMCMXCVIII", IntToRoman(3998));
         }
         [TestMethod]
-        public void TestMethod2()
+      public void TestMethod2()
         {
-            Assert.AreEqual("XXXV", ToRoman(35));
+            Assert.AreEqual("DCCLXXVII", ToRoman(777));
+            Assert.AreEqual("DCCLXXVII", ToRoman(777));
+          
         }
-        string x;
-        string ToRoman(int number)
+        public static string ToRoman(int number)
         {
-            while (number >0)
-            {
-                if ((number < 0) || (number > 3999)) return "Empty";
-                if (number >= 3000) { x = x + "MMM"; number = number - 3000; }
-                if (number >= 1000) { x = x + "M"; number = number - 1000; }
-                if (number >= 900) { x = x + "CM"; number = number - 900; }
-                if (number >= 500) { x = x + "D"; number = number - 500; }
-                if (number >= 400) { x = x + "CD"; number = number - 400; }
-                if (number == 100) { x = x + "C"; number = number - 100; }
-                if (number >= 90) { x = x + "XC"; number = number - 90; }
-                if (number >= 50) { x = x + "L"; number = number - 50; }
-                if (number >= 40) { x = x + "XL"; number = number - 40; }
-                if (number >= 20) { x = x + "XX"; number = number - 20; }
-                if (number >= 10) { x = x + "X"; number = number - 10; }
-                if (number >= 9) { x = x + "IX"; number = number - 9; }
-                if (number >= 8) { x = x + "VIII"; number = number - 8; }
-                if (number >= 7) { x = x + "VII"; number = number - 7; }
-                if (number >= 6) { x = x + "VI"; number = number - 6; }
-                if (number >= 5) { x = x + "V"; number = number - 5; }
-                if (number >= 4) { x = x + "IV"; number = number - 4; }
-                if (number >= 3) { x = x + "III"; number = number - 3; }
-                if (number >= 2) { x = x + "II"; number = number - 2; }
-                if (number >= 1) { x = x + "I"; number = number - 1; }
-            }
-            return x;
+            if ((number < 0) || (number > 3999)) throw new ArgumentOutOfRangeException("insert value betwheen 1 and 3999");
+            if (number < 1) return string.Empty;
+            if (number >= 1000) return "M" + ToRoman(number - 1000);
+            if (number >= 900) return "CM" + ToRoman(number - 900); 
+            if (number >= 500) return "D" + ToRoman(number - 500);
+            if (number >= 400) return "CD" + ToRoman(number - 400);
+            if (number >= 100) return "C" + ToRoman(number - 100);
+            if (number >= 90) return "XC" + ToRoman(number - 90);
+            if (number >= 50) return "L" + ToRoman(number - 50);
+            if (number >= 40) return "XL" + ToRoman(number - 40);
+            if (number >= 10) return "X" + ToRoman(number - 10);
+            if (number >= 9) return "IX" + ToRoman(number - 9);
+            if (number >= 5) return "V" + ToRoman(number - 5);
+            if (number >= 4) return "IV" + ToRoman(number - 4);
+            if (number >= 1) return "I" + ToRoman(number - 1);
+            throw new ArgumentOutOfRangeException("something bad happened");
+        }
+         String IntToRoman(int number)
+        {
+            string[] thou = { "", "M", "MM", "MMM" };
+            string[] hun = { "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM" };
+            string[] ten = { "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC" };
+            string[] ones = { "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" };
+            string roman = "";
+            roman += thou[(int)(number / 1000) % 10];
+            roman += hun[(int)(number / 100) % 10];
+            roman += ten[(int)(number / 10) % 10];
+            roman += ones[number % 10];
+
+            return roman;
         }
     }
 }
