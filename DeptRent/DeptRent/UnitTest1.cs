@@ -7,14 +7,16 @@ namespace DeptRent
     public class UnitTest1
     {
         [TestMethod]
-        public void PenalityTenDay()
+        public void PenalityForTenDay()
         {
-            Assert.AreEqual(102,CalculateDeptRent(100,2));
+            Assert.AreEqual(104,CalculateDeptRent(100,2));
         }
 
-        decimal CalculateDeptRent(int price ,int day)
+        decimal CalculateDeptRent(decimal price ,int day)
         {
-            return 102;
+            decimal pricefortenday ;
+           return pricefortenday = price + ((2/100*price)*day);
+           
         }
 
     }

@@ -23,9 +23,7 @@ namespace TestMelone
         }
         String CalculateMeloneForFriends(int kilograms)
         {
-            if (kilograms == 2)
-                return "not";
-            if (kilograms % 2 != 0)
+            if ((kilograms == 2) || ( kilograms % 2 != 0))
                 return "not";
             else
             {
