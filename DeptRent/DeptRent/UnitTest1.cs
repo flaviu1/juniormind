@@ -16,6 +16,11 @@ namespace DeptRent
         {
             Assert.AreEqual(200, CalculateDeptRent(100, 20));
         }
+        [TestMethod]
+        public void PenalityForThirtyOneToFortyDay()
+        {
+            Assert.AreEqual(500, CalculateDeptRent(100, 40));
+        }
         decimal rentDelay;
         decimal CalculateDeptRent(decimal price ,int day)
         {
