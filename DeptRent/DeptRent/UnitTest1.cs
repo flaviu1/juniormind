@@ -14,8 +14,9 @@ namespace DeptRent
 
         decimal CalculateDeptRent(decimal price ,int day)
         {
-            decimal pricefortenday ;
-           return pricefortenday = price + ((2/100*price)*day);
+            decimal priceForMaximumTenAay;
+            priceForMaximumTenAay = price + ((2 * price) / 100 * day);
+            return priceForMaximumTenAay;
            
         }
 
