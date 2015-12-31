@@ -26,6 +26,7 @@ namespace DeptRent
         {
             if ((day >= 1) || (day<= 10)) rentDelay = price + ((2 * price) / 100 * day);
             if ((day >= 11) || (day >= 30)) rentDelay = price + ((5 * price) / 100 * day);
+            if ((day >= 31) || (day >= 40)) rentDelay = price + ((10 * price) / 100 * day);
 
             return rentDelay ;
            
