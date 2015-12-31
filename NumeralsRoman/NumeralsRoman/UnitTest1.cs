@@ -17,9 +17,9 @@ namespace NumeralsRoman
             Assert.AreEqual("XXXV", ToRoman(35));
         }
         [TestMethod]
-        public void TestMethod2()
+        public void TestForBiggerNumber3999()
         {
-            Assert.AreEqual("XXXV", ToRoman(4500));
+            Assert.AreEqual("XXXV", ToRoman(4200));
         }
         string result;
         string ToRoman(int number)
