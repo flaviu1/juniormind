@@ -19,7 +19,33 @@ namespace NumeralsRoman
         string x;
         string ToRoman(int number)
         {
-            while (number >0)
+            int[ ] zecimalnumber = { 1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000 ,3000};
+            string[ ] romannumber = { "I", "IV", "V", "IX", "X", "XL", "L", "XC", "C", "CD", "D", "CM", "M","MMM" };
+            int n=13;
+            if((number>=1)&&(number<=3999))
+                return "Empty";
+            else
+                {
+                 for(int i=zecimalnumber[n]; i>=0 ; i--)
+                    {
+                         while(number>=zecimalnumber[i])
+                         {
+                             x=x +romannumber[i];
+                             number=number-zecimalnumber[i];
+                             n--;
+                         }
+                     }
+                 }
+            return x;
+            
+
+
+
+
+
+
+
+        /*    while (number >0)
             {
                 if ((number < 0) || (number > 3999)) return "Empty";
                 if (number >= 3000) { x = x + "MMM"; number = number - 3000; }
@@ -34,16 +60,11 @@ namespace NumeralsRoman
                 if (number >= 20) { x = x + "XX"; number = number - 20; }
                 if (number >= 10) { x = x + "X"; number = number - 10; }
                 if (number >= 9) { x = x + "IX"; number = number - 9; }
-                if (number >= 8) { x = x + "VIII"; number = number - 8; }
-                if (number >= 7) { x = x + "VII"; number = number - 7; }
-                if (number >= 6) { x = x + "VI"; number = number - 6; }
                 if (number >= 5) { x = x + "V"; number = number - 5; }
                 if (number >= 4) { x = x + "IV"; number = number - 4; }
-                if (number >= 3) { x = x + "III"; number = number - 3; }
-                if (number >= 2) { x = x + "II"; number = number - 2; }
                 if (number >= 1) { x = x + "I"; number = number - 1; }
             }
-            return x;
+            return x;*/
         }
 
     }
