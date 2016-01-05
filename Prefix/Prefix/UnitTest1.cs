@@ -9,12 +9,25 @@ namespace Prefix
         [TestMethod]
         public void TestMethod1()
         {
-            Assert.AreEqual("s",CalculatePrefix("sa","sff"));
+            Assert.AreEqual("s", CalculatePrefix("sa", "sff"));
         }
-        string CalculatePrefix(string stringA, string StringB )
+        [TestMethod]
+        public void TestMethod2()
         {
-            return "s";
+            Assert.AreEqual("abc", CalculatePrefix("abc", "abc"));
         }
-
-     }
-}
+        string x;
+        string CalculatePrefix(string stringA, string stringB)
+        {
+            for (int i = 0; i < stringA.Length; i++)
+            {
+                for (int j = 0; j < stringB.Length; j++)
+                    if (stringA[i] == stringB[j])
+                    {
+                        x = x + stringA[i];
+                    }
+            }
+            return x;
+        }
+    }
+  }
