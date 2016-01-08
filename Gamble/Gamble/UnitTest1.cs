@@ -12,28 +12,27 @@ namespace Gamble
             Assert.AreEqual(8, CalculateProbability(1));
         }
         [TestMethod]
-        public void TestForFactorial()
-        {
-            Assert.AreEqual(40320, CalculateFactorial(8));
+        public void TestForCategory22()
+         {
+            Assert.AreEqual(8, CalculatePosible(6));
         }
         int CalculateProbability(int categori)
         {
             int probability=0;
             return probability;
         }
-
-        int CalculateCombinari(int items ,int submultimi)
+        float CalculatePosible(int categori)
         {
-            return 1;
-        }
-        int CalculateFactorial(int number)
-        {
-            int result = 1;
-            for (int i = 1; i < number+1; i++)
+            int number = 49;
+            float probability = 1;
+            int x=1;
+            while(x<=categori)
             {
-                result = result * i;
+                probability = probability * (x / number);
+                number--;
+                x++;
             }
-            return result;
+            return probability;
         }
     }
 }

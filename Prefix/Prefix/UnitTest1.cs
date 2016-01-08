@@ -16,18 +16,24 @@ namespace Prefix
         {
             Assert.AreEqual("abc", CalculatePrefix("abc", "abc"));
         }
-        string x;
+        [TestMethod]
+        public void TestMethod3()
+        {
+            Assert.AreEqual("ab", CalculatePrefix("abc", "ab"));
+        }
         string CalculatePrefix(string stringA, string stringB)
         {
-            for (int i = 0; i < stringA.Length; i++)
+            string x = string.Empty;
+
+            for (int i = 0; i < Math.Min(stringA.Length, stringB.Length); i++)
             {
-                for (int j = 0; j < stringB.Length; j++)
-                    if (stringA[i] == stringB[j])
-                    {
-                        x = x + stringA[i];
-                    }
+                if (stringA[i] == stringB[i])
+                {
+                    x = x + stringA[i];
+                }
             }
             return x;
         }
     }
-  }
+}
+
