@@ -6,36 +6,36 @@ namespace Panagram
     [TestClass]
     public class UnitTest1
     {
-        private bool folse;
         [TestMethod]
-        public void TestMethod1()
+        public void TestForPanagram()
         {
             Assert.AreEqual("it is a panagram", SearchForPanagram("the quick brown fox jumps over the lazy dog"));
         }
-        string a;
+        [TestMethod]
+        public void Test()
+        {
+            Assert.AreEqual("it is not panagram", SearchForPanagram("tlazy dog "));
+        }
         string SearchForPanagram(string phrase)
         {
-            string alphabet = "abcdefghijklmnopqrstuvwxyz";
-            int contor=0;
-            for (int i = 0; i <= phrase.Length - 1; i++)
+            for (int i = 0; i < phrase.Length ; i++)
             {
-                if (SearchPoint(alphabet, phrase[i]) == true) ;
-                    contor++;
+                if (SearchPoint(phrase[i]) != true)
+                    return "it is not panagram";
             }
-            if (contor == phrase.Length - 1) a="it is a panagram";
-              return a;
+            return "it is a panagram";
         }
 
-        Boolean SearchPoint(string alphabet ,char letter)
+        Boolean SearchPoint(char letter)
         {
-            for (int i = 0; i <= alphabet.Length - 1; i++)
+            string alphabet = "abcdefghijklmnopqrstuvwxyz";
+
+            for (int i = 0; i < alphabet.Length; i++)
             {
-                if (alphabet[i] == letter)
-                   {
-                       return true;
-                   }
-            }  
-             return folse;
+               if(letter != alphabet[i])
+                    return false;
+            }
+            return true;
         }
     }
 }
