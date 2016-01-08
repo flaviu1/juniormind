@@ -9,33 +9,38 @@ namespace Panagram
         [TestMethod]
         public void TestForPanagram()
         {
-            Assert.AreEqual("it is a panagram", SearchForPanagram("the quick brown fox jumps over the lazy dog"));
+            Assert.AreEqual("it is a panagram",IsPanagram("abcdefghijklmnopqrstuvwxyz"));
         }
         [TestMethod]
         public void Test()
         {
-            Assert.AreEqual("it is not panagram", SearchForPanagram("tlazy dog "));
+            Assert.AreEqual("it is not panagram", IsPanagram("tlazy dog "));
         }
-        string SearchForPanagram(string phrase)
+        string IsPanagram(string phrase)
         {
-            for (int i = 0; i < phrase.Length ; i++)
-            {
-                if (SearchPoint(phrase[i]) != true)
-                    return "it is not panagram";
-            }
-            return "it is a panagram";
+            int x = 0;
+            string alphabet = "abcdefghijklmnopqrstuvwxyz";
+            for (int i = 0; i < alphabet.Length ; i++)
+             for (int j = 0; j < phrase.Length ;j++ )
+                {
+                    if (alphabet[i] == phrase[j])
+                        x = x + 1;
+                          break;
+                }
+            if (x != alphabet.Length) return "it is not panagram";
+            else return "it is a panagram";
         }
 
-        Boolean SearchPoint(char letter)
+       /* bool Contains(string phrase, char toFind)   
         {
             string alphabet = "abcdefghijklmnopqrstuvwxyz";
 
-            for (int i = 0; i < alphabet.Length; i++)
+            for (int i = 0; i < phrase.Length; i++)
             {
                if(letter != alphabet[i])
                     return false;
             }
             return true;
-        }
+        }*/
     }
 }
