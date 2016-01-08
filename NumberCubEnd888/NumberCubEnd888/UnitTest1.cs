@@ -30,7 +30,7 @@ namespace NumberCubEnd888
         long CalculateCub(int number)
         {
             int contor = 0;
-            int x = 0;
+            int result = 0;
             if (number == 0)
             {
                 return 0;
@@ -39,12 +39,12 @@ namespace NumberCubEnd888
                 if (EndNumberCube(i) == true)
                 {
                     contor = contor + 1;
-                    x = i;
+                    result = i;
                     if (contor == number)
                         break;
                 }
 
-            return x;
+            return result;
         }
 
         bool EndNumberCube(int number)
