@@ -36,7 +36,7 @@ namespace NumberCubEnd888
                 return 0;
             }
             for (int i = 0; i < 100000; i++)
-                if (EndNumberCube(i) == true)
+                if (CubeEndsWith(i) == true)
                 {
                     contor = contor + 1;
                     result = i;
@@ -47,11 +47,11 @@ namespace NumberCubEnd888
             return result;
         }
 
-        bool EndNumberCube(int number)
+        bool CubeEndsWith(int number)
         {
             int x = number * number * number;
             if (x > 888)
-            {
+            {   
                 x = x % 1000;
             }
             if (x == 888)
