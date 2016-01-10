@@ -9,38 +9,27 @@ namespace Panagram
         [TestMethod]
         public void TestForPanagram()
         {
-            Assert.AreEqual("it is a panagram",IsPanagram("abcdefghijklmnopqrstuvwxyz"));
+            Assert.IsTrue(IsPanagram("abcdefghijklmnopqrstuvwxyz"));
         }
         [TestMethod]
         public void Test()
         {
-            Assert.AreEqual("it is not panagram", IsPanagram("tlazy dog "));
+            Assert.IsFalse(IsPanagram("tlazy dog "));
         }
-        string IsPanagram(string phrase)
+
+        bool IsPanagram(string phrase)
         {
-            int x = 0;
-            string alphabet = "abcdefghijklmnopqrstuvwxyz";
+            bool value = true;
+            string[] alphabet = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
+
             for (int i = 0; i < alphabet.Length ; i++)
-             for (int j = 0; j < phrase.Length ;j++ )
-                {
-                    if (alphabet[i] == phrase[j])
-                        x = x + 1;
-                          break;
-                }
-            if (x != alphabet.Length) return "it is not panagram";
-            else return "it is a panagram";
-        }
-
-       /* bool Contains(string phrase, char toFind)   
-        {
-            string alphabet = "abcdefghijklmnopqrstuvwxyz";
-
-            for (int i = 0; i < phrase.Length; i++)
             {
-               if(letter != alphabet[i])
-                    return false;
+                if(!phrase.Contains(alphabet[i]))
+                {
+                    value = false;
+                }
             }
-            return true;
-        }*/
+            return value;
+        }
     }
 }
