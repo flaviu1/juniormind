@@ -21,6 +21,13 @@ namespace Prefix
         {
             Assert.AreEqual("ab", CalculatePrefix("abc", "ab"));
         }
+        [TestMethod]
+        public void TestMethod4()
+        {
+           Assert.AreEqual("", CalculatePrefix("xabc", "xab"));
+        }
+        [TestMethod]
+
         string CalculatePrefix(string stringA, string stringB)
         {
             string x = string.Empty;
