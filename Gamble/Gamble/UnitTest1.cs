@@ -7,37 +7,20 @@ namespace Gamble
     public class UnitTest1
     {
         [TestMethod]
-        public void TestForFactorial()
+        public void TestForCategoryI()
         {
-            Assert.AreEqual((long)23132, CalculateFactorial(49));
+            Assert.AreEqual(8, CalculateProbability(1));
         }
-        [TestMethod]
-        public void TestForCombinations()
-        {
-            Assert.AreEqual(13983816, CalculateCombinations(49, 6));
-        }
-       
         int CalculateProbability(int categori)
         {
-            int probability=0;
-            return probability; 
-        }
+            int probability = 1;
+            int number;
 
-         double CalculateCombinations(int number1 ,int number2)
-        {
-            double combinations = 0;
-            int drop = number1 - number2;
-            return combinations = combinations + CalculateFactorial(number1) / (CalculateFactorial(number2) * CalculateFactorial(drop));
-        }
-
-        double CalculateFactorial(int number)
-        {
-            int result = 1;
-            for (int i = 1; i <= number; i++)
+            while(number==categori)
             {
-                result = result * i;
+
             }
-            return result;
+            return probability;
         }
     }
 }
