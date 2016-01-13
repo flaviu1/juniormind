@@ -19,17 +19,17 @@ namespace Gamble
         [TestMethod]
         public void Test()
         {
-            Assert.AreEqual((double)0.00000007,(double)CalculateProbability(1));
+            Assert.AreEqual(0.00000007d,0.00000007d,(double)CalculateProbability(1));
         }
         [TestMethod]
         public void Test2()
         {
-            Assert.AreEqual((double)0.00001845,(double)CalculateProbability(2));
+            Assert.AreEqual( 0.00001845d,0.00001845d, (double)CalculateProbability(2));
         }
         [TestMethod]
         public void Test3()
         {
-            Assert.AreEqual((double)0.00096862,(double)CalculateProbability(3));
+            Assert.AreEqual(0.00096861d, 0.00096861d, (double)CalculateProbability(3));
         }
         double CalculateProbability(int categori)
         {
