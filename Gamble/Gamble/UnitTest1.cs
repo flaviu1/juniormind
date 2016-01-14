@@ -19,28 +19,27 @@ namespace Gamble
         [TestMethod]
         public void Test()
         {
-            Assert.AreEqual(0.00000007d,0.00000007d,(double)CalculateProbability(1));
+            Assert.AreEqual(0.00000007d,0.00000007d,(double)CalculateProbability(6,1,6,49));
         }
         [TestMethod]
         public void Test2()
         {
-            Assert.AreEqual( 0.00001845d,0.00001845d, (double)CalculateProbability(2));
+            Assert.AreEqual( 0.00001845d, (double)CalculateProbability(6,2,5,49));
         }
         [TestMethod]
         public void Test3()
         {
-            Assert.AreEqual(0.00096861d, 0.00096861d, (double)CalculateProbability(3));
+            Assert.AreEqual(0.00096861d, (double)CalculateProbability(6,3,4,49));
         }
-        double CalculateProbability(int categori)
+     
+        double CalculateProbability(int extraction, int category, int numberFailExtraction, int number)
         {
             double probability = 0;
-            if(categori==1)
-                probability+=CalculateCombinations(6,6)*CalculateCombinations(43,0)/CalculateCombinations(49,6);
-            if (categori == 2)
-                probability += CalculateCombinations(6, 5)*CalculateCombinations(43,1)/CalculateCombinations(49,6);
-            if (categori == 3)
-                probability += CalculateCombinations(6, 4) * CalculateCombinations(43, 2) / CalculateCombinations(49, 6);
-            return probability;
+            int x = 0;
+             x = x + (extraction - numberFailExtraction);
+            probability = probability + (CalculateCombinations(extraction, numberFailExtraction) * CalculateCombinations((x),(number - extraction)))/CalculateCombinations(extraction,number);
+            
+            return probability; 
         }
             
          double CalculateCombinations(int number1 ,int number2)

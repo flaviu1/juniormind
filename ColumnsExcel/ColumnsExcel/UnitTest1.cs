@@ -9,11 +9,26 @@ namespace ColumnsExcel
         [TestMethod]
         public void TestMethod1()
         {
-            Assert.AreEqual("A",ConvertColumns(1))
+            Assert.AreEqual("a", ConvertColumns(1));
         }
-        int ConvertColumns(int comumns)
+        [TestMethod]
+        public void TestMethod2()
         {
-            return "A";
+            Assert.AreEqual("z", ConvertColumns(26));
+        }
+
+         string ConvertColumns(int columns)
+        {
+            string result = string.Empty;
+            string[] alfabet = {" ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
+          while(--columns>0)
+          {
+              for(int i=1;i<alfabet.Length;i++)
+              {
+                 // if(columns%26)
+              }
+          }
+                return "s";
         }
     }
 }
