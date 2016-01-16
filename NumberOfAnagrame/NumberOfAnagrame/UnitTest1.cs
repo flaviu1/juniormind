@@ -9,34 +9,43 @@ namespace NumberOfAnagrame
         [TestMethod]
         public void TestMethod1()
         {
-            Assert.AreEqual(6, CalculateNumberOfAnagrame("ssaa"));
+            Assert.AreEqual(6, CalculateNumberOfAnagrame("assa"));
         }
         [TestMethod]
         public void Test2()
         {
-            Assert.AreEqual(15, CalculateNumberOfAnagrame("qqqwe"));
+            Assert.AreEqual(20, CalculateNumberOfAnagrame("qqqwe"));
         }
         [TestMethod]
         int CalculateNumberOfAnagrame(string phrase)
         {
-            int contor = 0;
-            int subunitary = 0;
-            int result = 0;
-            char character = ' ';
+            int product = 1;
+            string uniques = string.Empty;
+            foreach (char c in phrase)
+            {
+                if (!Contains(uniques, c))
+                {
+                    product *= CalculateFactorial(CountChar(phrase, c));
+                    uniques += c;
+                }
+            }
+            return CalculateFactorial(phrase.Length) / product;
+        }
+
+        private static bool Contains(string uniques, char c)
+        {
+            return CountChar(uniques, c) > 0;
+        }
+       
+        private static int CountChar(string phrase, char c)
+        {
+            int counter = 0;
             for (int i = 0; i < phrase.Length; i++)
             {
-                if (phrase[i] == character)
-                    continue;
-                for (int j = 0; j < phrase.Length; j++)
-                {
-                    if (phrase[i] == phrase[j])
-                        contor++;
-                    character = phrase[i];
-                }
-                subunitary += CalculateFactorial(contor);
-                contor = 0;
+                if (c == phrase[i])
+                    counter++;
             }
-            return result = CalculateFactorial(phrase.Length) / subunitary;
+            return counter;
         }
 
         int CalculateFactorial(int number)
