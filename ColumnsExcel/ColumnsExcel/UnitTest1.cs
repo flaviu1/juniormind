@@ -11,24 +11,38 @@ namespace ColumnsExcel
         {
             Assert.AreEqual("a", ConvertColumns(1));
         }
+
         [TestMethod]
         public void TestMethod2()
         {
             Assert.AreEqual("z", ConvertColumns(26));
         }
 
-         string ConvertColumns(int columns)
+        [TestMethod]
+        public void TestMethod3()
+        {
+            Assert.AreEqual("ba", ConvertColumns(53));
+        }
+
+        [TestMethod]
+        public void GetChartShouldGetZFor25()
+        {
+            Assert.AreEqual('z', GetChar(25));
+        }
+
+        private char GetChar(int p)
+        {
+            return (char)('a' + p);
+        }
+        string ConvertColumns(int columns)
         {
             string result = string.Empty;
-            string[] alfabet = {" ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
-          while(--columns>0)
-          {
-              for(int i=1;i<alfabet.Length;i++)
-              {
-                 // if(columns%26)
-              }
-          }
-                return "s";
+            while (--columns >= 0)
+            {
+                result = GetChar(columns % 26) + result;
+                columns = columns / 26;
+            }
+            return result;
         }
     }
 }
