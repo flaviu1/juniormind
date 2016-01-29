@@ -22,6 +22,12 @@ namespace BinaryConversion
         {
             CollectionAssert.AreEqual(new byte[4] {  0, 0, 0, 1 }, AndOperatorsOnByte(new byte[4] { 0, 1, 0, 1 }, new byte[4] { 0, 0, 1, 1 }));
         }
+        [TestMethod]
+        public void TestForOperatorOr()
+        {
+            CollectionAssert.AreEqual(new byte[4] { 0, 1, 1, 1 }, OrOperatorsOnByte(new byte[4] { 0, 1, 0, 1 }, new byte[4] { 0, 0, 1, 1 }));
+        }
+
         byte[] ConvertBinary(int number)
         {
             byte[] bytes = ConvertBinary(ref number);
@@ -63,6 +69,18 @@ namespace BinaryConversion
                 else
                 bytes3[i] = 0;
             }              
+            return bytes3;
+        }
+        byte[] OrOperatorsOnByte(byte[] bytes1,byte[] bytes2)
+        {
+            byte[] bytes3 = new byte[Math.Max(bytes1.Length,bytes2.Length)];
+            for (int i = 0; i < Math.Max(bytes1.Length, bytes2.Length); i++)
+            {
+                if (bytes1[i] == 1 ||  bytes2[i]==1)
+                    bytes3[i] = 1;
+                else
+                bytes3[i] = 0;
+            } 
             return bytes3;
         }
     }   
