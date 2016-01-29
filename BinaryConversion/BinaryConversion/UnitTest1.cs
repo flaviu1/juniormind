@@ -15,21 +15,18 @@ namespace BinaryConversion
         [TestMethod]
         public void TestForOperatorNot()
         {
-            CollectionAssert.AreEqual(new byte[6] {0,0,1,1,1,0},NotOperatorsOnByte(49));
+            CollectionAssert.AreEqual(new byte[6] { 0, 0, 1, 1, 1, 0 }, NotOperatorsOnByte( new byte[6] {1,1,0,0,0,1} ));
         }
         [TestMethod]
-
         byte[] ConvertBinary(int number)
         {
             byte[] bytes = ConvertBinary(ref number);
             Array.Reverse(bytes);
             return bytes;
         }
-        byte[] NotOperatorsOnByte(int number)
+        byte[] NotOperatorsOnByte(byte[] bytes)
         {
-            byte[] bytes = ConvertBinary(ref number);
-            byte n = (byte)bytes.Length;
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < bytes.Length; i++)
             {
                 if (bytes[i] != 1)
                 {
@@ -38,7 +35,6 @@ namespace BinaryConversion
                 else
                     bytes[i] = 0;
             }
-            Array.Reverse(bytes);
             return bytes;
         }
         private static byte[] ConvertBinary(ref int number)
