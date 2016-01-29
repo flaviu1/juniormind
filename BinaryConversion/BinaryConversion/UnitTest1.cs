@@ -18,11 +18,6 @@ namespace BinaryConversion
             CollectionAssert.AreEqual(new byte[6] {0,0,1,1,1,0},NotOperatorsOnByte(49));
         }
         [TestMethod]
-        public void TestForOperatorOr()
-        {
-            CollectionAssert.AreEqual(new byte[6] { 1,1,0,0,0,1 }, OrOperatorsOnByte(49, 49));
-        }
-
 
         byte[] ConvertBinary(int number)
         {
