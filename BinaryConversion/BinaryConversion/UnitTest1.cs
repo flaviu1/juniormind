@@ -32,13 +32,11 @@ namespace BinaryConversion
         {
             CollectionAssert.AreEqual(new byte[] { 0, 1, 1, 0 }, XorOperatorsOnByte(new byte[] { 0, 1, 0, 1 }, new byte[4] { 0, 0, 1, 1 }));
         }
-        /*  [TestMethod]
+        [TestMethod]
           public void ShiftLeft()
           {
-              CollectionAssert.AreEqual(new byte[] { 1,0,0,0 }, ShiftLeft(new byte[] { 0, 0, 0, 1 }, 3));
-              CollectionAssert.AreEqual(new byte[2] { 1, 1 }, ShiftLeft(new byte[4] { 1, 1, 1, 1 }, 2));
-              CollectionAssert.AreEqual(new byte[0] { }, ShiftLeft(new byte[4] { 1, 1, 1, 1 }, 4));
-          }*/
+              CollectionAssert.AreEqual(new byte[] { 0,0,0,1,0,1 }, ShiftLeft(new byte[] { 0,0, 0, 1, 0,1 },2));
+          }
 
 
 
@@ -73,7 +71,6 @@ namespace BinaryConversion
             }
             return bytes;
         }
-
         byte[] AndOperatorsOnByte(byte[] bytesOne, byte[] bytesTwo)
         {
             return VerifyConditions(bytesOne, bytesTwo, "And");
@@ -89,30 +86,30 @@ namespace BinaryConversion
         byte[] VerifyConditions(byte[] bytesOne, byte[] bytesTwo, string operatorr)
         {
             byte[] result = new byte[Math.Max(bytesOne.Length, bytesTwo.Length)];
+              return result=Condition(bytesOne, bytesTwo, operatorr);
+        }
+        private static byte[] Condition(byte[] bytesOne, byte[] bytesTwo, string operatorr)
+        {
+            byte[] result = new byte[Math.Max(bytesOne.Length, bytesTwo.Length)];
             for (int i = 0; i < result.Length; i++)
             {
-                Condition(bytesOne, bytesTwo, operatorr, result, i);
+                if (operatorr == "And")
+                    result[i] = (bytesOne[i] == 1) && (bytesTwo[i] == 1) ? (byte)1 : (byte)0;
+                if (operatorr == "Or")
+                    result[i] = (bytesOne[i] == 1) || (bytesTwo[i] == 1) ? (byte)1 : (byte)0;
+                if (operatorr == "Xor")
+                    result[i] = bytesOne[i] != bytesTwo[i] ? (byte)1 : (byte)0;
             }
-            return result;
+                return result;
         }
 
-        private static void Condition(byte[] bytesOne, byte[] bytesTwo, string operatorr, byte[] result, int i)
+        byte[] ShiftLeft(byte[] bytesOne, int positions)
         {
-            if (operatorr == "And")
-                result[i] = (bytesOne[i] == 1) && (bytesTwo[i] == 1) ? (byte)1 : (byte)0;
-            if (operatorr == "Or")
-                result[i] = (bytesOne[i] == 1) || (bytesTwo[i] == 1) ? (byte)1 : (byte)0;
-            if (operatorr == "Xor")
-                result[i] = bytesOne[i] != bytesTwo[i] ? (byte)1 : (byte)0;
-        }
+            byte[] result = new byte[bytesOne.Length];
+            for (int i = 3; i < 6 ; i++)
+                result[i] = bytesOne[i];
+                return result;
 
-        /*  byte[] ShiftLeft(byte[] bytesOne, int positions)
-          {
-              byte[] bytes2 = new byte[bytesOne.Length];
-              for (int i = positions; i < bytesOne.Length; i++)
-              {
-                  bytes2[i] = bytesOne[i];
-              }
-              return bytes2;*/
+        }
     }
 }
