@@ -98,55 +98,54 @@ namespace BinaryConversion
         }
         byte GetDigit(byte[] bytes, int positions)
         {
-            for (int i = 0; i < bytes.Length; i++)
-                if (bytes[i] < positions)
-                    return 0;
+            if (bytes.Length < positions)
+                return 0;
             byte bytesOne = bytes[bytes.Length - positions - 1];
             return bytesOne;
         }
         [TestMethod]
         public void RightHandShif()
         {
-              CollectionAssert.AreEqual(new byte[] {0,0, 0,1}, RightHandShif(new byte[] { 1, 1, 1, 1 }, 3 ));
-              CollectionAssert.AreEqual(new byte[] { 0, 0, 1, 1 }, RightHandShif(new byte[] { 1, 1, 1, 1 }, 2));
-              CollectionAssert.AreEqual(new byte[] { 0, 0, 0, 0 }, RightHandShif(new byte[] { 1, 1, 1, 1 }, 100));
+            CollectionAssert.AreEqual(new byte[] { 0, 0, 0, 1 }, RightHandShif(new byte[] { 1, 1, 1, 1 }, 3));
+            CollectionAssert.AreEqual(new byte[] { 0, 0, 1, 1 }, RightHandShif(new byte[] { 1, 1, 1, 1 }, 2));
+            CollectionAssert.AreEqual(new byte[] { 0, 0, 0, 0 }, RightHandShif(new byte[] { 1, 1, 1, 1 }, 100));
         }
 
-         byte[] RightHandShif( byte[] bytes ,int positions)
-         {
-             byte[] bytesOne = new byte[0];
-             for (int i = 0; i < bytes.Length + positions; i++)
-             {
-                 Array.Resize(ref bytesOne, bytesOne.Length + 1);
-                 if (bytesOne.Length > bytes.Length)
-                     bytesOne[i] = 0;
-                 else
-                     bytesOne[i] = bytes[i];
-             }
-             Array.Reverse(bytesOne);
-             for (int j = 0; j < bytes.Length;j++)
-                 bytes[j]=bytesOne[j];
-                 return bytes;
-         }
-         [TestMethod]
-         public void LefttHandShif()
-         {
-             CollectionAssert.AreEqual(new byte[] { 1, 1,0,1,0,0,0 }, LefttHandShif(new byte[] { 1, 1, 0, 1 }, 3));
-             CollectionAssert.AreEqual(new byte[] { 1, 1, 0, 1, 0 }, LefttHandShif(new byte[] { 1, 1, 0, 1 }, 1));
-         }
+        byte[] RightHandShif(byte[] bytes, int positions)
+        {
+            byte[] bytesOne = new byte[0];
+            bytesOne = Shift(bytes, positions, bytesOne);
 
-         byte[] LefttHandShif(byte[] bytes, int positions)
-         {
-             byte[] bytesOne = new byte[0];
-             for (int i = 0; i < bytes.Length+positions; i++)
-             {
-                 Array.Resize(ref bytesOne, bytesOne.Length+1);
-                 if (bytesOne.Length > bytes.Length)
-                     bytesOne[i] = 0;
-                 else
-                     bytesOne[i] = bytes[i];
-             }
-             return bytesOne;
-         }
+            Array.Reverse(bytesOne);
+            for (int j = 0; j < bytes.Length; j++)
+                bytes[j] = bytesOne[j];
+            return bytes;
+        }
+        [TestMethod]
+        public void LefttHandShif()
+        {
+            CollectionAssert.AreEqual(new byte[] { 1, 1, 0, 1, 0, 0, 0 }, LefttHandShif(new byte[] { 1, 1, 0, 1 }, 3));
+            CollectionAssert.AreEqual(new byte[] { 1, 1, 0, 1, 0 }, LefttHandShif(new byte[] { 1, 1, 0, 1 }, 1));
+        }
+
+        byte[] LefttHandShif(byte[] bytes, int positions)
+        {
+            byte[] bytesOne = new byte[0];
+            bytesOne = Shift(bytes, positions, bytesOne);
+            return bytesOne;
+        }
+
+        private static byte[] Shift(byte[] bytes, int positions, byte[] bytesOne)
+        {
+            for (int i = 0; i < bytes.Length + positions; i++)
+            {
+                Array.Resize(ref bytesOne, bytesOne.Length + 1);
+                if (bytesOne.Length > bytes.Length)
+                    bytesOne[i] = 0;
+                else
+                    bytesOne[i] = bytes[i];
+            }
+            return bytesOne;
+        }
     }
 }
