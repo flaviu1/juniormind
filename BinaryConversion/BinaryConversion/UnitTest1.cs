@@ -15,12 +15,7 @@ namespace BinaryConversion
         [TestMethod]
         public void Not()
         {
-            CollectionAssert.AreEqual(new byte[] { 0, 0, 1, 1, 1, 0 },Not(new byte[] {1, 1, 0, 0, 0, 1}));
-        }
-        [TestMethod]
-        public void And()
-        {
-            CollectionAssert.AreEqual(new byte[] { 0, 0, 0, 1 }, And(new byte[] { 0, 1, 0, 1 }, new byte[] { 0, 0, 1, 1 }));
+            CollectionAssert.AreEqual(new byte[] { 0, 0, 1, 1, 1, 0 }, Not(new byte[] { 1, 1, 0, 0, 0, 1 }));
         }
         [TestMethod]
         public void Or()
@@ -40,7 +35,7 @@ namespace BinaryConversion
             int n = 0;
             while (number >= 1)
             {
-                Array.Resize(ref bytes, bytes.Length+1);
+                Array.Resize(ref bytes, bytes.Length + 1);
                 bytes[n] = (byte)(number % 2);
                 n++;
                 number = number / 2;
@@ -50,16 +45,23 @@ namespace BinaryConversion
         }
         byte[] Not(byte[] bytes)
         {
+            byte[] result = new byte[0];
             for (int i = 0; i < bytes.Length; i++)
             {
-                if (bytes[i] != 1)
-                {
-                    bytes[i] = 1;
-                }
-                else
-                    bytes[i] = 0;
+                Array.Resize(ref result, result.Length + 1);
+                result[i] = Not(bytes[i]);
             }
-            return bytes;
+            return result;
+        }
+        private static byte Not(byte bytes)
+        {
+            return (bytes != 1) ? (byte)1 : (byte)0;
+        }
+
+        [TestMethod]
+        public void And()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 0, 0, 1 }, And(new byte[] { 0, 1, 0, 1 }, new byte[] { 0, 0, 1, 1 }));
         }
         byte[] And(byte[] bytesOne, byte[] bytesTwo)
         {
@@ -93,24 +95,26 @@ namespace BinaryConversion
             return 0;
         }
 
+
         [TestMethod]
         public void GetDigit()
         {
-            Assert.AreEqual(0, GetDigit(new byte[] { 1, 2, 3, 4 }, 10));
+            Assert.AreEqual(2, GetDigit(new byte[] { 1, 2, 3, 4 }, 2));
         }
         byte GetDigit(byte[] bytes, int positions)
         {
             if (bytes.Length < positions)
                 return 0;
-            byte bytesOne = bytes[bytes.Length - positions - 1];
-            return bytesOne;
+            return bytes[bytes.Length - positions - 1];
+
         }
 
+
         [TestMethod]
-        public void RightHandShif()
+        public void RightHandShift()
         {
-            CollectionAssert.AreEqual(new byte[] {  1 }, RightHandShif(new byte[] { 1, 1, 1, 1 }, 3));
-            CollectionAssert.AreEqual(new byte[] {  1, 1 }, RightHandShif(new byte[] { 1, 1, 1, 1 }, 2));
+            CollectionAssert.AreEqual(new byte[] { 1 }, RightHandShif(new byte[] { 1, 1, 1, 1 }, 3));
+            CollectionAssert.AreEqual(new byte[] { 1, 1 }, RightHandShif(new byte[] { 1, 1, 1, 1 }, 2));
         }
         byte[] RightHandShif(byte[] bytes, int positions)
         {
@@ -118,8 +122,9 @@ namespace BinaryConversion
             return bytes;
         }
 
+
         [TestMethod]
-        public void LefttHandShif()
+        public void LefttHandShift()
         {
             CollectionAssert.AreEqual(new byte[] { 1, 1, 0, 1, 0, 0, 0 }, LefttHandShif(new byte[] { 1, 1, 0, 1 }, 3));
             CollectionAssert.AreEqual(new byte[] { 1, 0, 0 }, LefttHandShif(new byte[] { 1 }, 2));
@@ -130,30 +135,31 @@ namespace BinaryConversion
             return bytes;
         }
 
+
         [TestMethod]
-        public void Assembly()
+        public void Add()
         {
-            CollectionAssert.AreEqual(new byte[] { 1, 0, 0, 0, 1, 1, 1, 0 }, Assembly(new byte[] { 0, 0, 0, 0, 1, 1, 1, 1 }, new byte[] { 0, 1, 1, 1, 1, 1, 1, 1 }));
+            CollectionAssert.AreEqual(new byte[] { 1, 0, 0, 0, 1, 1, 1, 0 }, Add(new byte[] { 0, 0, 0, 0, 1, 1, 1, 1 }, new byte[] { 0, 1, 1, 1, 1, 1, 1, 1 }));
         }
-        byte[] Assembly(byte[] bytesOne, byte[] bytesTwo)
+        byte[] Add(byte[] bytesOne, byte[] bytesTwo)
         {
             Array.Reverse(bytesOne);
             Array.Reverse(bytesTwo);
             byte[] bytesResult = new byte[Math.Max(bytesTwo.Length, bytesOne.Length)];
-            int counter=0;
+            int remainder = 0;
             for (int i = 0; i < bytesResult.Length; i++)
             {
-                if(bytesOne[i]+bytesTwo[i]+counter==3)
+                if (bytesOne[i] + bytesTwo[i] + remainder == 3)
                 {
-                    bytesResult[i]=1;
-                    counter=1;
+                    bytesResult[i] = 1;
+                    remainder = 1;
                 }
-                if(bytesOne[i]+bytesTwo[i]+counter==2)
+                if (bytesOne[i] + bytesTwo[i] + remainder == 2)
                 {
                     bytesResult[i] = 0;
-                    counter = 1;
+                    remainder = 1;
                 }
-                if (bytesOne[i] + bytesTwo[i]+counter == 1)
+                if (bytesOne[i] + bytesTwo[i] + remainder == 1)
                 {
                     bytesResult[i] = 1;
                 }
@@ -194,5 +200,52 @@ namespace BinaryConversion
             Array.Reverse(bytesResult);
             return bytesResult;
         }
+
+
+        [TestMethod]
+        public void AddNew()
+        {
+            CollectionAssert.AreEqual(new byte[] { 1, 0, 0, 0, 1, 1, 1, 0 }, AddNew(new byte[] { 0, 0, 0, 0, 1, 1, 1, 1 }, new byte[] { 0, 1, 1, 1, 1, 1, 1, 1 }));
+        }
+        byte[] AddNew(byte[] bytesOne, byte[] bytesTwo)
+        {
+            byte[] bytesResult = new byte[Math.Max(bytesTwo.Length, bytesOne.Length)];
+            int remainder = 0;
+            for (int i =0 ; i < bytesResult.Length; i++)
+            {
+                int a=GetDigit(bytesOne, i);
+                int b=GetDigit(bytesTwo, i);
+
+                bytesResult[i] =(byte)((a+b + remainder) % 2);
+                remainder = (a + b + remainder)/2;
+
+            }
+            Array.Reverse(bytesResult);
+            return bytesResult;
+        }
+
+
+        [TestMethod]
+        public void DropNew()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 0, 0, 1, 1, 1, 0, 1 }, DropNew(new byte[] { 1, 0, 0, 0, 1, 1, 1, 0 }, new byte[] { 0, 1, 1, 1, 0, 0, 0, 1 }));
+        }
+        byte[] DropNew(byte[] bytesOne, byte[] bytesTwo)
+        {
+            byte[] bytesResult = new byte[Math.Max(bytesTwo.Length, bytesOne.Length)];
+            int remainder = 0;
+            for (int i = 0; i < bytesResult.Length; i++)
+            {
+                int a = GetDigit(bytesOne, i);
+                int b = GetDigit(bytesTwo, i);
+
+                bytesResult[i] = (byte)((a - b - remainder+2) % 2);
+                remainder = (a -b - remainder-2) / 2;
+
+            }
+            Array.Reverse(bytesResult);
+            return bytesResult;
+        }
+
     }
 }
