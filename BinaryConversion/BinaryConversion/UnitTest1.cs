@@ -103,7 +103,7 @@ namespace BinaryConversion
         }
         byte GetDigit(byte[] bytes, int positions)
         {
-            if (bytes.Length < positions)
+            if (bytes.Length <= positions)
                 return 0;
             return bytes[bytes.Length - positions - 1];
 
@@ -205,20 +205,21 @@ namespace BinaryConversion
         [TestMethod]
         public void AddNew()
         {
-            CollectionAssert.AreEqual(new byte[] { 1, 0, 0, 0, 1, 1, 1, 0 }, AddNew(new byte[] { 0, 0, 0, 0, 1, 1, 1, 1 }, new byte[] { 0, 1, 1, 1, 1, 1, 1, 1 }));
+            CollectionAssert.AreEqual(ToBinary(6), AddNew(ToBinary(3), ToBinary(3)));
         }
         byte[] AddNew(byte[] bytesOne, byte[] bytesTwo)
         {
             byte[] bytesResult = new byte[Math.Max(bytesTwo.Length, bytesOne.Length)];
             int remainder = 0;
-            for (int i =0 ; i < bytesResult.Length; i++)
+            for (int i = 0; i < bytesResult.Length; i++)
             {
-                int a=GetDigit(bytesOne, i);
-                int b=GetDigit(bytesTwo, i);
-
-                bytesResult[i] =(byte)((a+b + remainder) % 2);
-                remainder = (a + b + remainder)/2;
-
+                bytesResult[i] = (byte)((GetDigit(bytesOne, i) + GetDigit(bytesTwo, i) + remainder) % 2);
+                remainder = (GetDigit(bytesOne, i) + GetDigit(bytesTwo, i) + remainder) / 2;
+            }
+            if (remainder == 1)
+            {
+                Array.Resize(ref bytesResult, bytesResult.Length + 1);
+                bytesResult[bytesResult.Length - 1] = (byte)remainder;
             }
             Array.Reverse(bytesResult);
             return bytesResult;
@@ -239,13 +240,138 @@ namespace BinaryConversion
                 int a = GetDigit(bytesOne, i);
                 int b = GetDigit(bytesTwo, i);
 
-                bytesResult[i] = (byte)((a - b - remainder+2) % 2);
-                remainder = (a -b - remainder-2) / 2;
+                bytesResult[i] = (byte)((a - b - remainder + 2) % 2);
+                remainder = (a - b - remainder - 2) / 2;
 
             }
             Array.Reverse(bytesResult);
             return bytesResult;
         }
+
+
+        [TestMethod]
+        public void LessThan()
+        {
+            CollectionAssert.AreEqual(ToBinary(4), LessThan(ToBinary(4), ToBinary(7)));
+        }
+        byte[] LessThan(byte[] bytesOne, byte[] bytesTwo)
+        {
+            byte[] bytesEmpty = new byte[0];
+            for (int i = 0; i < Math.Max(bytesOne.Length, bytesTwo.Length); i++)
+            {
+                if (GetDigit(bytesOne, i) < GetDigit(bytesTwo, i))
+                    return bytesOne;
+                if (GetDigit(bytesOne, i) > GetDigit(bytesTwo, i))
+                    return bytesTwo;
+            }
+            return bytesEmpty;
+        }
+
+
+        [TestMethod]
+        public void GreaterThan()
+        {
+            CollectionAssert.AreEqual(ToBinary(9), GreaterThan(ToBinary(9), ToBinary(7)));
+        }
+        byte[] GreaterThan(byte[] bytesOne, byte[] bytesTwo)
+        {
+            byte[] bytesEmpty = new byte[0];
+            for (int i = Math.Max(bytesOne.Length, bytesTwo.Length); i > 0; i--)
+            {
+                if (GetDigit(bytesOne, i) > GetDigit(bytesTwo, i))
+                    return bytesOne;
+                if (GetDigit(bytesOne, i) < GetDigit(bytesTwo, i))
+                    return bytesTwo;
+            }
+            return bytesEmpty;
+        }
+
+
+        [TestMethod]
+        public void Equal()
+        {
+            Assert.AreEqual(true, Equal(ToBinary(9), ToBinary(9)));
+            Assert.AreEqual(false, Equal(ToBinary(9), ToBinary(5)));
+        }
+        bool Equal(byte[] bytesOne, byte[] bytesTwo)
+        {
+            for (int i = Math.Max(bytesOne.Length, bytesTwo.Length); i > 0; i--)
+            {
+                if (GetDigit(bytesOne, i) != GetDigit(bytesTwo, i))
+                    return false;
+            }
+            return true;
+        }
+
+
+        [TestMethod]
+        public void NotEqual()
+        {
+            Assert.AreEqual(true, NotEqual(ToBinary(5), ToBinary(7)));
+           Assert.AreEqual(false, NotEqual(ToBinary(9), ToBinary(9)));
+        }
+        bool NotEqual(byte[] bytesOne, byte[] bytesTwo)
+        {
+             if (Equal(bytesOne,bytesTwo))
+                 return false;
+               return true;
+        }
+
+        [TestMethod]
+        public void calclulateMultiplication()
+        {
+            Assert.AreEqual(15,calclulateMultiplication(3,5));
+        }
+
+        int calclulateMultiplication(int a , int b)
+        {
+            int result = 0;
+            for(int i=0;i<b;i++)
+            {
+                result = a +result;
+            }
+            return result;
+        }
+
+        [TestMethod]
+        public void Multiplication()
+        {
+            CollectionAssert.AreEqual(new byte[] { 1, 1, 1, 1}, Multiplication(new byte[] { 0, 1, 0, 1 }, new byte[] { 0, 0, 1, 1 }));
+            CollectionAssert.AreEqual(ToBinary(15), Multiplication(ToBinary(3),ToBinary(5)));
+        }
+
+        byte[]  Multiplication(byte[] bytesOne, byte[] bytesTwo)
+        {
+            byte[] result =new byte[Math.Max(bytesTwo.Length,bytesOne.Length)];
+            int n = bytesOne.Length+1;
+            while (n>0)
+            {
+                result = AddNew(bytesTwo, result);
+                n--;
+            }
+            return result;
+        }
+
+
+       /* [TestMethod]
+        public void Division()
+        {
+            Assert.AreEqual(5, Division(new byte[] { 1, 0, 1, 0 }, new byte[] { 0, 0, 1,0  }));
+            CollectionAssert.AreEqual(ToBinary(5), Division(ToBinary(10), ToBinary(2)));
+        }
+
+        byte[] Division(byte[] bytesOne, byte[] bytesTwo)
+        {
+            byte[] result = new byte[Math.Max(bytesTwo.Length, bytesOne.Length)];
+            int n = 1;
+            byte[] counter = new byte[Math.Max(bytesTwo.Length,bytesOne.Length)];
+            while (n == 0)
+            {
+                counter = DropNew(GreaterThan(bytesOne, bytesTwo),LessThan(bytesOne, bytesTwo));
+                n--;
+            }
+            return counter;
+        }*/
 
     }
 }
