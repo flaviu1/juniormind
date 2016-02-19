@@ -10,7 +10,7 @@ namespace BinaryConversion
         [TestMethod]
         public void TestForConversion()
         {
-            CollectionAssert.AreEqual(new byte[] { 1, 1, 0, 0, 0, 1 }, ToBinary(49));
+            CollectionAssert.AreEqual(new byte[] { 1, 1, 0, 0, 0, 1 }, ToBinary(49,2));
         }
         [TestMethod]
         public void Not()
@@ -20,25 +20,25 @@ namespace BinaryConversion
         [TestMethod]
         public void Or()
         {
-            CollectionAssert.AreEqual(new byte[] { 0, 1, 1, 1 }, Or(new byte[] { 0, 1, 0, 1 }, new byte[] { 0, 0, 1, 1 }));
+            CollectionAssert.AreEqual(ToBinary(7,2), Or(ToBinary(5,2),ToBinary(3,2)));
         }
         [TestMethod]
         public void TestForOperatorXor()
         {
-            CollectionAssert.AreEqual(new byte[] { 0, 1, 1, 0 }, Xor(new byte[] { 0, 1, 0, 1 }, new byte[] { 0, 0, 1, 1 }));
+            CollectionAssert.AreEqual(ToBinary(6,2), Xor(ToBinary(5,2), ToBinary(3,2)));
         }
 
 
-        byte[] ToBinary(int number)
+        byte[] ToBinary(int number,int radix)
         {
             byte[] bytes = new byte[0];
             int n = 0;
             while (number >= 1)
             {
                 Array.Resize(ref bytes, bytes.Length + 1);
-                bytes[n] = (byte)(number % 2);
+                bytes[n] = (byte)(number % radix);
                 n++;
-                number = number / 2;
+                number = number / radix;
             }
             Array.Reverse(bytes);
             return bytes;
@@ -61,8 +61,7 @@ namespace BinaryConversion
         [TestMethod]
         public void And()
         {
-            CollectionAssert.AreEqual(new byte[] { 0, 0, 0, 1 }, And(new byte[] { 0, 1, 0, 1 }, new byte[] { 0, 0, 1, 1 }));
-           // CollectionAssert.AreEqual(ToBinary(1), And(ToBinary(5), ToBinary(3)));
+            CollectionAssert.AreEqual(ToBinary(10,2), And(ToBinary(10,2), ToBinary(10,2)));
         }
         byte[] And(byte[] bytesOne, byte[] bytesTwo)
         {
@@ -84,8 +83,10 @@ namespace BinaryConversion
             byte[] result = new byte[Math.Max(bytesOne.Length, bytesTwo.Length)];
             for (int i = 0; i < result.Length; i++)
             {
-                result[i] = Condition(bytesOne[i], bytesTwo[i], operatorr);
+                result[i] = Condition(GetDigit(bytesOne,i),GetDigit(bytesTwo,i), operatorr);
             }
+            Array.Reverse(result);
+            result = CountingZeros(result);
             return result;
         }
 
@@ -118,8 +119,8 @@ namespace BinaryConversion
         [TestMethod]
         public void RightHandShift()
         {
-            CollectionAssert.AreEqual(ToBinary(1), RightHandShif(ToBinary(15), 3));
-            CollectionAssert.AreEqual(ToBinary(3), RightHandShif(ToBinary(15), 2));
+            CollectionAssert.AreEqual(ToBinary(1,2), RightHandShif(ToBinary(15,2), 3));
+            CollectionAssert.AreEqual(ToBinary(3,2), RightHandShif(ToBinary(15,2), 2));
             CollectionAssert.AreEqual(new byte[] {  0, 1 }, RightHandShif(new byte[] { 0,0,0,1 }, 2));
         }
         byte[] RightHandShif(byte[] bytes, int positions)
@@ -133,7 +134,7 @@ namespace BinaryConversion
         [TestMethod]
         public void LefttHandShift()
         {
-            CollectionAssert.AreEqual(ToBinary(10), LefttHandShif(ToBinary(5), 1));
+            CollectionAssert.AreEqual(ToBinary(10,2), LefttHandShif(ToBinary(5,2), 1));
             CollectionAssert.AreEqual(new byte[] { 1, 0, 0 }, LefttHandShif(new byte[] { 1 }, 2));
         }
         byte[] LefttHandShif(byte[] bytes, int positions)
@@ -145,20 +146,22 @@ namespace BinaryConversion
         [TestMethod]
         public void AddNew()
         {
-            CollectionAssert.AreEqual(ToBinary(6), AddNew(ToBinary(3), ToBinary(3)));
-            CollectionAssert.AreEqual(ToBinary(117), AddNew(ToBinary(111), ToBinary(6))); 
-            CollectionAssert.AreEqual(ToBinary(6), AddNew(ToBinary(0), ToBinary(6)));
-            CollectionAssert.AreEqual(ToBinary(8), AddNew(ToBinary(4), ToBinary(4)));
+            CollectionAssert.AreEqual(ToBinary(6,2), AddNew(ToBinary(3,2), ToBinary(3,2)));
+            CollectionAssert.AreEqual(ToBinary(117,2), AddNew(ToBinary(111,2), ToBinary(6,2))); 
+            CollectionAssert.AreEqual(ToBinary(6,2), AddNew(ToBinary(0,2), ToBinary(6,2)));
+            CollectionAssert.AreEqual(ToBinary(8,2), AddNew(ToBinary(4,2), ToBinary(4,2)));
+            CollectionAssert.AreEqual(new byte[] { 8 }, AddNew(ToBinary(4,33), ToBinary(4,33), 33));
+            CollectionAssert.AreEqual(ToBinary(2,200), AddNew(ToBinary(1,200), ToBinary(1,200),200)); 
         }
-        byte[] AddNew(byte[] bytesOne, byte[] bytesTwo)
+        byte[] AddNew(byte[] bytesOne, byte[] bytesTwo,int radix=2)
         {
             byte[] bytesResult = new byte[Math.Max(bytesTwo.Length, bytesOne.Length)];
             int remainder = 0;
             for (int i = 0; i < bytesResult.Length; i++)
             {
                 var sum = (GetDigit(bytesOne, i) + GetDigit(bytesTwo, i) + remainder);
-                bytesResult[i] = (byte)(sum % 2);
-                remainder = sum / 2;
+                bytesResult[i] = (byte)(sum % radix);
+                remainder = sum / radix;
             }
             Array.Reverse(bytesResult = AddResizeWhitOne(bytesResult, remainder));
             return bytesResult;
@@ -176,14 +179,15 @@ namespace BinaryConversion
         [TestMethod]
         public void DropNew()
         {
-            CollectionAssert.AreEqual(ToBinary(12), Subtraction(ToBinary(15), ToBinary(3)));
-            CollectionAssert.AreEqual(ToBinary(9), Subtraction(ToBinary(12), ToBinary(3)));
-            CollectionAssert.AreEqual(ToBinary(6), Subtraction(ToBinary(9), ToBinary(3)));
+            CollectionAssert.AreEqual(ToBinary(12,2), Subtraction(ToBinary(15,2), ToBinary(3,2)));
+            CollectionAssert.AreEqual(ToBinary(9,2), Subtraction(ToBinary(12,2), ToBinary(3,2)));
+            CollectionAssert.AreEqual(ToBinary(6,2), Subtraction(ToBinary(9,2), ToBinary(3,2)));
             CollectionAssert.AreEqual(new byte[] { 1,1,0 }, Subtraction(new byte[] { 0, 0, 1, 1, 1 }, new byte[] { 0, 0, 0, 0, 1 }));
             CollectionAssert.AreEqual(new byte[] { }, Subtraction(new byte[] { 1,0 }, new byte[] {1,0}));
-            CollectionAssert.AreEqual(ToBinary(1), Subtraction(ToBinary(2), ToBinary(1)));
+            CollectionAssert.AreEqual(ToBinary(1,2), Subtraction(ToBinary(2,2), ToBinary(1,2)));
+            CollectionAssert.AreEqual(ToBinary(1, 150), Subtraction(ToBinary(2, 150), ToBinary(1, 150)));
         }
-        byte[] Subtraction(byte[] bytesOne, byte[] bytesTwo)
+        byte[] Subtraction(byte[] bytesOne, byte[] bytesTwo,int radix=2)
         {
             byte[] bytesResult = new byte[Math.Max(bytesTwo.Length, bytesOne.Length)];
             int remainder = 0;
@@ -196,8 +200,8 @@ namespace BinaryConversion
                     remainder = -1;
                     continue;
                 }
-                bytesResult[i] = (byte)((decrease + 2) % 2);
-                remainder = (decrease) / 2;
+                bytesResult[i] = (byte)((decrease + radix) % radix);
+                remainder = (decrease) / radix;
             }
             Array.Reverse(bytesResult);
             bytesResult = CountingZeros(bytesResult);
@@ -228,9 +232,9 @@ namespace BinaryConversion
         [TestMethod]
         public void TestIfTheArrayIsGreater()
         {
-            Assert.IsTrue(LessThan(ToBinary(1),ToBinary(5)));
-            Assert.IsFalse(LessThan(ToBinary(70), ToBinary(6))); 
-            Assert.IsFalse(LessThan(ToBinary(7), ToBinary(7)));
+            Assert.IsTrue(LessThan(ToBinary(1,2),ToBinary(5,2)));
+            Assert.IsFalse(LessThan(ToBinary(70,2), ToBinary(6,2))); 
+            Assert.IsFalse(LessThan(ToBinary(7,2), ToBinary(7,2)));
         }
         bool LessThan(byte[] bytesOne, byte[] bytesTwo)
         {
@@ -250,9 +254,9 @@ namespace BinaryConversion
         [TestMethod]
         public void TestIfTheArrayIsSmaller()
         {
-            Assert.IsTrue(GreaterThan(ToBinary(6), ToBinary(2)));
-            Assert.IsFalse(GreaterThan(ToBinary(1), ToBinary(10)));
-            Assert.IsFalse(GreaterThan(ToBinary(7), ToBinary(7)));
+            Assert.IsTrue(GreaterThan(ToBinary(6,2), ToBinary(2,2)));
+            Assert.IsFalse(GreaterThan(ToBinary(1,2), ToBinary(10,2)));
+            Assert.IsFalse(GreaterThan(ToBinary(7,2), ToBinary(7,2)));
         }
         bool GreaterThan(byte[] bytesOne, byte[] bytesTwo)
         {
@@ -263,8 +267,8 @@ namespace BinaryConversion
         [TestMethod]
         public void Equal()
         {
-            Assert.IsTrue(Equal(ToBinary(9), ToBinary(9)));
-            Assert.IsFalse(Equal(ToBinary(9), ToBinary(5)));
+            Assert.IsTrue(Equal(ToBinary(9,2), ToBinary(9,2)));
+            Assert.IsFalse(Equal(ToBinary(9,2), ToBinary(5,2)));
         }
         bool Equal(byte[] bytesOne, byte[] bytesTwo)
         {
@@ -275,8 +279,8 @@ namespace BinaryConversion
         [TestMethod]
         public void NotEqual()
         {
-           Assert.AreEqual(true, NotEqual(ToBinary(5), ToBinary(7)));
-           Assert.AreEqual(false, NotEqual(ToBinary(9), ToBinary(9)));
+           Assert.AreEqual(true, NotEqual(ToBinary(5,2), ToBinary(7,2)));
+           Assert.AreEqual(false, NotEqual(ToBinary(9,2), ToBinary(9,2)));
         }
         bool NotEqual(byte[] bytesOne, byte[] bytesTwo)
         {
@@ -286,16 +290,16 @@ namespace BinaryConversion
         [TestMethod]
         public void Multiplication()
         {
-            CollectionAssert.AreEqual(ToBinary(15), Multiplication(ToBinary(3),ToBinary(5)));
-            CollectionAssert.AreEqual(ToBinary(15), Multiplication(ToBinary(5), ToBinary(3)));
-            CollectionAssert.AreEqual(ToBinary(8), Multiplication(ToBinary(2), ToBinary(4)));
-            CollectionAssert.AreEqual(ToBinary(840), Multiplication(ToBinary(4), ToBinary(210)));
-            CollectionAssert.AreEqual(ToBinary(840), Multiplication(ToBinary(210), ToBinary(4)));
+            CollectionAssert.AreEqual(ToBinary(15,2), Multiplication(ToBinary(3,2),ToBinary(5,2)));
+            CollectionAssert.AreEqual(ToBinary(15,2), Multiplication(ToBinary(5,2), ToBinary(3,2)));
+            CollectionAssert.AreEqual(ToBinary(8,2), Multiplication(ToBinary(2,2), ToBinary(4,2)));
+            CollectionAssert.AreEqual(ToBinary(840,2), Multiplication(ToBinary(4,2), ToBinary(210,2)));
+            CollectionAssert.AreEqual(ToBinary(840,2), Multiplication(ToBinary(210,2), ToBinary(4,2)));
         }
         byte[]  Multiplication(byte[] bytesOne, byte[] bytesTwo)
         {
             byte[] result =new byte[Math.Max(bytesTwo.Length,bytesOne.Length)];
-            while (!Equal(bytesOne,new byte[] {}))
+            while (!Equal(bytesOne,new byte[] {0}))
             {
                 result = AddNew(bytesTwo, result);
                 bytesOne = Subtraction(bytesOne, new byte[] {1}); 
@@ -308,23 +312,24 @@ namespace BinaryConversion
         [TestMethod]
         public void Division()
         {
-            Assert.AreEqual(0, Division(ToBinary(3), ToBinary(5)));
-            Assert.AreEqual(1, Division(ToBinary(5), ToBinary(3)));
-            Assert.AreEqual(5, Division(ToBinary(15), ToBinary(3)));
-            Assert.AreEqual(500, Division(ToBinary(1500), ToBinary(3)));
-            Assert.AreEqual(1000000, Division(ToBinary(1000000), ToBinary(1)));
+            CollectionAssert.AreEqual(new byte[] {0}, Division(ToBinary(3,2), ToBinary(5,2)));
+            CollectionAssert.AreEqual(ToBinary(1,2), Division(ToBinary(5,2), ToBinary(3,2)));
+            CollectionAssert.AreEqual(ToBinary(5,2), Division(ToBinary(15,2), ToBinary(3,2)));
+            CollectionAssert.AreEqual(ToBinary(500,2), Division(ToBinary(1500,2), ToBinary(3,2)));
+            CollectionAssert.AreEqual(ToBinary(1000000,2) ,Division(ToBinary(1000000,2), ToBinary(1,2)));
         }
-        int Division(byte[] bytesOne, byte[] bytesTwo)
+        byte[] Division(byte[] bytesOne, byte[] bytesTwo)
         {
-            int result = 0;
+            byte[] result = new byte[bytesOne.Length];
             if (LessThan(bytesOne, bytesTwo))
-                return 0;
+                return new byte[] {0};
             while (GreaterThan(bytesOne, bytesTwo) || Equal(bytesOne, bytesTwo))
             {
                 bytesOne = Subtraction(bytesOne,bytesTwo);
-                result++;
+                result = AddNew(result, new byte[] { 1 });
             }
-            return result;
+            result = CountingZeros(result);
+             return result;
         }
     }
 }
