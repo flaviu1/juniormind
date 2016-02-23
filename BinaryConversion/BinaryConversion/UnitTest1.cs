@@ -332,7 +332,10 @@ namespace BinaryConversion
         [TestMethod]
         public void Factorial()
         {
-            CollectionAssert.AreEqual(ToBinary(6), Factorial(ToBinary(3,2)));
+
+          CollectionAssert.AreEqual(ToBinary(6), Factorial(ToBinary(3,2)));
+           CollectionAssert.AreEqual(ToBinary(720), Factorial(ToBinary(6, 2)));
+            CollectionAssert.AreEqual(ToBinary(1), Factorial(Division(ToBinary(49),ToBinary(48))));
         }
         byte[] Factorial(byte[] bytes)
         {
@@ -340,7 +343,7 @@ namespace BinaryConversion
             byte[] bytesOne = new byte[] { 0 };
             while (NotEqual(bytes,new byte[] {0}))
             {
-                result = Multiplication(result, bytes);
+                result = Multiplication(bytes, result);
                 bytes = Subtraction(bytes, new byte[] {1});
                 bytes = ResizesIfTheFirstDigitAndZero(bytes);
             }
