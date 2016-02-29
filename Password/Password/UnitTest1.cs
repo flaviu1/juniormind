@@ -116,12 +116,14 @@ namespace Password
         {
             Assert.AreEqual(true, CheckForAmbiguousCharacters('>'));
             Assert.AreEqual(false, CheckForAmbiguousCharacters('1'));
+            Assert.AreEqual(false, CheckForAmbiguousCharacters('g'));
         }
         [TestMethod]
         public void SimilarCharacters()
         {
             Assert.AreEqual(true, CheckForSimilarCharacters('1'));
             Assert.AreEqual(false, CheckForSimilarCharacters('>'));
+            Assert.AreEqual(false, CheckForSimilarCharacters('a'));
         }
         bool CheckForAmbiguousCharacters(char character)
         {
