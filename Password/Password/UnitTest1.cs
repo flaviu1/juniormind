@@ -111,26 +111,37 @@ namespace Password
             return counter;
         }
 
-
-        bool CheckIsNotAmbiguousCharacters(char character)
+        [TestMethod]
+        public void AmbigueCharacters()
         {
-            byte[] symbolsAmbigue = { 123, 125, 91, 93, 40, 41, 47, 92, 39, 34, 126, 44, 59, 46, 60, 62 };//numbers is ambiguous characters: "{}[]()/\'"~,;.<>".
-            for (int i = 0; i < symbolsAmbigue.Length;i++)
-               {
-                    if(character==(char)symbolsAmbigue[i])
-                    {
-                        return true;
-                    }
-               }
-                return false;
+            Assert.AreEqual(true, CheckForAmbiguousCharacters('>'));
+            Assert.AreEqual(false, CheckForAmbiguousCharacters('1'));
         }
-
+        [TestMethod]
+        public void SimilarCharacters()
+        {
+            Assert.AreEqual(true, CheckForSimilarCharacters('1'));
+            Assert.AreEqual(false, CheckForSimilarCharacters('>'));
+        }
+        bool CheckForAmbiguousCharacters(char character)
+        {
+            return VerifyCharactersSimilareAmbigue(character, "ambiguous");
+        }
         bool CheckForSimilarCharacters(char character)
         {
+            return VerifyCharactersSimilareAmbigue(character, "similar");
+        }
+
+        private static bool VerifyCharactersSimilareAmbigue(char character ,string tip)
+        {
             byte[] symbolsSimilar = { 108, 49, 73, 111, 48, 79 };//numbers is Similar characters: " l, 1, I, o, 0, O";.
-            for (int i = 0; i < symbolsSimilar.Length; i++)
+            byte[] symbolsAmbiguous = { 123, 125, 91, 93, 40, 41, 47, 92, 39, 34, 126, 44, 59, 46, 60, 62 };//numbers is ambiguous characters: "{}[]()/\'"~,;.<>".
+            byte[] symbols = new byte[0];
+            if (tip == "ambiguous") symbols = symbolsAmbiguous;
+            else  symbols = symbolsSimilar;
+            for (int i = 0; i < symbols.Length; i++)
             {
-                if (character == (char)symbolsSimilar[i])
+                if (character == (char)symbols[i])
                 {
                     return true;
                 }
