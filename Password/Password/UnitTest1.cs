@@ -24,7 +24,7 @@ namespace Password
         [TestMethod]
         public void ManySymbolsContainsPassword()
         {
-            Assert.AreEqual(10, ContingSymbols(GeneratePassword(20, 5,5,10)));
+            Assert.AreEqual(10, ContingSymbols(GeneratePassword(20, 0, 0, 10)));
         }
 
         string GeneratePassword(int number, int uppercase = 0, int digits = 0, int symbols = 0)
@@ -38,23 +38,33 @@ namespace Password
         private static string ConditionsForPassword(int number, int uppercase, int digits, Random rnd, int symbols)
         {
             string result = string.Empty;
-            for (int i = 0; i < number - uppercase - digits - symbols; i++)
-            {
-                result += (char)rnd.Next('a', 'z' + 1);
-            }
-            for (int i = 0; i < uppercase; i++)
-            {
-                result += (char)rnd.Next('A', 'Z' + 1);
-            }
-            for (int i = 0; i < digits; i++)
-            {
-                result += rnd.Next(0, 9);
-            }
+            string symbolsString = "!#$%&()+,-./:;<>*=?@[_{}]\\";
+
+            result = GeneratePasword((number - uppercase - digits - symbols), rnd, result, 'a', (char)('z' + 1));
+            result = GeneratePasword(uppercase, rnd, result, 'A', (char)('Z' + 1));
+            result = GeneratePasword(digits, rnd, result, (char)48, (char)(58));
             for (int i = 0; i < symbols; i++)
             {
-                result += (char)rnd.Next(33, 47);
+                result += symbolsString[rnd.Next(symbolsString.Length)];
             }
+            return result;
+        }
 
+        private static string GeneratePasword(int dimension, Random rnd, string result, char x, char y)
+        {
+            for (int i = 0; i < dimension; i++)
+            {
+                result += (char)rnd.Next(x, y);
+            }
+            return result;
+        }
+
+        private static string Generate(int number, int uppercase, int digits, Random rnd, int symbols, string result, char x, char y)
+        {
+            for (int i = 0; i < number - uppercase - digits - symbols; i++)
+            {
+                result += (char)rnd.Next(x, y);
+            }
             return result;
         }
 
@@ -100,10 +110,11 @@ namespace Password
         int ContingSymbols(string symbols)
         {
             int counter = 0;
+            string symbolsString = "!#$%&()+,-./:;<>*=?@[_{}]\\";
             for (int i = 0; i < symbols.Length; i++)
-                for (int j = 33; j <= 47; j++)
+                for (int j = 0; j < symbolsString.Length; j++)
                 {
-                    if (symbols[i] == j)
+                    if (symbols[i] == symbolsString[j])
                     {
                         counter++;
                     }
@@ -125,6 +136,7 @@ namespace Password
             Assert.AreEqual(false, CheckForSimilarCharacters('>'));
             Assert.AreEqual(false, CheckForSimilarCharacters('a'));
         }
+
         bool CheckForAmbiguousCharacters(char character)
         {
             return VerifyCharactersSimilareAmbigue(character, "ambiguous");
@@ -134,13 +146,13 @@ namespace Password
             return VerifyCharactersSimilareAmbigue(character, "similar");
         }
 
-        private static bool VerifyCharactersSimilareAmbigue(char character ,string tip)
+        private static bool VerifyCharactersSimilareAmbigue(char character, string similarOrAmbigue)
         {
-            byte[] symbolsSimilar = { 108, 49, 73, 111, 48, 79 };//numbers is Similar characters: " l, 1, I, o, 0, O";.
-            byte[] symbolsAmbiguous = { 123, 125, 91, 93, 40, 41, 47, 92, 39, 34, 126, 44, 59, 46, 60, 62 };//numbers is ambiguous characters: "{}[]()/\'"~,;.<>".
-            byte[] symbols = new byte[0];
-            if (tip == "ambiguous") symbols = symbolsAmbiguous;
-            else  symbols = symbolsSimilar;
+            string symbolsSimilar = "l1Io0O";
+            string symbolsAmbiguous = "{}[]()/\'~,;.<>";
+            string symbols = string.Empty;
+            if (similarOrAmbigue == "ambiguous") symbols = symbolsAmbiguous;
+            else symbols = symbolsSimilar;
             for (int i = 0; i < symbols.Length; i++)
             {
                 if (character == (char)symbols[i])
