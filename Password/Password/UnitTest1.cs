@@ -38,32 +38,52 @@ namespace Password
         private static string ConditionsForPassword(int number, int uppercase, int digits, Random rnd, int symbols)
         {
             string result = string.Empty;
-            string symbolsString = "!#$%&()+,-./:;<>*=?@[_{}]\\";
-
             result = GeneratePasword((number - uppercase - digits - symbols), rnd, result, 'a', (char)('z' + 1));
             result = GeneratePasword(uppercase, rnd, result, 'A', (char)('Z' + 1));
             result = GeneratePasword(digits, rnd, result, (char)48, (char)(58));
+            result = GenerateSymbolsForPassword(rnd, symbols, result);
+            return result;
+        }
+
+        private static string GenerateSymbolsForPassword(Random rnd, int symbols, string result)
+        {
+            string symbolsString = "!#$%&()+,-./:;<>*=?@[_{}]\\";
+            char symbolsGenerate = ' ';
+            int counter = 0;
             for (int i = 0; i < symbols; i++)
             {
-                result += symbolsString[rnd.Next(symbolsString.Length)];
+                while (counter == 0)//l1Io0O""{}[]()/\'~,;.<>";
+                {
+                    symbolsGenerate = symbolsString[rnd.Next(symbolsString.Length)];
+                    if (!CheckForSimilarCharacters(symbolsGenerate) && !CheckForAmbiguousCharacters(symbolsGenerate))
+                    {
+                        result += symbolsGenerate;
+                        counter = 1;
+                    }
+                    else symbolsGenerate = ' ';
+                }
+                counter = 0;
             }
             return result;
         }
 
         private static string GeneratePasword(int dimension, Random rnd, string result, char x, char y)
         {
+            char symbolsGenerate = ' ';
+            int counter = 0;
             for (int i = 0; i < dimension; i++)
             {
-                result += (char)rnd.Next(x, y);
-            }
-            return result;
-        }
-
-        private static string Generate(int number, int uppercase, int digits, Random rnd, int symbols, string result, char x, char y)
-        {
-            for (int i = 0; i < number - uppercase - digits - symbols; i++)
-            {
-                result += (char)rnd.Next(x, y);
+                while (counter == 0)
+                {
+                    symbolsGenerate = (char)rnd.Next(x, y);
+                    if (!CheckForSimilarCharacters(symbolsGenerate) && !CheckForAmbiguousCharacters(symbolsGenerate))
+                    {
+                        result += symbolsGenerate;
+                        counter = 1;
+                    }
+                    else symbolsGenerate = ' ';
+                }
+                counter = 0;
             }
             return result;
         }
@@ -137,11 +157,11 @@ namespace Password
             Assert.AreEqual(false, CheckForSimilarCharacters('a'));
         }
 
-        bool CheckForAmbiguousCharacters(char character)
+        private static bool CheckForAmbiguousCharacters(char character)
         {
             return VerifyCharactersSimilareAmbigue(character, "ambiguous");
         }
-        bool CheckForSimilarCharacters(char character)
+        private static bool CheckForSimilarCharacters(char character)
         {
             return VerifyCharactersSimilareAmbigue(character, "similar");
         }
