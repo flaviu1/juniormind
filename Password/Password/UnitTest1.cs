@@ -27,6 +27,14 @@ namespace Password
             Assert.AreEqual(10, ContingSymbols(GeneratePassword(20, 0, 0, 10)));
         }
 
+        /*struct Options
+        {
+           public int number;
+           public int uppercase;
+           public int digits;
+           public int symbols;
+        }*/
+
         string GeneratePassword(int number, int uppercase = 0, int digits = 0, int symbols = 0)
         {
             string result = string.Empty;
