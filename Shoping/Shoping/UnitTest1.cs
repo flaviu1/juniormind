@@ -37,21 +37,23 @@ namespace Shoping
         public void ProdusuCheapest()
         {
             var product = new Product[] { new Product("Apple", 10), new Product("Sugar", 25), new Product("Orange", 15) };
-            Assert.AreEqual(10, TheCheapestProduct(product));
-            var productEmpty= new Product[] { };
-            Assert.AreEqual(0, TheCheapestProduct(productEmpty));
+            Assert.AreEqual("Apple", TheCheapestProduct(product));
+           // var productEmpty= new Product[] { };
+           // Assert.AreEqual("Array is empty", TheCheapestProduct(productEmpty));
         }
-        double TheCheapestProduct(Product[] product)    
+        string TheCheapestProduct(Product[] product)    
         {
-            double result = 0;
-            for (int i = 1; i < product.Length; i++)
+            string result =string.Empty;
+            double counter = 0;
+            if (product.Length == 0)
+                return "Array is empty";
+            for (int i = 0; i < product.Length-1; i++)
             {
-                if (product[0].priceProduct == 0)
-                    return 0;
-                result = product[0].priceProduct;
-                if (result > product[i].priceProduct)
+                counter = product[i].priceProduct;
+                if (counter < product[i+1].priceProduct)
                 {
-                    result = product[i].priceProduct;
+                    counter = product[i].priceProduct;
+                    result = product[i].nameProduct;
                 }
             }
             return result;
@@ -61,22 +63,14 @@ namespace Shoping
         public void AddProduct()
         {
            var product = new Product[] { new Product("Apple",10), new Product("Sugar", 25), new Product("Orange", 15) };
-           var first = new Product[] { new Product("Apple", 10),new Product("Sugar", 25), new Product("Coffe", 20), new Product("Orange", 15) };
-           CollectionAssert.AreEqual(first, AddAProduct(product , 2 , "Coffe" , 20));
+           var first = new Product[] { new Product("Apple", 10),new Product("Sugar", 25), new Product("Orange", 15), new Product("Coffe", 20) };
+           CollectionAssert.AreEqual(first, AddAProduct(product , "Coffe" , 20));
         }
-        Product[] AddAProduct(Product[] product,int pozition,string name , int price)
+        Product[] AddAProduct(Product[] product,string name , int price)
         {
             Array.Resize(ref product, product.Length+1);
-            for (int i = pozition; i < product.Length+1; i++)
-            {
-                if (i + 1 < product.Length )
-                {
-                    product[i + 1].priceProduct = product[i].priceProduct;
-                    product[i + 1].nameProduct = product[i].nameProduct;
-                }
-            }
-            product[pozition].priceProduct = price;
-            product[pozition].nameProduct = name;
+            product[product.Length-1].priceProduct = price;
+            product[product.Length-1].nameProduct = name;
             return product;
         }
         
@@ -116,10 +110,7 @@ namespace Shoping
         }
        double CalculateTheAveragePrice(Product[] product)
         {
-            double total = 0;
-            for (int i = 0; i < product.Length; i++)
-                total += product[i].priceProduct;
-            return total / product.Length;
+            return CalculateTheSumOfProducts(product) / product.Length;
         }
     }
 }
