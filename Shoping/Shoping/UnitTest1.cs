@@ -83,23 +83,35 @@ namespace Shoping
         }
         Product[] RemoveAProduct(Product[] product)
         {
-            double counter = 0;
-            int index = 0;
-            for (int i = 0; i < product.Length; i++)
-            {
-                if (counter < product[i].priceProduct)
-                {
-                    counter = product[i].priceProduct; 
-                    index = i;
-                }
-            }
+
+            int index = LookingForTheMostMxpensiveProduct(product);
+            RemoveElementAtPositionX(product, index);
+            Array.Resize(ref product, product.Length - 1);
+            return product;
+        }
+
+        private static void RemoveElementAtPositionX(Product[] product, int index)
+        {
             for (int i = index; i < product.Length - index; i++)
             {
                 product[i].priceProduct = product[i + 1].priceProduct;
                 product[i].nameProduct = product[i + 1].nameProduct;
             }
-            Array.Resize(ref product, product.Length - 1);
-            return product;
+        }
+
+        private static int LookingForTheMostMxpensiveProduct(Product[] product)
+        {
+            int index = 0;
+            double counter = 0;
+            for (int i = 0; i < product.Length; i++)
+            {
+                if (counter < product[i].priceProduct)
+                {
+                    counter = product[i].priceProduct;
+                    index = i;
+                }
+            }
+            return index;
         }
          
         [TestMethod]
