@@ -38,8 +38,8 @@ namespace Shoping
         {
             var product = new Product[] { new Product("Apple", 10), new Product("Sugar", 25), new Product("Orange", 15) };
             Assert.AreEqual("Apple", TheCheapestProduct(product));
-           // var productEmpty= new Product[] { };
-           // Assert.AreEqual("Array is empty", TheCheapestProduct(productEmpty));
+            var productEmpty= new Product[] { };
+            Assert.AreEqual("Array is empty", TheCheapestProduct(productEmpty));
         }
         string TheCheapestProduct(Product[] product)    
         {
