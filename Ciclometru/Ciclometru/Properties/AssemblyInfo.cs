@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Alarm")]
+[assembly: AssemblyTitle("Ciclometru")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Alarm")]
+[assembly: AssemblyProduct("Ciclometru")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("62b3ce59-0167-4290-9f36-e87feb364be4")]
+[assembly: Guid("eca793fe-0da8-49ab-b3f6-e0a52305df16")]
 
 // Version information for an assembly consists of the following four values:
 //
