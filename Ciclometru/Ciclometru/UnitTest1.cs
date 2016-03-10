@@ -1,18 +1,19 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 
 namespace Ciclometru
 {
-    public struct Ciclometru
+    public struct Bicyclist
     {
-        public string nameCiclometru;
-        public double rotationCiclometru;
-        public double diameterCiclometru;
-        public Ciclometru(string nameCiclometru, double rotationCiclometru, double diameterCiclometru)
+        public string name;
+        public int[] records;
+        public int diameter;
+        public Bicyclist(string nameBicyclist, int[] recordsBicyclist, int diameterBicyclist)
         {
-            this.nameCiclometru = nameCiclometru;
-            this.rotationCiclometru = rotationCiclometru;
-            this.diameterCiclometru = diameterCiclometru;
+            this.name = nameBicyclist;
+            this.records = recordsBicyclist;
+            this.diameter = diameterBicyclist;
         }
     }
 
@@ -22,47 +23,89 @@ namespace Ciclometru
         [TestMethod]
         public void DistanceTraveledByCyclists()
         {
-            var distance = new Ciclometru[] { new Ciclometru("Alin", 1000, 10), new Ciclometru("Bogdan", 1100, 11), new Ciclometru("Silvian", 1200, 12) };
-            Assert.AreEqual(300, DistanceTraveled(distance));
+            var bicyclists = new Bicyclist[] { new Bicyclist("Alin", new int[] { 1, 2, 3 }, 3), new Bicyclist("Bogdan", new int[] { 2, 2, 4 }, 4), new Bicyclist("Silvian", new int[] { 2, 3, 5 }, 5) };
+            Assert.AreEqual(6, DistanceTraveled(bicyclists));
         }
-        double DistanceTraveled(Ciclometru[] distance)
+        int DistanceTraveled(Bicyclist[] bicyclists)
         {
-            double result = 0;
-            for (int i = 0; i < distance.Length; i++)
+            int result = 0;
+            foreach (Bicyclist currentBicyclist in bicyclists)
             {
-                result += DistanceTraveledByACyclist(distance, i);
+                result += DistanceOneBicyclists(currentBicyclist);
             }
             return result;
         }
 
-        private static double DistanceTraveledByACyclist(Ciclometru[] distance, int i)
-        {
-            double result = 0;
-            result = (distance[i].rotationCiclometru / distance[i].diameterCiclometru);
-            return result;
-        }
 
         [TestMethod]
-        public void AverageDrivingSpeed()
-        {
-            var distance = new Ciclometru[] { new Ciclometru("Alin", 1000, 10), new Ciclometru("Bogdan", 1100, 10), new Ciclometru("Silvian", 1200, 10) };
-            Assert.AreEqual("Alin", AverageDrivingSpeed(distance));
-        }
-        string AverageDrivingSpeed(Ciclometru[] distance)
-        {
-            double result = 0;
-            double counter = 0;
-            int index = 0;
-            for (int i = 0; i < distance.Length; i++)
+         public void DistanceOneBicyclists()
+         {
+             var bicyclists = new Bicyclist[] { new Bicyclist("Alin", new int[] { 1, 2, 3 }, 3)};
+             Assert.AreEqual(2, DistanceOneBicyclists( new Bicyclist("Alin", new int[] { 1, 2, 3 }, 3)));
+         }
+         private static int DistanceOneBicyclists( Bicyclist currentBicyclist)
+         {
+             int result = 0;
+             int totalDistance = 0;
+             totalDistance = currentBicyclist.records.Sum();
+             result += totalDistance / currentBicyclist.diameter;
+             return result;
+         }
+
+
+         [TestMethod]
+         public void RiderWithAverageSpeed()
+         {
+             var bicyclists = new Bicyclist[] { new Bicyclist("Alin", new int[] { 3, 3, 3 }, 2), new Bicyclist("Bogdan", new int[] { 4, 4, 4 }, 2), new Bicyclist("Silvian", new int[] { 6, 6, 6 }, 2) };
+             Assert.AreEqual("Silvian", RiderWithAverageSpeed(bicyclists));
+             var bicyclists1 = new Bicyclist[] { new Bicyclist("Silvian", new int[] { 6, 6, 6 }, 2) , new Bicyclist("Alin", new int[] { 3, 3, 3 }, 3), new Bicyclist("Bogdan", new int[] { 4, 4, 4 }, 4)};
+             Assert.AreEqual("Silvian", RiderWithAverageSpeed(bicyclists1));
+         }
+        string RiderWithAverageSpeed(Bicyclist[] bicyclists)
+         {
+             int speed = 0;
+            int counter=0;
+            string result =string.Empty;
+            string cursier=string.Empty;
+            int AverageSpeed=0;
+            for(int i=0; i<bicyclists.Length; i++)
             {
-                counter = (DistanceTraveledByACyclist(distance, i)) / (distance[i].rotationCiclometru / 60);
-                if (counter > result)
+                foreach (Bicyclist time in bicyclists)
                 {
-                    result = counter;
-                    index = i;
+                    counter++;
+                }
+                cursier = bicyclists[i].name;
+                AverageSpeed = DistanceOneBicyclists(bicyclists[i]) / counter;
+                if (speed < AverageSpeed) 
+                {
+                    speed = AverageSpeed;
+                    result = cursier;
+                }
+                counter = 0;
+            }
+            return result;
+         }
+
+
+         [TestMethod]
+        public void CyclistWithMaximumSpeed()
+         {
+             var bicyclists = new Bicyclist[] { new Bicyclist("Alin", new int[] { 3, 3, 3 }, 2), new Bicyclist("Bogdan", new int[] { 4, 4, 4 }, 2), new Bicyclist("Silvian", new int[] { 6, 6, 6 }, 2) };
+             Assert.AreEqual("Silvian", CyclistWithMaximumSpeed(bicyclists));
+         }
+        string CyclistWithMaximumSpeed(Bicyclist[] bicyclists)
+        {
+            int second = 0;
+            int[] counter = { 0 };
+            for (int i = 0; i < bicyclists.Length;i++ )
+            {
+                foreach (Bicyclist currentBicyclist in bicyclists)
+                {
+                    counter = currentBicyclist.records;
+                    if()
                 }
             }
-            return distance[index].nameCiclometru;
+            return " a";
         }
     }
 }
