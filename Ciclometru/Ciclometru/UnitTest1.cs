@@ -39,6 +39,14 @@ namespace Ciclometru
                 return (int)result;
         }
 
+
+        [TestMethod]
+        public void SumWhoneCyclist()
+        {
+            var cyclist = new Cyclist("Alin", new int[] { 1, 2, 3 }, 3);
+            int i = cyclist.records.Length;
+            Assert.AreEqual(6, Sum(cyclist,i));
+        }
         private static int Sum(Cyclist cyclists, int i)
         {
             int sum=0;
@@ -75,6 +83,33 @@ namespace Ciclometru
                 }
             }
                 return cyclist[index].name;
+        }
+
+
+        [TestMethod]
+        public void CyclistWithSpeedMaximum()
+        {
+            var cyclist = new Cyclist[] { new Cyclist("Alin", new int[] { 1, 2, 9 }, 3), new Cyclist("Bogdan", new int[] { 1, 2, 4 }, 3), new Cyclist("Silvian", new int[] { 1, 3, 6 }, 3) };
+            Assert.AreEqual("Alin", CyclistWithSpeedMaximum(cyclist));
+        }
+        string CyclistWithSpeedMaximum(Cyclist[] cyclist)
+        {
+           int index1 = 0;
+           double result = 0;
+           int counter=0;
+           for(int i=0;i<cyclist.Length;i++)
+           {
+               for (int j = 0; j < cyclist[i].records.Length;j++)
+               {
+                   counter=cyclist[i].records[j];
+                   if (result < counter)
+                   {
+                       result = counter;
+                       index1 = i;
+                   }
+               }
+           }
+           return cyclist[index1].name;
         }
     }
 }
