@@ -18,6 +18,20 @@ namespace Ciclometru
         }
     }
 
+
+    public struct Maximum
+    {
+        public string name;
+        public int second;
+        public int diameter;
+        public Maximum(string name, int second, int diameter)
+        {
+            this.name = name;
+            this.second = second;
+            this.diameter = diameter;
+        }
+    }
+
     [TestClass]
     public class UnitTest1
     {
@@ -100,11 +114,13 @@ namespace Ciclometru
         public void CyclistWithSpeedMaximum()
         {
             var cyclist = new Cyclist[] { new Cyclist("Alin", new int[] { 1, 2, 3 }, 3), new Cyclist("Bogdan", new int[] { 1, 2, 4 }, 3), new Cyclist("Silvian", new int[] { 1, 3, 6 }, 3) };
-            Assert.AreEqual("Silvian", CyclistWithSpeedMaximum(cyclist));
+            var result = new Maximum[] { new Maximum("Silvian", 3 , 3) };
+            Assert.AreEqual(result, CyclistWithSpeedMaximum(cyclist));
         }
-        string CyclistWithSpeedMaximum(Cyclist[] cyclist)
+        Maximum[] CyclistWithSpeedMaximum(Cyclist[] cyclist)
         {
            int index1 = 0;
+           Maximum[] maximum = new Maximum[1];
            double result = 0;
            double speed=0;
            for(int i=0;i<cyclist.Length;i++)
@@ -112,11 +128,32 @@ namespace Ciclometru
                speed=SpeedForOneCyclist(cyclist, i);
                if(result<speed)
                {
-                   result = speed;
-                   index1 = i;
+                   int second = 0;
+                    result = speed;
+                    index1 = i;
+                    maximum[0].name = cyclist[i].name;
+                    second+=SecondWhitMaximumSpeed(cyclist, index1);
+                    maximum[0].second = second;
+                    maximum[0].diameter = cyclist[i].diameter;
                }
            }
-           return cyclist[index1].name;
+           return maximum;
+        }
+
+        private static int SecondWhitMaximumSpeed(Cyclist[] cyclist, int index1)
+        {
+            int counter = 0;
+            int second=0;
+            for (int j = 0; j < cyclist[index1].records.Length; j++)
+            {
+                int count = 0;
+                if (count < cyclist[index1].records[j])
+                {
+                    counter = cyclist[index1].records[j];
+                    second = j;
+                }
+            }
+            return second+1;
         }
 
 
