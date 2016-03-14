@@ -120,7 +120,7 @@ namespace Ciclometru
         Maximum CyclistWithSpeedMaximum(Cyclist[] cyclist)
         {
            int index = 0;
-           Maximum[] maximum = new Maximum[1];
+           Maximum maximum = new Maximum { };
            double result = 0;
            double speed=0;
            for(int i=0;i<cyclist.Length;i++)
@@ -132,22 +132,21 @@ namespace Ciclometru
                     result = speed;
                     index=i;
                     second+=SecondWhitMaximumSpeed(cyclist[index]);
-                    AddToCyclistWhitSpeedMaximumNewStruct(cyclist, index, maximum);
+                    maximum =AddToCyclistWhitSpeedMaximumNewStruct(cyclist, index);
                }
            }
-           return maximum[0];
+           return maximum;
         }
 
-        private static void AddToCyclistWhitSpeedMaximumNewStruct(Cyclist[] cyclist, int index, Maximum[] maximum)
+        private static Maximum AddToCyclistWhitSpeedMaximumNewStruct(Cyclist[] cyclist, int index)
         {
-            for (int j = 0; j < maximum.Length; j++)
-            {
+            Maximum maximum = new Maximum { };
                 int second = 0;
                 second += SecondWhitMaximumSpeed(cyclist[index]);
-                maximum[j].name = cyclist[index].name;
-                maximum[j].second = second;
-                maximum[j].diameter = cyclist[index].diameter;
-            }
+                maximum.name = cyclist[index].name;
+                maximum.second = second;
+                maximum.diameter = cyclist[index].diameter;
+                return maximum;
         }
 
         private static int SecondWhitMaximumSpeed(Cyclist cyclist)
