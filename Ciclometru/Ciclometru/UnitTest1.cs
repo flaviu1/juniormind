@@ -125,7 +125,7 @@ namespace Ciclometru
            double speed=0;
            for(int i=0;i<cyclist.Length;i++)
            {
-               speed=SpeedForOneCyclist(cyclist[i]);
+               speed = MaximSpeedForOneCyclist(cyclist[i]);
                if(result<speed)
                {
                    int second = 0;
@@ -170,15 +170,16 @@ namespace Ciclometru
         public void SpeedOneCyclist()
         {
             var cyclist =  new Cyclist("Alin", new int[] { 1, 2, 3 }, 3);
-            Assert.AreEqual(2,2, SpeedForOneCyclist(cyclist));
+            Assert.AreEqual(2, MaximSpeedForOneCyclist(cyclist));
         }
-        private static double SpeedForOneCyclist(Cyclist cyclist)
+        private static int MaximSpeedForOneCyclist(Cyclist cyclist)
         {
             double distance = 0;
             int time = 0;
-            distance = DistancetTraveledByACyclist(cyclist);
-            time = cyclist.records.Length;
-            return distance * time / 60;
+            for (int i = 0; i < cyclist.records.Length;i++ )
+                distance = DistancetTraveledByACyclist(cyclist);
+                time = cyclist.records.Length;
+            return (int)(distance * time/60);
         }
     }
 }
