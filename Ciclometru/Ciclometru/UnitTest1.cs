@@ -23,12 +23,10 @@ namespace Ciclometru
     {
         public string name;
         public int second;
-        public int diameter;
-        public Maximum(string name, int second, int diameter)
+        public Maximum(string name, int second)
         {
             this.name = name;
             this.second = second;
-            this.diameter = diameter;
         }
     }
 
@@ -114,7 +112,7 @@ namespace Ciclometru
         public void CyclistWithSpeedMaximum()
         {
             var cyclist = new Cyclist[] { new Cyclist("Alin", new int[] { 1, 2, 3 }, 3), new Cyclist("Bogdan", new int[] { 1, 2, 4 }, 3), new Cyclist("Silvian", new int[] { 6, 3, 1 }, 3) };
-            var result = new Maximum("Silvian", 1, 3);
+            var result = new Maximum("Silvian", 1);
             Assert.AreEqual(result, CyclistWithSpeedMaximum(cyclist));
         }
         Maximum CyclistWithSpeedMaximum(Cyclist[] cyclist)
@@ -131,7 +129,7 @@ namespace Ciclometru
                     int second = 0;
                     result = speed;
                     index = i;
-                    second += SecondWhitMaximumSpeed(cyclist[index]);
+                    second = SecondWhitMaximumSpeed(cyclist[index]);
                     maximum = AddToCyclistWhitSpeedMaximumNewStruct(cyclist, index);
                 }
             }
@@ -145,7 +143,6 @@ namespace Ciclometru
             second += SecondWhitMaximumSpeed(cyclist[index]);
             maximum.name = cyclist[index].name;
             maximum.second = SecondAtTheMaximumSpeed(cyclist[index]);
-            maximum.diameter = cyclist[index].diameter;
             return maximum;
         }
 
