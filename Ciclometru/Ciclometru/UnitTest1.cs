@@ -172,7 +172,7 @@ namespace Ciclometru
             var cyclist = new Cyclist("Alin", new int[] { 3, 2, 1 }, 3);
             Assert.AreEqual(28, MaximSpeedForOneCyclist(cyclist));
             var cyclist1 = new Cyclist("Alin", new int[] { 1, 2, 3 }, 3);
-            Assert.AreEqual(9, MaximSpeedForOneCyclist(cyclist1));
+            Assert.AreEqual(28, MaximSpeedForOneCyclist(cyclist1));
         }
         private static int MaximSpeedForOneCyclist(Cyclist cyclist)
         {
@@ -180,7 +180,7 @@ namespace Ciclometru
             int time = 0;
             time = SecondAtTheMaximumSpeed(cyclist);
             distance = Math.PI * cyclist.records[time - 1] * cyclist.diameter;
-            return (int)(distance / time);
+            return (int)(distance);
         }
 
 
