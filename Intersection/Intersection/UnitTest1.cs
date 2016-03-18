@@ -56,7 +56,7 @@ namespace Intersection
         Point CheckIfIntersection(Direction[] direction)
         {
             Point intersection = new Point(0, 0);
-            Point[] intersection2 = new Point[direction.Length];
+            Point[] totalPoint = new Point[direction.Length];
             for (int i = 0; i < direction.Length; i++)
             {
                 if (direction[i] == Direction.up) intersection.y +=1 ;
@@ -64,13 +64,13 @@ namespace Intersection
                 if (direction[i] == Direction.right) intersection.x += 1;
                 if (direction[i] == Direction.left) intersection.x -= 1;
 
-                for(int j=0;j<intersection2.Length;j++)
+                for (int j = 0; j < totalPoint.Length; j++)
                 {
-                    if (intersection2[j].x == intersection.x && intersection2[j].y == intersection.y)
+                    if (totalPoint[j].x == intersection.x && totalPoint[j].y == intersection.y)
                         return intersection;
                 }
-                intersection2[i].x = intersection.x;
-                intersection2[i].y = intersection.y;
+                totalPoint[i].x = intersection.x;
+                totalPoint[i].y = intersection.y;
             }
             return intersection;
         }
