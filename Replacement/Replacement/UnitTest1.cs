@@ -6,30 +6,34 @@ namespace Replacement
     [TestClass]
     public class UnitTest1
     {
-       /* [TestMethod]
+        [TestMethod]
         public void TestCangeLetterRecursiv()
         {
-           Assert.AreEqual("Flavia", ChangeLetterRecursiv("Flaviu", 'u', "a"));
+            Assert.AreEqual("Flaviaa", ChangeLetterRecursive("Flaviu", 'u', "aa"));
+            Assert.AreEqual("aaxxa", ChangeLetterRecursive("uuxxu", 'u', "a"));
         }
-        string ChangeLetterRecursiv(string input, char letterChange, string newLetter)
+        string ChangeLetterRecursive(string input, char letterChange, string newLetter)
         {
-            if (input.Length > 1)
+            string result = string.Empty;
+            if (input.Length > 0)
             {
-              
+                if (input[0] == letterChange) return result = newLetter + ChangeLetterRecursive(input.Substring(1, input.Length - 1), letterChange, newLetter);
+                return input[0] + ChangeLetterRecursive(input.Substring(1, input.Length - 1), letterChange, newLetter);
             }
-            return "Flavia";
-        }*/
+            return result;
+
+        }
+
         [TestMethod]
-        public void TestChangeLetter()
+        public void TestChangeLettere()
         {
             Assert.AreEqual("Flavia", ChangeLetterNotRecursiv("Flaviu", 'u', "a"));
             Assert.AreEqual("FlaviaFlaviu", ChangeLetterNotRecursiv("Flaviu", 'u', "aFlaviu"));
         }
-         
-        string ChangeLetterNotRecursiv( string input, char letterChange, string newLetter)
+        string ChangeLetterNotRecursiv(string input, char letterChange, string newLetter)
         {
             string result = string.Empty;
-            for(int i=0;i<input.Length;i++)
+            for (int i = 0; i < input.Length; i++)
             {
                 if (input[i] == letterChange)
                 {
