@@ -14,13 +14,12 @@ namespace Replacement
         }
         string ChangeLetterRecursive(string input, char letterChange, string newLetter)
         {
-            string result = string.Empty;
             if (input.Length > 0)
             {
-                if (input[0] == letterChange) return result = newLetter + ChangeLetterRecursive(input.Substring(1, input.Length - 1), letterChange, newLetter);
-                return input[0] + ChangeLetterRecursive(input.Substring(1, input.Length - 1), letterChange, newLetter);
+                if (input[0] == letterChange) return newLetter + ChangeLetterRecursive(input.Substring(1), letterChange, newLetter);
+                return input[0] + ChangeLetterRecursive(input.Substring(1), letterChange, newLetter);
             }
-            return result;
+            return input;
 
         }
 
