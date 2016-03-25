@@ -25,19 +25,28 @@ namespace Pascal_sTriangle
         }
         int[] CalculateTrianglHisPascalRecursive(int number)
         {
-            int[] result = new int[number];
             if (number == 1) return new int[] { 1 };
+            int[] result = new int[number];
             result[0] = 1;
             result[number - 1] = 1;
 
             int[] previousLine = CalculateTrianglHisPascalRecursive(number - 1);
 
-            for(int i=1;i<number-1;i++)
+            result=CreatesNewLine(number, previousLine);
+            return result;
+        }
+
+        private static int[] CreatesNewLine(int number, int[] previousLine)
+        {
+            int[] result = new int[number];
+            for (int i = 1; i < number - 1; i++)
             {
                 result[i] = previousLine[i - 1] + previousLine[i];
             }
             return result;
         }
+
+
         int[] CalculateTrianglHisPascal(int number)
         {
             int[] first = new int[] { 1 };
