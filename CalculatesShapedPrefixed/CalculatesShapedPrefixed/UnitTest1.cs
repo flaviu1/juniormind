@@ -7,51 +7,53 @@ namespace CalculatesShapedPrefixed
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethod1()
+        public void TestForAdditionNumber()
         {
-            Assert.AreEqual(0,Calculate("+ - 1 2 3"));
+            int index = 0;
+            Assert.AreEqual(3,Calculate("+ 1 2 ",ref index));
+        }
+        [TestMethod]
+        public void TestForSubtracionNumber()
+        {
+            int index = 0;
+            Assert.AreEqual(-1, Calculate("- 1 2 ", ref index));
+        }
+        [TestMethod]
+        public void TestForMultiplicationNumber()
+        {
+            int index = 0;
+            Assert.AreEqual(2, Calculate("* 1 2 ", ref index));
+        }
+        [TestMethod]
+        public void TestForDivisionNumber()
+        {
+            int index = 0;
+            Assert.AreEqual(0.5, Calculate("/ 1 2 ", ref index));
+        }
+        [TestMethod]
+        public void ComputerPrefixat()
+        {
+            int index = 0;
+            Assert.AreEqual(1, Calculate("/ * 1 2 2 1", ref index));
+        }
+        double Calculate(string input,ref int index)
+        {
+            double result = 0;
+            string[] counterElement = input.Split(' ');
+            string element=counterElement[index++];
+            if (double.TryParse(element, out result)) return result;
+            return CheckOperation(element,input,ref index);
         }
 
-        int Calculate(string operation)
+        double CheckOperation(string operation,string input,ref int index)
         {
-            int counter=0;
-            int result=0;
-            counter += CountOperation(operation);
-            for (int i = 0; i < operation.Length;i++)
+            switch(operation)
             {
-                if (operation[i] == '+')
-                {
-                    result += (int)operation[counter] + (int)operation[counter + 1];
-                    counter += 2;
-                }
-                if (operation[i] == '-')
-                {
-                    result += operation[counter] - operation[counter + 1];
-                    counter += 2;
-                } if (operation[i] == '*')
-                {
-                    result += operation[counter] * operation[counter + 1];
-                    counter += 2;
-                } if (operation[i] == '/')
-                {
-                    result += operation[counter] / operation[counter + 1];
-                    counter += 2;
-                }
+                case "+": return Calculate(input, ref index) + Calculate(input, ref index);
+                case "-": return Calculate(input, ref index) - Calculate(input, ref index);
+                case "*": return Calculate(input, ref index) * Calculate(input, ref index);
             }
-                return result;
-        }
-
-        private static int CountOperation(string operation)
-        {
-            int counter = 0;
-            for (int i = 0; i < operation.Length; i++)
-            {
-                if ((operation[i] == '+') && (operation[i] != 0)) counter++;
-                if ((operation[i] == '-') && (operation[i] != 0)) counter++;
-                if ((operation[i] == '*') && (operation[i] != 0)) counter++;
-                if ((operation[i] == '/') && (operation[i] != 0)) counter++;
-            }
-            return counter;
+            return Calculate(input, ref index) / Calculate(input, ref index);
         }
     }
 }
