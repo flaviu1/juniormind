@@ -15,6 +15,29 @@ namespace Pascal_sTriangle
             CollectionAssert.AreEqual(result1, CalculateTrianglHisPascal(10));
         }
 
+        [TestMethod]
+        public void TestCalculateTrianglePascalRecursive()
+        {
+            var result = new int[] { 1, 4, 6, 4, 1 };
+            CollectionAssert.AreEqual(result, CalculateTrianglHisPascal(5));
+            var result1 = new int[] { 1, 9, 36, 84, 126, 126, 84, 36, 9, 1 };
+            CollectionAssert.AreEqual(result1, CalculateTrianglHisPascal(10));
+        }
+        int[] CalculateTrianglHisPascalRecursive(int number)
+        {
+            int[] result = new int[number];
+            if (number == 1) return new int[] { 1 };
+            result[0] = 1;
+            result[number - 1] = 1;
+
+            int[] previousLine = CalculateTrianglHisPascalRecursive(number - 1);
+
+            for(int i=1;i<number-1;i++)
+            {
+                result[i] = previousLine[i - 1] + previousLine[i];
+            }
+            return result;
+        }
         int[] CalculateTrianglHisPascal(int number)
         {
             int[] first = new int[] { 1 };
