@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CalculatesShapedPrefixed")]
+[assembly: AssemblyTitle("CalculatorPrefixat")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CalculatesShapedPrefixed")]
+[assembly: AssemblyProduct("CalculatorPrefixat")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("8f8d55b0-5ca8-4f26-80be-368e33086fcb")]
+[assembly: Guid("a4d76e92-2388-4662-b633-fd6f4ad6e713")]
 
 // Version information for an assembly consists of the following four values:
 //
