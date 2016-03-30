@@ -31,6 +31,7 @@ namespace Calculator
         {
             Assert.AreEqual(1524, 1, Calculate("+ / * + 56 45 46 3 - 1 0.25"));
         }
+
         double Calculate(string[] input, ref int index)
         {
             double result = 0;
