@@ -19,16 +19,30 @@ namespace TowersOfHanoi
         }
 
 
-
         [TestMethod]
         public void Test()
         {
-            int[] A=new int[] {3,2,1};
-            int[] B=new int[A.Length];
-            int[] C=new int[A.Length];
-           CollectionAssert.AreEqual(new int[] {3,2,1} ,TowersOfHanoi(3,A ,B,C));
+            Assert.AreEqual("ac ab cb ac ba bc ac", TowersOfHanoi(3,'a','b','c'));
         }
-        int[] TowersOfHanoi(int numberDisk ,int[] a ,int[] b, int[] c)
+        char TowersOfHanoi(int numberDisk ,char a ,char b ,char c)
+        {
+            string result = string.Empty;
+            if (numberDisk == 1)
+            {
+                c = a;
+                return result =(string)(a+c);
+            }
+            else
+            {
+                TowersOfHanoi(numberDisk - 1, a, b, c);
+                c = a; 
+                TowersOfHanoi(numberDisk - 1, c, b, a);
+            }
+            return (char)(c+a);
+        }
+    }
+}
+/* int[] TowersOfHanoi(int numberDisk ,int[] a ,int[] b, int[] c)
         {
             if (numberDisk == 1)
             {
@@ -46,4 +60,4 @@ namespace TowersOfHanoi
             return c;
         }
     }
-}
+}*/

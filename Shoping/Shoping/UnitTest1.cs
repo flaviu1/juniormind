@@ -63,7 +63,7 @@ namespace Shoping
         public void AddProduct()
         {
            var product = new Product[] { new Product("Apple",10), new Product("Sugar", 25), new Product("Orange", 15) };
-           var first = new Product[] { new Product("Apple", 10),new Product("Sugar", 25), new Product("Orange", 15), new Product("Coffe", 20) };
+           Product[] first = new Product[] { new Product("Apple", 10), new Product("Sugar", 25), new Product("Orange", 15), new Product("Coffe", 20) };
            CollectionAssert.AreEqual(first, AddAProduct(product , "Coffe" , 20));
         }
         Product[] AddAProduct(Product[] product,string name , int price)
