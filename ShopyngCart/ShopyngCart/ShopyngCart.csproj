@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{00165BD1-36C2-43E0-8EF5-51B2E6DA5216}</ProjectGuid>
+    <ProjectGuid>{EF0DA33F-2237-472B-A112-6A15E4794D9E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OOPShoppingCart</RootNamespace>
-    <AssemblyName>OOPShoppingCart</AssemblyName>
+    <RootNamespace>ShopyngCart</RootNamespace>
+    <AssemblyName>ShopyngCart</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
