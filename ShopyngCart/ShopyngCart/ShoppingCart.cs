@@ -10,10 +10,10 @@ namespace ShopyngCart
     {
         static void Add(string[] args)
       {
-            Product p = new Product();
+            Product p = new Product("apple",15);
             p.name = "apple";
             p.price=15;
-            p.Product(p.name,p.price);
+            p.AddNedwProductWhenListIsEmpty("apple", 15);
       }
    } 
 }
