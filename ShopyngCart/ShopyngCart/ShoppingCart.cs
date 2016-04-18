@@ -9,13 +9,15 @@ namespace ShopyngCart
     class ShoppingCart
     {
         private Product[] products;
+
+
         public void Add(Product product)
         {
             products = new Product[] { };
-            Array.Resize(ref products, products.Length + 1);
+            Array.Resize(ref  products, products.Length + 1);
             products[products.Length - 1] = product;
         }
-        public bool ceckForProduct(Product product)
+        public bool CeckForProduct(Product product)
         {
             bool isPresent = false;
 
@@ -31,7 +33,6 @@ namespace ShopyngCart
         }
         public int CalculateTheSumOfProducts()
         {
-            products = new Product[] {};
             int result = 0;
 
             for (int i = 0; i <= products.Length-1; i++)
