@@ -8,19 +8,22 @@ namespace ShopyngCart
 {
     class Product
     {
-        public string name;
-        public int price;
+        private string name;
+        private int price;
+
+        public Product() { }
         public Product(string name, int price)
         {
             this.name = name;
             this.price = price;
         }
-        public Product AddNedwProductWhenListIsEmpty(string name, int price)
-            {
-                Product Product1=new Product(string.Empty,0);
-                Product1.name = name;
-                Product1.price = price;
-                return Product1;
-            }
+        public string getProductName()
+        {
+            return name;
+        }
+        public int getProductPrice()
+        {
+            return price;
+        }
     }
 }
