@@ -8,12 +8,11 @@ namespace ShopyngCart
 {
     class ShoppingCart
     {
-        private Product[] products;
+        private Product[] products = new Product[0];
 
 
         public void Add(Product product)
         {
-            products = new Product[] { };
             Array.Resize(ref  products, products.Length + 1);
             products[products.Length - 1] = product;
         }
@@ -41,6 +40,60 @@ namespace ShopyngCart
                 result = result +counter;
             }
             return result;
+        }
+
+        public double CalculateTheAveragePrice()
+        {
+            return CalculateTheSumOfProducts() / products.Length;
+        }
+        public string TheCheapestProduct()
+        {
+            string result = string.Empty;
+            double counter = 0;
+            if (products.Length == 0)
+                return "Array is empty";
+            counter = products[0].getProductPrice();
+            for (int i = 1; i < products.Length - 1; i++)
+            {
+                if (counter > products[i].getProductPrice())
+                {
+                    counter = products[i].getProductPrice();
+                    result = products[i].getProductName();
+                }
+            }
+            return result;
+        }
+
+        public Product[] RemoveAProduct()
+        {
+            int index = LookingForTheMostMxpensiveProduct();
+            RemoveElementAtPositionX(index);
+            Array.Resize(ref products, products.Length - 1);
+            return products;
+        }
+        public Product[] RemoveElementAtPositionX(int index)
+        {
+            for (int i = index; i < products.Length - index; i++)
+            {
+               // products[i].getProductPrice() = ;
+               // products[i].getProductName() = );
+            }
+            return products;
+        }
+
+        public  int LookingForTheMostMxpensiveProduct()
+        {
+            int index = 0;
+            double counter = 0;
+            for (int i = 0; i < products.Length; i++)
+            {
+                if (counter < products[i].getProductPrice())
+                {
+                    counter = products[i].getProductPrice();
+                    index = i;
+                }
+            }
+            return index;
         }
    }
 }
