@@ -16,12 +16,11 @@ namespace ShopyngCart
         public void testAddProduct()
         {
             shophoppingCart = new ShoppingCart();
-            a = new Product("Orange", 4);
             shophoppingCart.Add(a);
             shophoppingCart.Add(b);
             Assert.IsTrue(shophoppingCart.CeckForProduct(a));
         }
-        [TestMethod]
+       [TestMethod]
         public void testPriceOneProdut()
         {
             shophoppingCart = new ShoppingCart();
@@ -74,14 +73,10 @@ namespace ShopyngCart
             shophoppingCart = new ShoppingCart();
             shophoppingCart.Add(new Product("appel", 4));
             shophoppingCart.Add(new Product("orange", 1));
-            shophoppingCart.Add(new Product("sugar", 3));
+            shophoppingCart.Add(new Product("sugar", 1));
             shophoppingCart.Add(new Product("a", 5));
-            ShoppingCart newCart;
-            newCart=new ShoppingCart();
-            newCart.Add(new Product("appel", 4));
-            newCart.Add(new Product("sugar", 3));
-            newCart.Add(new Product("a", 5));
-            Assert.AreEqual(newCart,shophoppingCart.RemoveElementAtPositionX(1));
-        }
+            shophoppingCart.RemoveElementAtPositionX(1);
+            Assert.AreEqual(10,shophoppingCart.CalculateTheSumOfProducts());
+        } 
     } 
 }

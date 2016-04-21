@@ -64,21 +64,17 @@ namespace ShopyngCart
             return result;
         }
 
-        public Product[] RemoveAProduct()
+        public void RemoveAProduct()
         {
             int index = LookingForTheMostMxpensiveProduct();
             RemoveElementAtPositionX(index);
             Array.Resize(ref products, products.Length - 1);
-            return products;
         }
-        public Product[] RemoveElementAtPositionX(int index)
+        public void RemoveElementAtPositionX(int index)
         {
-            for (int i = index; i < products.Length - index; i++)
-            {
-               // products[i].getProductPrice() = ;
-               // products[i].getProductName() = );
-            }
-            return products;
+            for(int i=index;i<products.Length-1;i++)
+               products[i] = products[i + 1];
+               Array.Resize(ref products, products.Length - 1);
         }
 
         public  int LookingForTheMostMxpensiveProduct()
