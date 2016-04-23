@@ -49,17 +49,25 @@ namespace ShopyngCart
         public string TheCheapestProduct()
         {
             string result = string.Empty;
-            double counter = 0;
+            int counter = 0;
             if (products.Length == 0)
                 return "Array is empty";
             counter = products[0].getProductPrice();
             for (int i = 1; i < products.Length - 1; i++)
             {
-                if (counter > products[i].getProductPrice())
+                Product a = new Product();
+                int x=products[i].getProductPrice();
+                if (a.CompareProducts(counter, x) == 1)
+                {
+                    counter = x;
+                    result = products[i].getProductName();
+                }
+
+           /*     if (counter > products[i].getProductPrice())
                 {
                     counter = products[i].getProductPrice();
                     result = products[i].getProductName();
-                }
+                }*/
             }
             return result;
         }
