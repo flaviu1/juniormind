@@ -8,7 +8,7 @@ namespace ShopyngCart
 {
     class ShoppingCart
     {
-        private Product[] products = new Product[0];
+        public Product[] products = new Product[0];
 
 
         public void Add(Product product)
@@ -20,7 +20,7 @@ namespace ShopyngCart
         {
             bool isPresent = false;
 
-            for(int i=0;i<products.Length;i++)
+            for (int i = 0; i < products.Length; i++)
             {
                 if (products[i].Equals(product))
                 {
@@ -34,10 +34,10 @@ namespace ShopyngCart
         {
             int result = 0;
 
-            for (int i = 0; i <= products.Length-1; i++)
+            for (int i = 0; i <= products.Length - 1; i++)
             {
                 int counter = products[i].getProductPrice();
-                result = result +counter;
+                result = result + counter;
             }
             return result;
         }
@@ -72,24 +72,28 @@ namespace ShopyngCart
         }
         public void RemoveElementAtPositionX(int index)
         {
-            for(int i=index;i<products.Length-1;i++)
-               products[i] = products[i + 1];
-               Array.Resize(ref products, products.Length - 1);
+            for (int i = index; i < products.Length - 1; i++)
+                products[i] = products[i + 1];
+            Array.Resize(ref products, products.Length - 1);
         }
 
-        public  int LookingForTheMostMxpensiveProduct()
+        public int LookingForTheMostMxpensiveProduct()
         {
             int index = 0;
-            double counter = 0;
+            int counter = 0;
             for (int i = 0; i < products.Length; i++)
             {
-                if (counter < products[i].getProductPrice())
+
+                Product a = new Product();
+                int y = products[i].getProductPrice();
+                if (a.CompareProducts(counter, y) == -1)
                 {
-                    counter = products[i].getProductPrice();
+                    counter = y;
                     index = i;
                 }
             }
             return index;
         }
-   }
+
+    }
 }

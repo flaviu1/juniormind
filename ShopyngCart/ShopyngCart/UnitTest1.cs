@@ -11,7 +11,7 @@ namespace ShopyngCart
         Product b = new Product("orange", 1);
         Product c = new Product("sugar", 3);
         Product p = new Product("a", 4);
-      
+
         [TestMethod]
         public void testAddProduct()
         {
@@ -20,7 +20,7 @@ namespace ShopyngCart
             shophoppingCart.Add(b);
             Assert.IsTrue(shophoppingCart.CeckForProduct(a));
         }
-       [TestMethod]
+        [TestMethod]
         public void testPriceOneProdut()
         {
             shophoppingCart = new ShoppingCart();
@@ -50,7 +50,7 @@ namespace ShopyngCart
         [TestMethod]
         public void testTheCheapestProduct()
         {
-            shophoppingCart = new ShoppingCart(); 
+            shophoppingCart = new ShoppingCart();
             shophoppingCart.Add(a);
             shophoppingCart.Add(b);
             shophoppingCart.Add(c);
@@ -63,12 +63,12 @@ namespace ShopyngCart
             shophoppingCart = new ShoppingCart();
             shophoppingCart.Add(new Product("appel", 4));
             shophoppingCart.Add(new Product("orange", 1));
-            shophoppingCart.Add(new Product("sugar", 3));
+            shophoppingCart.Add(new Product("sugar", 7));
             shophoppingCart.Add(new Product("a", 5));
-            Assert.AreEqual(3, shophoppingCart.LookingForTheMostMxpensiveProduct());
+            Assert.AreEqual(2, shophoppingCart.LookingForTheMostMxpensiveProduct());
         }
         [TestMethod]
-        public void testRemoveElementAtPositionX() 
+        public void testRemoveElementAtPositionX()
         {
             shophoppingCart = new ShoppingCart();
             shophoppingCart.Add(new Product("appel", 4));
@@ -76,7 +76,7 @@ namespace ShopyngCart
             shophoppingCart.Add(new Product("sugar", 1));
             shophoppingCart.Add(new Product("a", 5));
             shophoppingCart.RemoveElementAtPositionX(1);
-            Assert.AreEqual(10,shophoppingCart.CalculateTheSumOfProducts());
-        } 
-    } 
+            Assert.AreEqual(10, shophoppingCart.CalculateTheSumOfProducts());
+        }
+    }
 }
