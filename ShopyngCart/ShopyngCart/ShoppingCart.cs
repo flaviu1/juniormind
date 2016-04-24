@@ -8,7 +8,7 @@ namespace ShopyngCart
 {
     class ShoppingCart
     {
-        public Product[] products = new Product[0];
+        private Product[] products = new Product[0];
 
 
         public void Add(Product product)
@@ -19,7 +19,6 @@ namespace ShopyngCart
         public bool CeckForProduct(Product product)
         {
             bool isPresent = false;
-
             for (int i = 0; i < products.Length; i++)
             {
                 if (products[i].Equals(product))
@@ -32,16 +31,9 @@ namespace ShopyngCart
         }
         public int CalculateTheSumOfProducts()
         {
-            int result = 0;
-
-            for (int i = 0; i <= products.Length - 1; i++)
-            {
-                int counter = products[i].getProductPrice();
-                result = result + counter;
-            }
-            return result;
+            Product result = new Product();
+            return result.Sum(products);
         }
-
         public double CalculateTheAveragePrice()
         {
             return CalculateTheSumOfProducts() / products.Length;
@@ -49,59 +41,15 @@ namespace ShopyngCart
         public string TheCheapestProduct()
         {
             string result = string.Empty;
-            int counter = 0;
-            if (products.Length == 0)
-                return "Array is empty";
-            counter = products[0].getProductPrice();
-            for (int i = 1; i < products.Length - 1; i++)
-            {
-                Product a = new Product();
-                int x=products[i].getProductPrice();
-                if (a.CompareProducts(counter, x) == 1)
-                {
-                    counter = x;
-                    result = products[i].getProductName();
-                }
-
-           /*     if (counter > products[i].getProductPrice())
-                {
-                    counter = products[i].getProductPrice();
-                    result = products[i].getProductName();
-                }*/
-            }
-            return result;
+            Product a = new Product();
+            return a.CompareProducts(products);
         }
-
-        public void RemoveAProduct()
+        private void RemoveAProduct()
         {
-            int index = LookingForTheMostMxpensiveProduct();
-            RemoveElementAtPositionX(index);
+            Product result = new Product();
+            int index = result.LookingForTheMostMxpensiveProduct(products);
+            result.RemoveElementAtPositionX(products, index);
             Array.Resize(ref products, products.Length - 1);
         }
-        public void RemoveElementAtPositionX(int index)
-        {
-            for (int i = index; i < products.Length - 1; i++)
-                products[i] = products[i + 1];
-            Array.Resize(ref products, products.Length - 1);
-        }
-
-        public int LookingForTheMostMxpensiveProduct()
-        {
-            int index = 0;
-            int counter = 0;
-            for (int i = 0; i < products.Length; i++)
-            {
-
-                Product a = new Product();
-                int y = products[i].getProductPrice();
-                if (a.CompareProducts(counter, y) == -1)
-                {
-                    counter = y;
-                    index = i;
-                }
-            }
-            return index;
-        }
-
     }
 }
