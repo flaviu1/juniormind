@@ -37,7 +37,7 @@ namespace ShopyngCart
             shophoppingCart.Add(p);
             Assert.AreEqual(12, shophoppingCart.CalculateTheSumOfProducts());
         }
-        [TestMethod]
+      /* [TestMethod]
         public void testCalculateTheAveragePrice()
         {
             shophoppingCart = new ShoppingCart(); ;
@@ -51,11 +51,32 @@ namespace ShopyngCart
         public void testTheCheapestProduct()
         {
             shophoppingCart = new ShoppingCart();
-            shophoppingCart.Add(new Product("appel", 4));
-            shophoppingCart.Add(new Product("a", 1));
-            shophoppingCart.Add(new Product("sugar", 1));
-            shophoppingCart.Add(new Product("orange", 5));
-            Assert.AreEqual("orange", shophoppingCart.TheCheapestProduct());
+            shophoppingCart.Add(a);
+            shophoppingCart.Add(b);
+            shophoppingCart.Add(c);
+            shophoppingCart.Add(p);
+            //Assert.AreEqual("orange", shophoppingCart.TheCheapestProduct());
         }
+        [TestMethod]
+        public void testLookingForTheMostMxpensiveProduct()
+        {
+            shophoppingCart = new ShoppingCart();
+            shophoppingCart.Add(new Product("appel", 4));
+            shophoppingCart.Add(new Product("orange", 1));
+            shophoppingCart.Add(new Product("sugar", 7));
+            shophoppingCart.Add(new Product("a", 5));
+           // Assert.AreEqual(2, shophoppingCart.LookingForTheMostMxpensiveProduct());
+        }
+        [TestMethod]
+        public void testRemoveElementAtPositionX()
+        {
+            shophoppingCart = new ShoppingCart();
+            shophoppingCart.Add(new Product("appel", 4));
+            shophoppingCart.Add(new Product("orange", 1));
+            shophoppingCart.Add(new Product("sugar", 1));
+            shophoppingCart.Add(new Product("a", 5));
+            //shophoppingCart.RemoveElementAtPositionX(1);
+           // Assert.AreEqual(10, shophoppingCart.CalculateTheSumOfProducts());
+        }*/
     }
 }
