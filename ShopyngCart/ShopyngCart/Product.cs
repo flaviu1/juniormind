@@ -25,10 +25,24 @@ namespace ShopyngCart
         {
             return price;
         }
-        public int Sum(Product[] products ,int Pozitions)
+        public int Sum(Product[] products, int Pozitions)
         {
             int result = 0;
             return result += products[Pozitions].price;
+        }
+        public int CompareProduct(Product[] products)
+        {
+            int counter=0;
+            int index=0;
+            for(int i=0;i<products.Length;i++)
+            {
+                if(counter<products[i].price)
+                {
+                    counter = products[i].price;
+                    index = i;
+                }
+            }
+            return index;
         }
     }
 }

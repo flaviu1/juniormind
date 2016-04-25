@@ -56,7 +56,7 @@ namespace ShopyngCart
             shophoppingCart.Add(c);
             shophoppingCart.Add(p);
             //Assert.AreEqual("orange", shophoppingCart.TheCheapestProduct());
-        }
+        }*/
         [TestMethod]
         public void testLookingForTheMostMxpensiveProduct()
         {
@@ -65,9 +65,9 @@ namespace ShopyngCart
             shophoppingCart.Add(new Product("orange", 1));
             shophoppingCart.Add(new Product("sugar", 7));
             shophoppingCart.Add(new Product("a", 5));
-           // Assert.AreEqual(2, shophoppingCart.LookingForTheMostMxpensiveProduct());
+           Assert.AreEqual(2, shophoppingCart.LookingForTheMostMxpensiveProduct());
         }
-        [TestMethod]
+       /* [TestMethod]
         public void testRemoveElementAtPositionX()
         {
             shophoppingCart = new ShoppingCart();
