@@ -37,7 +37,7 @@ namespace ShopyngCart
             shophoppingCart.Add(p);
             Assert.AreEqual(12, shophoppingCart.CalculateTheSumOfProducts());
         }
-      /* [TestMethod]
+        [TestMethod]
         public void testCalculateTheAveragePrice()
         {
             shophoppingCart = new ShoppingCart(); ;
@@ -55,8 +55,8 @@ namespace ShopyngCart
             shophoppingCart.Add(b);
             shophoppingCart.Add(c);
             shophoppingCart.Add(p);
-            //Assert.AreEqual("orange", shophoppingCart.TheCheapestProduct());
-        }*/
+            Assert.AreEqual("orange", shophoppingCart.TheCheapestProduct());
+        }
         [TestMethod]
         public void testLookingForTheMostMxpensiveProduct()
         {
@@ -65,9 +65,9 @@ namespace ShopyngCart
             shophoppingCart.Add(new Product("orange", 1));
             shophoppingCart.Add(new Product("sugar", 7));
             shophoppingCart.Add(new Product("a", 5));
-           Assert.AreEqual(2, shophoppingCart.LookingForTheMostMxpensiveProduct());
+            Assert.AreEqual(2, shophoppingCart.LookingForTheMostMxpensiveProduct());
         }
-       /* [TestMethod]
+        [TestMethod]
         public void testRemoveElementAtPositionX()
         {
             shophoppingCart = new ShoppingCart();
@@ -75,8 +75,17 @@ namespace ShopyngCart
             shophoppingCart.Add(new Product("orange", 1));
             shophoppingCart.Add(new Product("sugar", 1));
             shophoppingCart.Add(new Product("a", 5));
-            //shophoppingCart.RemoveElementAtPositionX(1);
-           // Assert.AreEqual(10, shophoppingCart.CalculateTheSumOfProducts());
-        }*/
+            shophoppingCart.RemoveElementAtPositionX(1);
+            Assert.AreEqual(10, shophoppingCart.CalculateTheSumOfProducts());
+        }
+        [TestMethod]
+        public void testCompareProduct()
+        {
+            Product a = new Product("appel", 4);
+            Product b = new Product("orange", 1);
+            Assert.AreEqual(-1, a.CompareProduct(a,b));
+            Assert.AreEqual(1, b.CompareProduct(b,a));
+            Assert.AreEqual(0, b.CompareProduct(b, b));
+        }
     }
 }

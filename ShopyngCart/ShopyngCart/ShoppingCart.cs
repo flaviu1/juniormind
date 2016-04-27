@@ -45,42 +45,43 @@ namespace ShopyngCart
         {
             return CalculateTheSumOfProducts() / products.Length;
         }
-      /*  public string TheCheapestProduct()
-        {
-            string result = string.Empty;
-            double counter = 0;
-            if (products.Length == 0)
-                return "Array is empty";
-            counter = products[0].getProductPrice();
-            for (int i = 1; i < products.Length - 1; i++)
-            {
-                if (counter > products[i].getProductPrice())
-                {
-                    counter = products[i].getProductPrice();
-                    result = products[i].getProductName();
-                }
-            }
-            return result;
-        }*/
+          public string TheCheapestProduct()
+          {
+              string result = string.Empty;
+              double counter = 0;
+              if (products.Length == 0)
+                  return "Array is empty";
+              counter = products[0].GetProductPrice();
+              for (int i = 1; i < products.Length - 1; i++)
+              {
+                  if (counter > products[i].GetProductPrice())
+                  {
+                      counter = products[i].GetProductPrice();
+                      result = products[i].GetProductName();
+                  }
+              }
+              return result;
+          }
 
         public void RemoveAProduct()
-         {
-             int index = LookingForTheMostMxpensiveProduct();
-             RemoveElementAtPositionX(index);
-             Array.Resize(ref products, products.Length - 1);
-         }
-         public void RemoveElementAtPositionX(int index)
-         {
-             for (int i = index; i < products.Length - 1; i++)
-                 products[i] = products[i + 1];
-             Array.Resize(ref products, products.Length - 1);
-         }
+        {
+            int index = LookingForTheMostMxpensiveProduct();
+            RemoveElementAtPositionX(index);
+            Array.Resize(ref products, products.Length - 1);
+        }
+        public void RemoveElementAtPositionX(int index)
+        {
+            for (int i = index; i < products.Length - 1; i++)
+                products[i] = products[i + 1];
+            Array.Resize(ref products, products.Length - 1);
+        }
 
         public int LookingForTheMostMxpensiveProduct()
-         {
-             int index = 0;
-             index=products[0].CompareProduct(products);
-             return index;
-         }
+        {
+            int index = 0;
+            index = products[0].CompareProduct(products);
+            return index;
+        }
+            
     }
 }
