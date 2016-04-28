@@ -9,6 +9,29 @@ namespace ShopyngCart
     class ShoppingCart
     {
         public Product[] products = new Product[0];
+        int indexProducts = -1;
+
+        public void Reset()
+        {
+            var a = new Product[0];
+            products = a;
+        }
+
+        public string Current(int pozitions)
+        {
+            return products[pozitions - 1].GetProductName();
+        }
+
+        public bool MoveNext()
+        {
+            indexProducts++;
+            return (indexProducts < products.Length);
+        }
+
+
+
+
+
 
 
         public void Add(Product product)
