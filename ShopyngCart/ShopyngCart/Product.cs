@@ -44,11 +44,11 @@ namespace ShopyngCart
             }
             return index;
         }
-        public int CompareProduct(Product a,Product b)
+        public int CompareProduct(Product b)
         {
-            if (a.GetProductPrice() < b.GetProductPrice())
+            if (this.GetProductPrice() < b.GetProductPrice())
                 return 1;
-            if (a.GetProductPrice()> b.GetProductPrice())
+            if (this.GetProductPrice()> b.GetProductPrice())
                 return -1;
             return 0;
         }

@@ -45,23 +45,23 @@ namespace ShopyngCart
         {
             return CalculateTheSumOfProducts() / products.Length;
         }
-          public string TheCheapestProduct()
-          {
-              string result = string.Empty;
-              double counter = 0;
-              if (products.Length == 0)
-                  return "Array is empty";
-              counter = products[0].GetProductPrice();
-              for (int i = 1; i < products.Length - 1; i++)
-              {
-                  if (counter > products[i].GetProductPrice())
-                  {
-                      counter = products[i].GetProductPrice();
-                      result = products[i].GetProductName();
-                  }
-              }
-              return result;
-          }
+        public string TheCheapestProduct()
+        {
+            string result = string.Empty;
+            double counter = 0;
+            if (products.Length == 0)
+                return "Array is empty";
+            counter = products[0].GetProductPrice();
+            for (int i = 1; i < products.Length - 1; i++)
+            {
+                if (counter > products[i].GetProductPrice())
+                {
+                    counter = products[i].GetProductPrice();
+                    result = products[i].GetProductName();
+                }
+            }
+            return result;
+        }
 
         public void RemoveAProduct()
         {
@@ -82,6 +82,6 @@ namespace ShopyngCart
             index = products[0].CompareProduct(products);
             return index;
         }
-            
     }
+
 }

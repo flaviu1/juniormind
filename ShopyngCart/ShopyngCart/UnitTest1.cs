@@ -83,9 +83,9 @@ namespace ShopyngCart
         {
             Product a = new Product("appel", 4);
             Product b = new Product("orange", 1);
-            Assert.AreEqual(-1, a.CompareProduct(a,b));
-            Assert.AreEqual(1, b.CompareProduct(b,a));
-            Assert.AreEqual(0, b.CompareProduct(b, b));
+            Assert.AreEqual(-1, a.CompareProduct(b));
+            Assert.AreEqual(1, b.CompareProduct(a));
+            Assert.AreEqual(0, b.CompareProduct(b));
         }
     }
 }
