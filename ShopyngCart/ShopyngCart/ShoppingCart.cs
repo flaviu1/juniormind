@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ShopyngCart
 {
-    class ShoppingCart
+    class ShoppingCart //:IEnumerable<Product>
     {
         public Product[] products = new Product[0];
         int indexProducts = -1;
@@ -59,7 +59,7 @@ namespace ShopyngCart
 
             for (int i = 0; i <= products.Length - 1; i++)
             {
-                result += products[i].Sum(products, i);
+                result += products[i].Sum();
             }
             return result;
         }

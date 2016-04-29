@@ -25,10 +25,10 @@ namespace ShopyngCart
         {
             return price;
         }
-        public int Sum(Product[] products, int Pozitions)
+        public int Sum()
         {
             int result = 0;
-            return result += products[Pozitions].price;
+            return result += this.price;
         }
         public int CompareProduct(Product[] products)
         {

@@ -98,7 +98,7 @@ namespace ShopyngCart
             shophoppingCart.Reset();
             Assert.AreEqual(0, shophoppingCart.CalculateTheSumOfProducts());
         }
-        [TestMethod]
+        [TestMethod]    
         public void testCurrent()
         {
             shophoppingCart = new ShoppingCart();
