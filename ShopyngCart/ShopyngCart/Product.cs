@@ -17,38 +17,46 @@ namespace ShopyngCart
             this.name = name;
             this.price = price;
         }
-        public string GetProductName()
-        {
-            return name;
-        }
-        public int GetProductPrice()
-        {
-            return price;
-        }
         public int Sum()
         {
             int result = 0;
             return result += this.price;
         }
-        public int CompareProduct(Product[] products)
+        public int LookingForTheMostMxpensiveProduct(Product[] products)
         {
-            int counter = 0;
+            Product productCounter ;
             int index = 0;
-            for (int i = 0; i < products.Length; i++)
+            productCounter = this;
+            for (int i = 1;i < products.Length; i++)
             {
-                if (counter < products[i].price)
+                if (productCounter.CompareProduct(products[i]) == 1)
                 {
-                    counter = products[i].price;
+                    productCounter.price = products[i].price;
                     index = i;
                 }
             }
             return index;
         }
+        public string TheCheapestProduct(Product[] products)
+        {
+            Product productCounter;
+            int index = 0;
+            productCounter = this;
+            for (int i = 1; i < products.Length; i++)
+            {
+                if (productCounter.CompareProduct(products[i]) == -1)
+                {
+                    productCounter.price = products[i].price;
+                    index = i;
+                }
+            }
+            return products[index].name;
+        }
         public int CompareProduct(Product b)
         {
-            if (this.GetProductPrice() < b.GetProductPrice())
+            if (this.price < b.price)
                 return 1;
-            if (this.GetProductPrice()> b.GetProductPrice())
+            if (this.price> b.price)
                 return -1;
             return 0;
         }

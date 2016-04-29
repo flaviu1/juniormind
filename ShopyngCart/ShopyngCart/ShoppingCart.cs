@@ -17,29 +17,22 @@ namespace ShopyngCart
             products = a;
         }
 
-        public string Current(int pozitions)
-        {
-            return products[pozitions - 1].GetProductName();
-        }
+        // public string Current(int pozitions)
+        //{
+        //return products[pozitions - 1].GetProductName();
+        //        }
 
         public bool MoveNext()
         {
             indexProducts++;
             return (indexProducts < products.Length);
         }
-
-
-
-
-
-
-
         public void Add(Product product)
         {
             Array.Resize(ref  products, products.Length + 1);
             products[products.Length - 1] = product;
         }
-        public bool CeckForProduct(Product product)
+        public bool CheckForProduct(Product product)
         {
             bool isPresent = false;
 
@@ -71,18 +64,7 @@ namespace ShopyngCart
         public string TheCheapestProduct()
         {
             string result = string.Empty;
-            double counter = 0;
-            if (products.Length == 0)
-                return "Array is empty";
-            counter = products[0].GetProductPrice();
-            for (int i = 1; i < products.Length - 1; i++)
-            {
-                if (counter > products[i].GetProductPrice())
-                {
-                    counter = products[i].GetProductPrice();
-                    result = products[i].GetProductName();
-                }
-            }
+            result = products[0].TheCheapestProduct(products);
             return result;
         }
 
@@ -102,7 +84,7 @@ namespace ShopyngCart
         public int LookingForTheMostMxpensiveProduct()
         {
             int index = 0;
-            index = products[0].CompareProduct(products);
+            index = products[0].LookingForTheMostMxpensiveProduct(products);//1 pentru cel mai scump produs.
             return index;
         }
     }
