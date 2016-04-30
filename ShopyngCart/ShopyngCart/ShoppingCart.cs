@@ -6,27 +6,55 @@ using System.Threading.Tasks;
 
 namespace ShopyngCart
 {
-    class ShoppingCart //:IEnumerable<Product>
+    public class ShoppingCart : IEnumerable
     {
         public Product[] products = new Product[0];
-        int indexProducts = -1;
+        int _indexProducts = -1;
+
+        public void ProductEnum(Product[] list)
+        {
+            products = list;
+        }
+        public bool MoveNext()
+        {
+
+            _indexProducts++;
+            return (_indexProducts < products.Length);
+        }
 
         public void Reset()
         {
-            var a = new Product[0];
-            products = a;
+            _indexProducts = -1;
         }
-
-        // public string Current(int pozitions)
-        //{
-        //return products[pozitions - 1].GetProductName();
-        //        }
-
-        public bool MoveNext()
+        object IEnumerable.Current
         {
-            indexProducts++;
-            return (indexProducts < products.Length);
+            get
+            {
+                return Current;
+            }
         }
+
+        public Product Current
+        {
+            get
+            {
+                try
+                {
+                    return products[_indexProducts];
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    throw new InvalidOperationException();
+                }
+            }
+        }
+
+
+
+
+
+
+
         public void Add(Product product)
         {
             Array.Resize(ref  products, products.Length + 1);
@@ -84,7 +112,7 @@ namespace ShopyngCart
         public int LookingForTheMostMxpensiveProduct()
         {
             int index = 0;
-            index = products[0].LookingForTheMostMxpensiveProduct(products);//1 pentru cel mai scump produs.
+            index = products[0].LookingForTheMostMxpensiveProduct(products);
             return index;
         }
     }
