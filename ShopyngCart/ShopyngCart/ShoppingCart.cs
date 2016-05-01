@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,35 +7,24 @@ using System.Threading.Tasks;
 
 namespace ShopyngCart
 {
-    public class ShoppingCart : IEnumerable
+    class ShoppingCart : IEnumerable
     {
         public Product[] products = new Product[0];
         int _indexProducts = -1;
 
-        public void ProductEnum(Product[] list)
-        {
-            products = list;
-        }
         public bool MoveNext()
         {
-
             _indexProducts++;
             return (_indexProducts < products.Length);
         }
 
+
         public void Reset()
         {
-            _indexProducts = -1;
-        }
-        object IEnumerable.Current
-        {
-            get
-            {
-                return Current;
-            }
+            products = new Product[0];
         }
 
-        public Product Current
+        public object Current
         {
             get
             {
@@ -42,13 +32,13 @@ namespace ShopyngCart
                 {
                     return products[_indexProducts];
                 }
+
                 catch (IndexOutOfRangeException)
                 {
                     throw new InvalidOperationException();
                 }
             }
         }
-
 
 
 

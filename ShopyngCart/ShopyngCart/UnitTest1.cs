@@ -106,7 +106,7 @@ namespace ShopyngCart
             shophoppingCart.Add(new Product("orange", 1));
             shophoppingCart.Add(new Product("sugar", 7));
             shophoppingCart.Add(new Product("a", 5));
-            //Assert.AreEqual("sugar", shophoppingCart.Current(3));
+             //Assert.AreEqual("sugar", shophoppingCart.Current());
         }
         [TestMethod]
         public void testMoveNext()
@@ -116,7 +116,7 @@ namespace ShopyngCart
             shophoppingCart.Add(new Product("orange", 1));
             shophoppingCart.Add(new Product("sugar", 7));
             shophoppingCart.Add(new Product("a", 5));
-            Assert.AreEqual(true, shophoppingCart.MoveNext());
+            Assert.AreEqual(false, shophoppingCart.MoveNext());
         }
     }
 }
