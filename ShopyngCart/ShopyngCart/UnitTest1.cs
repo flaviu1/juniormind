@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+
 namespace ShopyngCart
 {
     [TestClass]
@@ -116,12 +117,27 @@ namespace ShopyngCart
             shophoppingCart.Add(new Product("orange", 1));
             shophoppingCart.Add(new Product("sugar", 7));
             shophoppingCart.Add(new Product("a", 5));
-            Assert.AreEqual(true, shophoppingCart.MoveNext());
+          //  Assert.AreEqual(true, shophoppingCart.MoveNext());
         }
         public void testFalseMoveNext()
         {
             shophoppingCart = new ShoppingCart();
-            Assert.AreEqual(true, shophoppingCart.MoveNext());
+            //Assert.AreEqual(true, shophoppingCart.MoveNext());
+        }
+        [TestMethod]
+        public void testIEnumerable()
+        {
+            shophoppingCart = new ShoppingCart();
+            shophoppingCart.Add(new Product("appel", 4));
+            shophoppingCart.Add(new Product("orange", 1));
+            shophoppingCart.Add(new Product("sugar", 7));
+            shophoppingCart.Add(new Product("a", 5));
+            int counter = 0;
+            foreach (var product in shophoppingCart) 
+	        {
+                counter++;
+	        }
+            Assert.AreEqual(4, counter);
         }
     }
 }

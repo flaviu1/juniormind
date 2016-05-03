@@ -12,15 +12,14 @@ namespace ShopyngCart
         public Product[] products = new Product[0];
         int _indexProducts = -1;
 
-        public IEnumerator GetEnumerator()
+
+
+
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            return (IEnumerator)this;
+            return this.products.GetEnumerator();
         }
-        public bool MoveNext()
-        {
-            _indexProducts++;
-            return (_indexProducts < products.Length);
-        }
+
 
 
 
