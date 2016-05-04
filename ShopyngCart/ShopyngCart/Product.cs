@@ -10,12 +10,30 @@ namespace ShopyngCart
     {
         private string name;
         private int price;
+        private int quantity;
 
         public Product() { }
-        public Product(string name, int price)
+        public Product(string name, int price, int quantity=1)
         {
             this.name = name;
             this.price = price;
+            this.quantity = quantity;
+        }
+        public void Quantity(ref Product products)
+        {
+            products.quantity--;
+        }
+        public string GetName()
+        {
+            return this.name;
+        }
+        public int GetPrice()
+        {
+            return this.price;
+        }
+        public int GetQuantity()
+        {
+            return this.quantity;
         }
         public int Sum()
         {

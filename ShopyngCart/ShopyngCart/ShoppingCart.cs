@@ -10,20 +10,10 @@ namespace ShopyngCart
     class ShoppingCart : IEnumerable
     {
         public Product[] products = new Product[0];
-        int _indexProducts = -1;
-
-
-
-
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.products.GetEnumerator();
         }
-
-
-
-
-
         public void Add(Product product)
         {
             Array.Resize(ref  products, products.Length + 1);
@@ -46,14 +36,12 @@ namespace ShopyngCart
         public int CalculateTheSumOfProducts()
         {
             int result = 0;
-
             for (int i = 0; i <= products.Length - 1; i++)
             {
                 result += products[i].Sum();
             }
             return result;
         }
-
         public double CalculateTheAveragePrice()
         {
             return CalculateTheSumOfProducts() / products.Length;
@@ -64,7 +52,6 @@ namespace ShopyngCart
             result = products[0].TheCheapestProduct(products);
             return result;
         }
-
         public void RemoveAProduct()
         {
             int index = LookingForTheMostMxpensiveProduct();
@@ -77,13 +64,12 @@ namespace ShopyngCart
                 products[i] = products[i + 1];
             Array.Resize(ref products, products.Length - 1);
         }
-
         public int LookingForTheMostMxpensiveProduct()
         {
             int index = 0;
             index = products[0].LookingForTheMostMxpensiveProduct(products);
             return index;
         }
-    }
 
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 
 namespace ShopyngCart
@@ -12,6 +13,25 @@ namespace ShopyngCart
         Product b = new Product("orange", 1);
         Product c = new Product("sugar", 3);
         Product p = new Product("a", 4);
+        ProductRepository stock;
+        List<Product> list = new List<Product>();
+
+        [TestMethod]
+        public void HowManyProducts()
+        {
+            stock = new ProductRepository();
+            list = stock.ListProduct();
+            Assert.AreEqual(11, list.Count);
+        }
+
+
+
+
+
+
+
+
+
 
         [TestMethod]
         public void testAddProduct()
@@ -117,7 +137,7 @@ namespace ShopyngCart
             shophoppingCart.Add(new Product("orange", 1));
             shophoppingCart.Add(new Product("sugar", 7));
             shophoppingCart.Add(new Product("a", 5));
-          //  Assert.AreEqual(true, shophoppingCart.MoveNext());
+            //  Assert.AreEqual(true, shophoppingCart.MoveNext());
         }
         public void testFalseMoveNext()
         {
@@ -133,10 +153,10 @@ namespace ShopyngCart
             shophoppingCart.Add(new Product("sugar", 7));
             shophoppingCart.Add(new Product("a", 5));
             int counter = 0;
-            foreach (var product in shophoppingCart) 
-	        {
+            foreach (var product in shophoppingCart)
+            {
                 counter++;
-	        }
+            }
             Assert.AreEqual(4, counter);
         }
     }

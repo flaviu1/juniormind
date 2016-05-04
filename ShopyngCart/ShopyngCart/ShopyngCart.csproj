@@ -53,6 +53,7 @@
     <Compile Include="Product.cs" />
     <Compile Include="products.cs" />
     <Compile Include="ShoppingCart.cs" />
+    <Compile Include="StockProducts.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
