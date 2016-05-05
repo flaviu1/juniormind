@@ -46,6 +46,18 @@ namespace ShopyngCart
             Assert.AreEqual(3, shoppingCart.CalculateTheSumOfProducts());
         }
         [TestMethod]
+        public void RemoveElementFromStock()
+        {
+            shoppingCart = new ShoppingCart();
+            list = stock.ListProduct();
+            stock.RemoveProduct(list[0]);
+            shoppingCart.Add(stock.ReturnProduct("apple"));
+            Assert.AreEqual(0, shoppingCart.CalculateTheSumOfProducts());
+        }
+
+
+
+        [TestMethod]
         public void testAddProduct()
         {
             shoppingCart = new ShoppingCart();

@@ -37,13 +37,6 @@ namespace ShopyngCart
             stock.Add(bmw);
             return stock;
         }
-        public void DecreasesInStock(Product[] products)
-        {
-            foreach (var product in products)
-            {
-                product.Quantity();
-            }
-        }
         public Product ReturnProduct(string element)
         {
             Product a = new Product("Product not existed");
@@ -61,13 +54,10 @@ namespace ShopyngCart
             }
             return a;
         }
-        public List<Product> GetAllProducts()
-        {
-            return stock;
-        }
         public void RemoveProduct(Product product)
         {
-
+          //  if(product.GetQuantity()==1)
+             stock.Remove(product);
         }
     }
 }
