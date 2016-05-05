@@ -13,15 +13,19 @@ namespace ShopyngCart
         private int quantity;
 
         public Product() { }
-        public Product(string name, int price, int quantity=1)
+        public Product(string name, int price, int quantity = 1)
         {
             this.name = name;
             this.price = price;
             this.quantity = quantity;
         }
-        public void Quantity(ref Product products)
+        public Product(string name)
         {
-            products.quantity--;
+            this.name = name;
+        }
+        public void Quantity()
+        {
+            this.quantity--;
         }
         public string GetName()
         {
@@ -42,10 +46,10 @@ namespace ShopyngCart
         }
         public int LookingForTheMostMxpensiveProduct(Product[] products)
         {
-            Product productCounter ;
+            Product productCounter;
             int index = 0;
             productCounter = this;
-            for (int i = 1;i < products.Length; i++)
+            for (int i = 1; i < products.Length; i++)
             {
                 if (productCounter.CompareProduct(products[i]) == 1)
                 {
@@ -74,7 +78,7 @@ namespace ShopyngCart
         {
             if (this.price < b.price)
                 return 1;
-            if (this.price> b.price)
+            if (this.price > b.price)
                 return -1;
             return 0;
         }

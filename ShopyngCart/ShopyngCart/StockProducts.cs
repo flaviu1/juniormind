@@ -37,27 +37,37 @@ namespace ShopyngCart
             stock.Add(bmw);
             return stock;
         }
-        public Product containsElement(string element)
+        public void DecreasesInStock(Product[] products)
         {
-            int counter = 0;
-            for(int i=0;i<stock.Count;i++)
+            foreach (var product in products)
+            {
+                product.Quantity();
+            }
+        }
+        public Product ReturnProduct(string element)
+        {
+            Product a = new Product("Product not existed");
+            Product b = new Product("the stock is empty");
+            for (int i = 0; i < stock.Count; i++)
             {
                 if (stock[i].GetName() == element)
                 {
+                    if (stock[i].GetQuantity() > 0)
+                        stock[i].Quantity();
+                    else
+                        return b;
                     return stock[i];
-                    counter = i;
-                    break;
                 }
             }
-            return stock[counter]; 
+            return a;
         }
-        public List<Product> GetAllProducts ()
+        public List<Product> GetAllProducts()
         {
-                return stock;
+            return stock;
         }
         public void RemoveProduct(Product product)
         {
-            
+
         }
     }
 }

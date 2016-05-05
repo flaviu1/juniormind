@@ -70,6 +70,5 @@ namespace ShopyngCart
             index = products[0].LookingForTheMostMxpensiveProduct(products);
             return index;
         }
-
     }
 }

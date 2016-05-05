@@ -8,96 +8,108 @@ namespace ShopyngCart
     [TestClass]
     public class UnitTest1
     {
-        private ShoppingCart shophoppingCart;
+        private ShoppingCart shoppingCart;
         Product a = new Product("appel", 4);
         Product b = new Product("orange", 1);
         Product c = new Product("sugar", 3);
         Product p = new Product("a", 4);
-        ProductRepository stock;
-        List<Product> list = new List<Product>();
+        ProductRepository stock = new ProductRepository();
+        List<Product> list;
 
         [TestMethod]
         public void HowManyProducts()
         {
-            stock = new ProductRepository();
             list = stock.ListProduct();
             Assert.AreEqual(11, list.Count);
         }
-
-
-
-
-
-
-
-
-
-
+        [TestMethod]
+        public void AddProductToShoppingCartFromStock()
+        {
+            shoppingCart = new ShoppingCart();
+            list = stock.ListProduct();
+            Product a = stock.ReturnProduct("apple");
+            shoppingCart.Add(a);
+            shoppingCart.Add(stock.ReturnProduct("Sony"));
+            shoppingCart.Add(stock.ReturnProduct("Bmw"));
+            shoppingCart.Add(stock.ReturnProduct("Grapes"));
+            Assert.AreEqual(44, shoppingCart.CalculateTheSumOfProducts());
+        }
+        [TestMethod]
+        public void DescraseQuantityWhenAddProductAtShoppingCart()
+        {
+            shoppingCart = new ShoppingCart();
+            list = stock.ListProduct();
+            shoppingCart.Add(stock.ReturnProduct("apple"));
+            shoppingCart.Add(stock.ReturnProduct("apple"));
+            shoppingCart.Add(stock.ReturnProduct("apple"));
+            shoppingCart.Add(stock.ReturnProduct("apple"));
+            Assert.AreEqual(3, shoppingCart.CalculateTheSumOfProducts());
+        }
         [TestMethod]
         public void testAddProduct()
         {
-            shophoppingCart = new ShoppingCart();
-            shophoppingCart.Add(a);
-            shophoppingCart.Add(b);
-            Assert.IsTrue(shophoppingCart.CheckForProduct(a));
+            shoppingCart = new ShoppingCart();
+            shoppingCart.Add(a);
+            shoppingCart.Add(b);
+            Assert.IsTrue(shoppingCart.CheckForProduct(a));
         }
         [TestMethod]
         public void testPriceOneProdut()
         {
-            shophoppingCart = new ShoppingCart();
-            shophoppingCart.Add(a);
-            Assert.AreEqual(4, shophoppingCart.CalculateTheSumOfProducts());
+            shoppingCart = new ShoppingCart();
+            shoppingCart.Add(a);
+            Assert.AreEqual(4, shoppingCart.CalculateTheSumOfProducts());
         }
         [TestMethod]
         public void testSumProducts()
         {
-            shophoppingCart = new ShoppingCart(); ;
-            shophoppingCart.Add(a);
-            shophoppingCart.Add(b);
-            shophoppingCart.Add(c);
-            shophoppingCart.Add(p);
-            Assert.AreEqual(12, shophoppingCart.CalculateTheSumOfProducts());
+            shoppingCart = new ShoppingCart(); ;
+            shoppingCart.Add(a);
+            shoppingCart.Add(b);
+            shoppingCart.Add(c);
+            shoppingCart.Add(p);
+            Assert.AreEqual(12, shoppingCart.CalculateTheSumOfProducts());
         }
         [TestMethod]
         public void testCalculateTheAveragePrice()
         {
-            shophoppingCart = new ShoppingCart(); ;
-            shophoppingCart.Add(a);
-            shophoppingCart.Add(b);
-            shophoppingCart.Add(c);
-            shophoppingCart.Add(p);
-            Assert.AreEqual(3, shophoppingCart.CalculateTheAveragePrice());
+            shoppingCart = new ShoppingCart(); ;
+            shoppingCart.Add(a);
+            shoppingCart.Add(b);
+            shoppingCart.Add(c);
+            shoppingCart.Add(p);
+            Assert.AreEqual(3, shoppingCart.CalculateTheAveragePrice());
         }
         [TestMethod]
         public void testTheCheapestProduct()
         {
-            shophoppingCart = new ShoppingCart();
-            shophoppingCart.Add(a);
-            shophoppingCart.Add(b);
-            shophoppingCart.Add(c);
-            shophoppingCart.Add(p);
-            Assert.AreEqual("orange", shophoppingCart.TheCheapestProduct());
+            shoppingCart = new ShoppingCart();
+            shoppingCart.Add(a);
+            shoppingCart.Add(b);
+            shoppingCart.Add(c);
+            shoppingCart.Add(p);
+            Assert.AreEqual("orange", shoppingCart.TheCheapestProduct());
         }
         [TestMethod]
         public void testLookingForTheMostMxpensiveProduct()
         {
-            shophoppingCart = new ShoppingCart();
-            shophoppingCart.Add(new Product("appel", 4));
-            shophoppingCart.Add(new Product("orange", 1));
-            shophoppingCart.Add(new Product("sugar", 7));
-            shophoppingCart.Add(new Product("a", 5));
-            Assert.AreEqual(2, shophoppingCart.LookingForTheMostMxpensiveProduct());
+            shoppingCart = new ShoppingCart();
+            shoppingCart.Add(new Product("appel", 4));
+            shoppingCart.Add(new Product("orange", 1));
+            shoppingCart.Add(new Product("sugar", 7));
+            shoppingCart.Add(new Product("a", 5));
+            Assert.AreEqual(2, shoppingCart.LookingForTheMostMxpensiveProduct());
         }
         [TestMethod]
         public void testRemoveElementAtPositionX()
         {
-            shophoppingCart = new ShoppingCart();
-            shophoppingCart.Add(new Product("appel", 4));
-            shophoppingCart.Add(new Product("orange", 1));
-            shophoppingCart.Add(new Product("sugar", 1));
-            shophoppingCart.Add(new Product("a", 5));
-            shophoppingCart.RemoveElementAtPositionX(1);
-            Assert.AreEqual(10, shophoppingCart.CalculateTheSumOfProducts());
+            shoppingCart = new ShoppingCart();
+            shoppingCart.Add(new Product("appel", 4));
+            shoppingCart.Add(new Product("orange", 1));
+            shoppingCart.Add(new Product("sugar", 1));
+            shoppingCart.Add(new Product("a", 5));
+            shoppingCart.RemoveElementAtPositionX(1);
+            Assert.AreEqual(10, shoppingCart.CalculateTheSumOfProducts());
         }
         [TestMethod]
         public void testCompareProduct()
@@ -109,51 +121,15 @@ namespace ShopyngCart
             Assert.AreEqual(0, b.CompareProduct(b));
         }
         [TestMethod]
-        public void testReset()
-        {
-            shophoppingCart = new ShoppingCart();
-            shophoppingCart.Add(new Product("appel", 4));
-            shophoppingCart.Add(new Product("orange", 1));
-            shophoppingCart.Add(new Product("sugar", 7));
-            shophoppingCart.Add(new Product("a", 5));
-            //shophoppingCart.Reset();
-            // Assert.AreEqual(0, shophoppingCart.CalculateTheSumOfProducts());
-        }
-        [TestMethod]
-        public void testCurrent()
-        {
-            shophoppingCart = new ShoppingCart();
-            shophoppingCart.Add(new Product("appel", 4));
-            shophoppingCart.Add(new Product("orange", 1));
-            shophoppingCart.Add(new Product("sugar", 7));
-            shophoppingCart.Add(new Product("a", 5));
-            //Assert.AreEqual("sugar", shophoppingCart.Current());
-        }
-        [TestMethod]
-        public void testTrueMoveNext()
-        {
-            shophoppingCart = new ShoppingCart();
-            shophoppingCart.Add(new Product("appel", 4));
-            shophoppingCart.Add(new Product("orange", 1));
-            shophoppingCart.Add(new Product("sugar", 7));
-            shophoppingCart.Add(new Product("a", 5));
-            //  Assert.AreEqual(true, shophoppingCart.MoveNext());
-        }
-        public void testFalseMoveNext()
-        {
-            shophoppingCart = new ShoppingCart();
-            //Assert.AreEqual(true, shophoppingCart.MoveNext());
-        }
-        [TestMethod]
         public void testIEnumerable()
         {
-            shophoppingCart = new ShoppingCart();
-            shophoppingCart.Add(new Product("appel", 4));
-            shophoppingCart.Add(new Product("orange", 1));
-            shophoppingCart.Add(new Product("sugar", 7));
-            shophoppingCart.Add(new Product("a", 5));
+            shoppingCart = new ShoppingCart();
+            shoppingCart.Add(new Product("appel", 4));
+            shoppingCart.Add(new Product("orange", 1));
+            shoppingCart.Add(new Product("sugar", 7));
+            shoppingCart.Add(new Product("a", 5));
             int counter = 0;
-            foreach (var product in shophoppingCart)
+            foreach (var product in shoppingCart)
             {
                 counter++;
             }
