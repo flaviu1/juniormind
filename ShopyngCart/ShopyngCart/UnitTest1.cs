@@ -31,17 +31,16 @@ namespace ShopyngCart
         public void  HowManyProductsContainsStock()
         {
             products = stock.DisplaysProduct();
-            Assert.AreEqual(9, stock.StockLength());
+            Assert.AreEqual(5, stock.StockLength());
         }
         [TestMethod]
         public void DecreaseQuantity()
         {
-            products = stock.DisplaysProduct();
-            shoppingCart.Add(stock.apple);
-            shoppingCart.Add(stock.orange);
-            shoppingCart.Add(stock.grapes);
-            shoppingCart.Add(stock.nokia);
-            shoppingCart.Add(stock.sony);
+            //products = stock.DisplaysProduct();
+            //shoppingCart.Add(stock.apple);
+            //shoppingCart.Add(stock.orange);
+            //shoppingCart.Add(stock.grapes);
+
 
 
         }
