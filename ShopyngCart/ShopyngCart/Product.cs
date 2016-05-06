@@ -19,31 +19,27 @@ namespace ShopyngCart
             this.price = price;
             this.quantity = quantity;
         }
-        public Product(string name)
-        {
-            this.name = name;
-        }
-        public void Quantity()
-        {
-            this.quantity--;
-        }
-        public string GetName()
-        {
-            return this.name;
-        }
-        public int GetPrice()
-        {
-            return this.price;
-        }
-        public int GetQuantity()
-        {
-            return this.quantity;
-        }
         public int Sum()
         {
             int result = 0;
             return result += this.price;
         }
+
+        public void DecreaseQuantity()
+        {
+
+
+
+
+        }
+
+       
+
+
+
+
+
+
         public int LookingForTheMostMxpensiveProduct(Product[] products)
         {
             Product productCounter;

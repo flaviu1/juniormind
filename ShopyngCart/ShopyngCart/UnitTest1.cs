@@ -13,47 +13,40 @@ namespace ShopyngCart
         Product b = new Product("orange", 1);
         Product c = new Product("sugar", 3);
         Product p = new Product("a", 4);
-        ProductRepository stock = new ProductRepository();
-        List<Product> list;
+        Stock stock = new Stock();
+        Product[] products = new Product[0];
 
         [TestMethod]
-        public void HowManyProducts()
+        public void StockIsEmpty()
         {
-            list = stock.ListProduct();
-            Assert.AreEqual(11, list.Count);
+            Assert.AreEqual(0, stock.StockLength());
         }
         [TestMethod]
-        public void AddProductToShoppingCartFromStock()
+        public void HowManyProductsAddToStock()
         {
-            shoppingCart = new ShoppingCart();
-            list = stock.ListProduct();
-            Product a = stock.ReturnProduct("apple");
-            shoppingCart.Add(a);
-            shoppingCart.Add(stock.ReturnProduct("Sony"));
-            shoppingCart.Add(stock.ReturnProduct("Bmw"));
-            shoppingCart.Add(stock.ReturnProduct("Grapes"));
-            Assert.AreEqual(44, shoppingCart.CalculateTheSumOfProducts());
+            stock.AddProductAtStock(new Product("apple",1,1));
+            Assert.AreEqual(1, stock.StockLength());
         }
         [TestMethod]
-        public void DescraseQuantityWhenAddProductAtShoppingCart()
+        public void  HowManyProductsContainsStock()
         {
-            shoppingCart = new ShoppingCart();
-            list = stock.ListProduct();
-            shoppingCart.Add(stock.ReturnProduct("apple"));
-            shoppingCart.Add(stock.ReturnProduct("apple"));
-            shoppingCart.Add(stock.ReturnProduct("apple"));
-            shoppingCart.Add(stock.ReturnProduct("apple"));
-            Assert.AreEqual(3, shoppingCart.CalculateTheSumOfProducts());
+            products = stock.DisplaysProduct();
+            Assert.AreEqual(9, stock.StockLength());
         }
         [TestMethod]
-        public void RemoveElementFromStock()
+        public void DecreaseQuantity()
         {
-            shoppingCart = new ShoppingCart();
-            list = stock.ListProduct();
-            stock.RemoveProduct(list[0]);
-            shoppingCart.Add(stock.ReturnProduct("apple"));
-            Assert.AreEqual(0, shoppingCart.CalculateTheSumOfProducts());
+            products = stock.DisplaysProduct();
+            shoppingCart.Add(stock.apple);
+            shoppingCart.Add(stock.orange);
+            shoppingCart.Add(stock.grapes);
+            shoppingCart.Add(stock.nokia);
+            shoppingCart.Add(stock.sony);
+
+
         }
+
+
 
 
 
