@@ -10,7 +10,7 @@ namespace ShopyngCart
     class ShoppingCart : IEnumerable
     {
         public Product[] products = new Product[0];
-        IEnumerator IEnumerable.GetEnumerator()
+        public IEnumerator GetEnumerator()
         {
             return this.products.GetEnumerator();
         }
@@ -18,11 +18,8 @@ namespace ShopyngCart
         {
             Array.Resize(ref  products, products.Length + 1);
             products[products.Length - 1] = product;
-            product.DecreaseQuantity();
         }
-
-
-            public bool CheckForProduct(Product product)
+        public bool CheckForProduct(Product product)
         {
             bool isPresent = false;
 
@@ -38,22 +35,30 @@ namespace ShopyngCart
         }
         public int CalculateTheSumOfProducts()
         {
-            int result = 0;
-            for (int i = 0; i <= products.Length - 1; i++)
+            int sum = 0;
+            foreach (var product in products)
             {
-                result += products[i].Sum();
+                sum = product.Sum(ref sum);
             }
-            return result;
+            return sum;
         }
         public double CalculateTheAveragePrice()
         {
             return CalculateTheSumOfProducts() / products.Length;
         }
-        public string TheCheapestProduct()
+        public Product TheCheapestProduct()
         {
             string result = string.Empty;
-            result = products[0].TheCheapestProduct(products);
-            return result;
+            Product counter = new Product();
+            counter = counter.Assignment(products[0]);
+            if (counter.CompareProduct(products[1]) == -1)
+                counter = counter.Assignment(products[1]);
+            for (int i = 2; i < products.Length; i++)
+            {
+                if (counter.CompareProduct(products[i]) == -1)
+                    counter = counter.Assignment(products[i]);
+            }
+            return counter;
         }
         public void RemoveAProduct()
         {
@@ -69,8 +74,23 @@ namespace ShopyngCart
         }
         public int LookingForTheMostMxpensiveProduct()
         {
+            string result = string.Empty;
             int index = 0;
-            index = products[0].LookingForTheMostMxpensiveProduct(products);
+            Product counter = new Product();
+            counter = counter.Assignment(products[0]);
+            if (counter.CompareProduct(products[1]) == 1)
+            {
+                counter = counter.Assignment(products[1]);
+                index = 1;
+            }
+            for (int i = 2; i < products.Length; i++)
+            {
+                if (counter.CompareProduct(products[i]) == 1)
+                {
+                    counter = counter.Assignment(products[i]);
+                    index = i;
+                }
+            }
             return index;
         }
     }
