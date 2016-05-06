@@ -36,13 +36,12 @@ namespace ShopyngCart
         [TestMethod]
         public void DecreaseQuantity()
         {
-            //products = stock.DisplaysProduct();
-            //shoppingCart.Add(stock.apple);
-            //shoppingCart.Add(stock.orange);
-            //shoppingCart.Add(stock.grapes);
-
-
-
+            products = stock.DisplaysProduct();
+            shoppingCart = new ShoppingCart();
+            shoppingCart.Add(stock.apple);
+            shoppingCart.Add(stock.apple);
+            shoppingCart.Add(stock.apple);
+            Assert.AreEqual(0, stock.apple.Quantity());
         }
 
 

@@ -27,10 +27,11 @@ namespace ShopyngCart
 
         public void DecreaseQuantity()
         {
-
-
-
-
+            this.quantity--;
+        }
+        public int Quantity()
+        {
+            return this.quantity;
         }
 
        

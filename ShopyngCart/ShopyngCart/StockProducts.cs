@@ -15,7 +15,7 @@ namespace ShopyngCart
        public Product grapes = new Product("Grapes", 3, 3);
        public Product strawberries = new Product("Strawberries", 4, 3);
        public Product raspberry = new Product("Raspberry", 5, 3);
-       public Product nokia = new Product("Nokia", 20, 2);
+
 
         public Product[] DisplaysProduct()
         {

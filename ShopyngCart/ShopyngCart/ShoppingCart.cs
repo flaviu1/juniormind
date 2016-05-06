@@ -18,8 +18,11 @@ namespace ShopyngCart
         {
             Array.Resize(ref  products, products.Length + 1);
             products[products.Length - 1] = product;
+            product.DecreaseQuantity();
         }
-        public bool CheckForProduct(Product product)
+
+
+            public bool CheckForProduct(Product product)
         {
             bool isPresent = false;
 
