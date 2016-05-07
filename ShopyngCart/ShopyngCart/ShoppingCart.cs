@@ -48,23 +48,18 @@ namespace ShopyngCart
         }
         public Product TheCheapestProduct()
         {
-            string result = string.Empty;
-            Product counter = new Product();
-            counter = counter.Assignment(products[0]);
-            if (counter.CompareProduct(products[1]) == -1)
-                counter = counter.Assignment(products[1]);
-            for (int i = 2; i < products.Length; i++)
+            var index = 0;
+            for (int i = 1; i < products.Length; i++)
             {
-                if (counter.CompareProduct(products[i]) == -1)
-                    counter = counter.Assignment(products[i]);
+                if (products[index].CompareProduct(products[i]) == -1)
+                    index = i;
             }
-            return counter;
+            return products[index];
         }
         public void RemoveAProduct()
         {
-            int index = LookingForTheMostMxpensiveProduct();
+            int index = FindMostExpensive();
             RemoveElementAtPositionX(index);
-            Array.Resize(ref products, products.Length - 1);
         }
         public void RemoveElementAtPositionX(int index)
         {
@@ -72,24 +67,13 @@ namespace ShopyngCart
                 products[i] = products[i + 1];
             Array.Resize(ref products, products.Length - 1);
         }
-        public int LookingForTheMostMxpensiveProduct()
+        public int FindMostExpensive()
         {
-            string result = string.Empty;
-            int index = 0;
-            Product counter = new Product();
-            counter = counter.Assignment(products[0]);
-            if (counter.CompareProduct(products[1]) == 1)
+            var index = 0;
+            for (int i = 1; i < products.Length; i++)
             {
-                counter = counter.Assignment(products[1]);
-                index = 1;
-            }
-            for (int i = 2; i < products.Length; i++)
-            {
-                if (counter.CompareProduct(products[i]) == 1)
-                {
-                    counter = counter.Assignment(products[i]);
+                if (products[index].CompareProduct(products[i]) == 1)
                     index = i;
-                }
             }
             return index;
         }

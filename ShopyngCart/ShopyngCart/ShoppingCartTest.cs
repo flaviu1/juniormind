@@ -77,14 +77,14 @@ namespace ShopyngCart
             Assert.AreEqual(4, x.CalculateTheSumOfProducts());
         }
         [TestMethod]
-        public void testLookingForTheMostMxpensiveProduct()
+        public void testLookingForTheMostExpensiveProduct() 
         {
             shoppingCart = new ShoppingCart();
             shoppingCart.Add(new Product("appel", 4));
             shoppingCart.Add(new Product("orange", 1));
             shoppingCart.Add(new Product("sugar", 7));
             shoppingCart.Add(new Product("a", 5));
-            Assert.AreEqual(2, shoppingCart.LookingForTheMostMxpensiveProduct());
+            Assert.AreEqual(2, shoppingCart.FindMostExpensive());
         }
         [TestMethod]
         public void testRemoveElementAtPositionX()

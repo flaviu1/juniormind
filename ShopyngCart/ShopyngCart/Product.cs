@@ -23,12 +23,6 @@ namespace ShopyngCart
         {
             return sum += this.price;
         }
-        public Product Assignment(Product product)
-        {
-            this.name = product.name;
-            this.price = product.price;
-            return this;
-        }
 
         public void DecreaseQuantity()
         {

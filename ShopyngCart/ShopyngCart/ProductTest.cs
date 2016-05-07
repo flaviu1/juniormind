@@ -7,8 +7,7 @@ namespace ShopyngCart
     [TestClass]
     public class UnitTest3
     {
-
-        private ShoppingCart shoppingCart;
+        Product[] products = new Product[0];
         [TestMethod]
         public void testCompareProduct()
         {
@@ -17,6 +16,14 @@ namespace ShopyngCart
             Assert.AreEqual(-1, a.CompareProduct(b));
             Assert.AreEqual(1, b.CompareProduct(a));
             Assert.AreEqual(0, b.CompareProduct(b));
+        }
+        [TestMethod]
+        public void SumProducts()
+        {
+            Product a = new Product("appel", 4);
+            Product b = new Product("orange", 1);
+            int x=10;
+            Assert.AreEqual(14,a.Sum(ref x));
         }
     }
 }
