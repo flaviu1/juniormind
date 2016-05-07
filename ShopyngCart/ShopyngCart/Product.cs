@@ -28,9 +28,9 @@ namespace ShopyngCart
             return this.quantity * this.price;
         }
 
-        public void DecreaseQuantity()
+        public void DecreaseQuantity(int quantity)
         {
-            this.quantity--;
+            this.quantity -= quantity;
         }
         public int CompareProduct(Product b)
         {

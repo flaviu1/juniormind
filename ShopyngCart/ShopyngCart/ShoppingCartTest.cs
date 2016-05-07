@@ -77,7 +77,7 @@ namespace ShopyngCart
             Assert.AreEqual(4, x.CalculateTheSumOfProducts());
         }
         [TestMethod]
-        public void testLookingForTheMostExpensiveProduct() 
+        public void testLookingForTheMostExpensiveProduct()
         {
             shoppingCart = new ShoppingCart();
             shoppingCart.Add(new Product("appel", 4));

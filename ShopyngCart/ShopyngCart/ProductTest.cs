@@ -22,13 +22,13 @@ namespace ShopyngCart
         {
             Product a = new Product("appel", 4);
             Product b = new Product("orange", 1);
-            int x=10;
-            Assert.AreEqual(14,a.Sum(ref x));
+            int x = 10;
+            Assert.AreEqual(14, a.Sum(ref x));
         }
         [TestMethod]
         public void QuantityAndPrice()
         {
-            Product a = new Product("appel", 4,2);
+            Product a = new Product("appel", 4, 2);
             Assert.AreEqual(8, a.QuantityAndPrice());
         }
     }
