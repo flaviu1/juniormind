@@ -33,6 +33,7 @@ namespace ShopyngCart
         {
             Array.Resize(ref stock, stock.Length + 1);
             stock[stock.Length - 1] = product;
+            product.DecreaseQuantity();
 
             return stock;
         }
@@ -57,7 +58,5 @@ namespace ShopyngCart
                 stock[i] = stock[i + 1];
             Array.Resize(ref stock, stock.Length - 1);
         }
-
-
     }
 }

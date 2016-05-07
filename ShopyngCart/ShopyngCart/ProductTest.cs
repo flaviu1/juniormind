@@ -25,6 +25,12 @@ namespace ShopyngCart
             int x=10;
             Assert.AreEqual(14,a.Sum(ref x));
         }
+        [TestMethod]
+        public void QuantityAndPrice()
+        {
+            Product a = new Product("appel", 4,2);
+            Assert.AreEqual(8, a.QuantityAndPrice());
+        }
     }
 }
 

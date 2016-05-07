@@ -23,6 +23,10 @@ namespace ShopyngCart
         {
             return sum += this.price;
         }
+        public int QuantityAndPrice()
+        {
+            return this.quantity * this.price;
+        }
 
         public void DecreaseQuantity()
         {
