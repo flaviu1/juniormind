@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CB14A50D-4FC7-456F-B6DE-743C8A6FA579}</ProjectGuid>
+    <ProjectGuid>{CABCE8D2-7BB7-4AC5-A001-F65F97C2448B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IList</RootNamespace>
-    <AssemblyName>IList</AssemblyName>
+    <RootNamespace>List</RootNamespace>
+    <AssemblyName>List</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -51,8 +51,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="IList.cs" />
-    <Compile Include="IList1.cs" />
-    <Compile Include="T.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
