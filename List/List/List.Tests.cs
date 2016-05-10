@@ -175,7 +175,7 @@ namespace List
             list.Insert(2, 10);
             list.Insert(2, 10);
             list.Insert(2, 10);
-            Assert.AreEqual(7 list.Count);
+            Assert.AreEqual(7, list.Count);
         }
         [TestMethod]
         public void InsertInListString()
