@@ -172,7 +172,10 @@ namespace List
             list.Add(2);
             list.Add(3);
             list.Insert(2, 10);
-            Assert.AreEqual(4, list.Count);
+            list.Insert(2, 10);
+            list.Insert(2, 10);
+            list.Insert(2, 10);
+            Assert.AreEqual(7 list.Count);
         }
         [TestMethod]
         public void InsertInListString()

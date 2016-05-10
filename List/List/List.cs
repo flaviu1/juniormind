@@ -26,17 +26,17 @@ namespace List
 
         public void Insert(int index, T item)
         {
+            if ((index < Count) && (index >= 0))
             {
-                if ((count <= array.Length) && (index < Count) && (index >= 0))
-                {
-                    count++;
+                if (count <= array.Length)
+                Array.Resize(ref array, array.Length + 1);
+                count++;
 
-                    for (int i = Count - 2; i > index; i--)
-                    {
-                        array[i] = array[i - 1];
-                    }
-                    array[index] = item;
+                for (int i = Count - 2; i > index; i--)
+                {
+                    array[i] = array[i - 1];
                 }
+                array[index] = item;
             }
         }
 
