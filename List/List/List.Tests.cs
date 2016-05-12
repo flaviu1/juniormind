@@ -260,6 +260,31 @@ namespace List
             Assert.IsFalse(list.Contains('4'));
             Assert.IsTrue(list.Contains('2'));
         }
+        [TestMethod]
+        public void GetEnumerator()
+        {
+            List<int> list = new List<int>();
+            list.Add(1);
+            list.Add(2);
+            list.Add(3);
+            int counter = 0;
+            foreach (var item in list)
+            {
+                counter++;
+            }
+            Assert.AreEqual(3, counter);
+        }
+        [TestMethod]
+        public void CopyTo()
+        {
+            List<int> list = new List<int>();
+            list.Add(1);
+            list.Add(2);
+            list.Add(3);
+            var newList = new int[3] { 4,5,6};
+            list.CopyTo(newList, 3);
+            Assert.AreEqual(6, newList.Length);
+        }
     }
 
 }

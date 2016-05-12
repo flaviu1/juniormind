@@ -9,7 +9,7 @@ namespace List
     class List<T> : IList<T>
     {
         private T[] array = new T[] { };
-        private int count;
+        private int _index;
         public int IndexOf(T item)
         {
             int itemIndex = -1;
@@ -28,11 +28,10 @@ namespace List
         {
             if ((index < Count) && (index >= 0))
             {
-                if (count <= array.Length)
-                Array.Resize(ref array, array.Length + 1);
-                count++;
-
-                for (int i = Count - 2; i > index; i--)
+                if (_index <= array.Length)
+                    Array.Resize(ref array, array.Length * 2);
+                _index++;
+                for (int i = Count - 1; i > index; i--)
                 {
                     array[i] = array[i - 1];
                 }
@@ -48,7 +47,7 @@ namespace List
                 {
                     array[i] = array[i + 1];
                 }
-                count--;
+                _index--;
             }
         }
 
@@ -56,11 +55,11 @@ namespace List
         {
             get
             {
-                return array[count];
+                return array[_index];
             }
             set
             {
-                array[count] = value;
+                array[_index] = value;
             }
         }
 
@@ -68,15 +67,15 @@ namespace List
         {
             if (Count == 0)
                 Array.Resize(ref array, array.Length + 1);
-            if (array.Length <= Count && count == Count)
+            if (array.Length <= Count && _index == Count)
                 Array.Resize(ref array, array.Length * 2);
-            array[count] = item;
-            count++;
+            array[_index] = item;
+            _index++;
         }
 
         public void Clear()
         {
-            count = 0;
+            _index = 0;
         }
 
         public bool Contains(T item)
@@ -93,16 +92,21 @@ namespace List
             return inList;
         }
 
-        public void CopyTo(T[] array, int arrayIndex)
+        public void CopyTo(T[] array1, int arrayIndex)
         {
-            throw new NotImplementedException();
+            int counter = _index + array1.Length-1;
+            var values = new T[]{};
+            values = array;
+            for (int i = _index; i < counter; i++)
+                values[i] = array[i];
+            array = values;
         }
 
         public int Count
         {
             get
             {
-                return count;
+                return _index;
             }
         }
 
@@ -117,13 +121,22 @@ namespace List
         }
         public IEnumerator<T> GetEnumerator()
         {
-            return this.GetEnumerator();
-
+            int counter = 0;
+            while (counter < Count)
+            {
+                yield return array[counter];
+                counter++;
+            }
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            int counter = 0;
+            while (counter < Count)
+            {
+                yield return array[counter];
+                counter++;
+            }
         }
     }
 }
