@@ -94,14 +94,21 @@ namespace List
 
         public void CopyTo(T[] array1, int arrayIndex)
         {
-            int counter = _index + array1.Length-1;
-            var values = new T[]{};
-            values = array;
-            for (int i = _index; i < counter; i++)
-                values[i] = array[i];
-            array = values;
+            int j = arrayIndex;
+            for (int i = 0; i < _index; i++)
+            {
+                array1.SetValue(array[i], j++);
+            }
         }
-
+        public bool Compare(T[] array1, T[] array2)
+        {
+            for(int i=0;i<array1.Length;i++)
+            {
+                if(!array1[i].Equals(array2[i]))
+                    return false;
+            }
+            return true;
+        }
         public int Count
         {
             get

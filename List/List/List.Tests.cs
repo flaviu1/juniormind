@@ -278,12 +278,13 @@ namespace List
         public void CopyTo()
         {
             List<int> list = new List<int>();
-            list.Add(1);
-            list.Add(2);
             list.Add(3);
-            var newList = new int[3] { 4,5,6};
+            list.Add(2);
+            list.Add(1);
+            var newList = new int[] {1,2,3,4,5,6};
             list.CopyTo(newList, 3);
-            Assert.AreEqual(6, newList.Length);
+            int[] result = new int[] { 1, 2, 3, 3, 2, 1 };
+            Assert.IsTrue(list.Compare(newList, result));
         }
     }
 
