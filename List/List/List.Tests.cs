@@ -6,6 +6,34 @@ namespace List
     [TestClass]
     public class UnitTest1
     {
+
+
+        [TestMethod]
+        public void QuickSort()
+        {
+            var x = new List<int>(); 
+            int[] numbers= new int[] { 6, 2, 4, 9, 1, 7, 3, 5, 8 };
+            var sort = new Quicksort<int>();
+            sort.QuickSort(numbers, 0, numbers.Length - 1);
+             var array = new int[]{1,2,3,4,5,6,7,8,9};
+             Assert.IsTrue(x.Compare(numbers, array));
+        }
+
+        //[TestMethod]
+        //public void Quick()
+        //{
+        //    var numbers = new List<int>() { 2, 1 };
+        //    var sortedNumbers = new List<int>() { 1, 2 }; 
+        //    var sort = new Quicksort<int>();
+        //    int[] a = new int[] { 2, 1, 3, 3, 3, 6, 5 };
+        //    sort.QuickSort(a, 2, 1);
+        //   // numbers.Sort();
+
+        //    for (int index = 0; index < numbers.Count; index++)
+        //    {
+        //        Assert.AreEqual(numbers[index], sortedNumbers[index]);
+        //    }
+        //}
         [TestMethod]
         public void AddListInt()
         {
@@ -286,6 +314,12 @@ namespace List
             int[] result = new int[] { 1, 2, 3, 3, 2, 1 };
             Assert.IsTrue(list.Compare(newList, result));
         }
+
+
+
+
+
+ 
     }
 
 }

@@ -10,6 +10,13 @@ namespace List
     {
         private T[] array = new T[] { };
         private int _index;
+        
+        public List() { }
+
+        public List(T[] array)
+        {
+            this.array = array;
+        }
         public int IndexOf(T item)
         {
             int itemIndex = -1;
@@ -26,7 +33,7 @@ namespace List
 
         public void Insert(int index, T item)
         {
-            if ((index < Count) && (index >= 0))
+            if (index < Count && index >= 0)
             {
                 if (_index <= array.Length)
                     Array.Resize(ref array, array.Length * 2);
@@ -55,13 +62,15 @@ namespace List
         {
             get
             {
-                return array[_index];
+                return array[index];
             }
             set
             {
-                array[_index] = value;
+                array[index] = value;
             }
         }
+
+
 
         public void Add(T item)
         {
@@ -69,6 +78,7 @@ namespace List
                 Array.Resize(ref array, array.Length + 1);
             if (array.Length <= Count && _index == Count)
                 Array.Resize(ref array, array.Length * 2);
+
             array[_index] = item;
             _index++;
         }
@@ -92,12 +102,15 @@ namespace List
             return inList;
         }
 
-        public void CopyTo(T[] array1, int arrayIndex)
+        public void CopyTo(T[] arrayToAdd, int arrayIndex)
         {
+            if (arrayToAdd.Length <= array.Count())
+                Array.Resize(ref arrayToAdd, arrayToAdd.Count() + array.Count() + 1);
+
             int j = arrayIndex;
             for (int i = 0; i < _index; i++)
             {
-                array1.SetValue(array[i], j++);
+                arrayToAdd.SetValue(array[i], j++);
             }
         }
         public bool Compare(T[] array1, T[] array2)
@@ -135,6 +148,7 @@ namespace List
                 counter++;
             }
         }
+
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
