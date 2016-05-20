@@ -32,6 +32,11 @@ namespace List
                     right--;
                 }
             }
+            MoveElement(array, begin, end, left, right);
+        }
+
+        private void MoveElement(int[] array, int begin, int end, int left, int right)
+        {
             if (begin < right)
             {
                 QuickSort(array, begin, left - 1);
