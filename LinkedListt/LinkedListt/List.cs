@@ -9,51 +9,51 @@ namespace LinkedList
 {
     public class ListaInlantuita
     {
-        protected Nod header;
+        protected Node header;
         public ListaInlantuita()
         {
-            header = new Nod(0);
+            header = new Node(0);
         }
 
         public void Insert(int valn, int dupa)
         {
-            Nod curent = new Nod();
-            Nod nn = new Nod(valn);
-            curent = Caut(dupa);
-            nn.adres = curent.adres;
-            curent.adres = nn;
+            Node curent = new Node();
+            Node nn = new Node(valn);
+            curent = Search(dupa);
+            nn.address = curent.address;
+            curent.address = nn;
         }
 
-        private Nod Caut(int item)
+        private Node Search(int item)
         {
-            Nod curent = new Nod();
+            Node curent = new Node();
             curent = header;
             while (curent.value != item)
-                curent = curent.adres;
+                curent = curent.address;
             return curent;
         }
-        private Nod CautP(int n)
+        private Node SearchP(int n)
         {
-            Nod curent = header;
-            while (!(curent.adres == null) && (curent.adres.value != n))
-                curent = curent.adres;
+            Node curent = header;
+            while (curent.address != null && curent.address.value != n)
+                curent = curent.address;
             return curent;
         }
 
-        public void Clear(int n)
+        public void Clean(int n)
         {
-            Nod p = CautP(n);
-            if (!(p.adres == null))
-                p.adres = p.adres.adres;
+            Node p = SearchP(n);
+            if (!(p.address == null))
+                p.address = p.address.address;
         }
         public int Count()
         {
-            Nod curent = new Nod();
+            Node curent = new Node();
             curent = header;
             int counter = 0;
-            while (curent.adres != null)
+            while (curent.address != null)
             {
-                curent = curent.adres;
+                curent = curent.address;
                 counter++;
             }
             return counter;

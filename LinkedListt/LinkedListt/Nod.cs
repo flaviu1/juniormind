@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace LinkedList
 {
-    public class Nod
+    public class Node
     {
         public int value;
-        public Nod adres;
-        public Nod()
+        public Node address; 
+        public Node()
         {
             value = 0;
-            adres = null;
+            address = null;
         }
-        public Nod(int x)
+        public Node(int x)
         {
             value = x;
-            adres = null;
+            address = null;
         }
     }
 
