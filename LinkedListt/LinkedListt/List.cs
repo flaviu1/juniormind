@@ -7,48 +7,48 @@ using System.Threading.Tasks;
 
 namespace LinkedList
 {
-    public class ListaInlantuita
+    public class List<T>
     {
-        protected Node header;
-        public ListaInlantuita()
+        protected Node<T>  header;
+        public List()
         {
-            header = new Node(0);
+            header = new Node<T>();
         }
 
-        public void Insert(int valn, int dupa)
+        public void Insert(T valn, T after)
         {
-            Node curent = new Node();
-            Node nn = new Node(valn);
-            curent = Search(dupa);
+            Node<T> curent = new Node<T>();
+            Node<T> nn = new Node<T>(valn);
+            curent = Search(after);
             nn.address = curent.address;
             curent.address = nn;
         }
 
-        private Node Search(int item)
+        private Node<T> Search(T item)
         {
-            Node curent = new Node();
+            Node<T> curent = new Node<T>();
             curent = header;
-            while (curent.value != item)
+            while (!curent.value.Equals(item))
                 curent = curent.address;
             return curent;
         }
-        private Node SearchP(int n)
+        private Node<T> SearchP(T n)
         {
-            Node curent = header;
-            while (curent.address != null && curent.address.value != n)
+            Node<T> curent = header;
+            while (curent.address != null && !curent.address.value.Equals(n))
                 curent = curent.address;
             return curent;
         }
 
-        public void Clean(int n)
+        public void Clean(T n)
         {
-            Node p = SearchP(n);
+            Node<T> p = SearchP(n);
             if (!(p.address == null))
                 p.address = p.address.address;
         }
         public int Count()
         {
-            Node curent = new Node();
+            Node<T> curent = new Node<T>();
             curent = header;
             int counter = 0;
             while (curent.address != null)
