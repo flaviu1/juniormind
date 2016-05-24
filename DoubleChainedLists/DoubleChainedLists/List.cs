@@ -6,37 +6,37 @@ using System.Threading.Tasks;
 
 namespace DoubleChainedLists
 {
-    class List
+    class List<T>
     {
-        protected Nod header;
+        protected Node<T> header;
 
         public List()
         {
-            header = new Nod(0);
+            header = new Node<T>();
         }
 
-        public void Insert(int x, int dupa)
+        public void Insert(T x, T dupa)
         {
-            Nod curent = new Nod();
-            Nod nn = new Nod(x);
-            curent = Caut(dupa);
+            Node<T> curent = new Node<T>();
+            Node<T> nn = new Node<T>(x);
+            curent = SearchItem(dupa);
             nn.next = curent.next;
             nn.previous = curent;
             curent.next = nn;
         }
 
-        private Nod Caut(int item)
+        private Node<T> SearchItem(T item)
         {
-            Nod curent = new Nod();
+            Node<T> curent = new Node<T>();
             curent = header;
-            while (curent.value != item)
+            while (!curent.value.Equals(item))
                 curent = curent.next;
             return curent;
         }
 
-        public void Clear(int n)
+        public void Clear(T n)
         {
-            Nod s = Caut(n);
+            Node<T> s = SearchItem(n);
             if (!(s.next == null))
             {
                 s.previous.next = s.next;
@@ -46,9 +46,9 @@ namespace DoubleChainedLists
             }
         }
 
-        private Nod CautU()
+        private Node<T> Search()
         {
-            Nod curent = new Nod();
+            Node<T> curent = new Node<T>();
             curent = header;
             while (!(curent.next == null))
                 curent = curent.next;
@@ -57,8 +57,8 @@ namespace DoubleChainedLists
 
         public int Count()
         {
-            Nod curent = new Nod();
-            curent = CautU();
+            Node<T> curent = new Node<T>();
+            curent = Search();
             int counter = 0;
             while (!(curent.previous == null))
             {
@@ -68,17 +68,17 @@ namespace DoubleChainedLists
             return counter;
         }
 
-        public int ReturnElementposition(int position, int count)
+        public T ReturnElementposition(int position, int  count)
         {
-            Nod curent = new Nod();
+            Node<T> curent = new Node<T>();
             curent = header;
             int counter = 0;
-            while (count > 0)
+            while (!count.Equals(0))
             {
                 counter++;
                 curent = curent.next;
                 count--;
-                if (counter == position)
+                if (counter.Equals(position))
                     break;
             }
             return curent.value;

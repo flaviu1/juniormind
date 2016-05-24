@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace DoubleChainedLists
 {
-    public class Nod
+    public class Node<T>
     {
-        public int value;
-        public Nod next;
-        public Nod previous;
+        public T value;
+        public Node<T> next;
+        public Node<T> previous;
  
 
-        public Nod()
+        public Node()
         {
-            value = 0;
+            value = default(T);
             next = null;
             previous = null;
         }
-        public Nod(int x)
+        public Node(T x)
         {
             value = x;
             next = null;
