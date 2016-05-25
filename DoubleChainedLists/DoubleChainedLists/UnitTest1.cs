@@ -77,7 +77,7 @@ namespace DoubleChainedLists
             list.Insert('2', '1');
             list.Insert('3', '2');
             list.Insert('4', '3');
-            list.Clear('3');
+            list.Clear('2');
             Assert.AreEqual('4', list.ReturnElementposition(4, list.Count()));
         }
     }

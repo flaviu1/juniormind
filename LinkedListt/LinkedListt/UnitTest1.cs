@@ -7,70 +7,106 @@ namespace LinkedList
     public class UnitTest1
     {
         [TestMethod]
-        public void InsertElementToList()
+        public void AddFirst()
         {
-            List<int> list = new List<int>();
-            list.Insert(1, 0);
-            list.Insert(2, 1);
-            list.Insert(3, 2);
-            list.Insert(4, 3);
-            Assert.AreEqual(4, list.Count());
+            LinkedList<string> myList1 = new LinkedList<string>();
+            myList1.AddFirst("a");
+            myList1.AddFirst("b");
+            myList1.AddFirst("c");
+            string a = myList1.FierstElement();
+            Assert.IsTrue(a.Equals("c"));
         }
+
         [TestMethod]
-        public void CleanList()
+        public void AddLastInListWhitThreeElements()
         {
-            List<int> list = new List<int>();
-            list.Insert(1, 0);
-            list.Insert(2, 1);
-            list.Insert(3, 2);
-            list.Insert(4, 3);
-            list.Clean(4);
-            list.Clean(3);
-            Assert.AreEqual(2, list.Count());
+            LinkedList<string> myList1 = new LinkedList<string>();
+            myList1.AddFirst("a");
+            myList1.AddFirst("b");
+            myList1.AddFirst("c");
+            myList1.AddLast("d");
+            myList1.AddLast("x");
+            string result = myList1.TheLastItemInTheList();
+            Assert.IsTrue(result.Equals("x"));
         }
+
         [TestMethod]
-        public void DeleteElementThatWasNotInTheList()
+        public void AddLastInEmptyList()
         {
-            List<int> list = new List<int>();
-            list.Insert(1, 0);
-            list.Insert(2, 1);
-            list.Insert(3, 2);
-            list.Insert(4, 3); 
-            list.Clean(7);
-            Assert.AreEqual(4, list.Count());
+            LinkedList<string> myList1 = new LinkedList<string>();
+            myList1.AddLast("x");
+            string result = myList1.TheLastItemInTheList();
+            Assert.IsTrue(result.Equals("x"));
         }
+
+        [TestMethod]
+        public void RemoveLikedList()
+        {
+            LinkedList<string> myList1 = new LinkedList<string>();
+            myList1.AddFirst("a");
+            myList1.AddFirst("b");
+            myList1.AddFirst("c");
+            myList1.AddLast("d");
+            myList1.AddLast("x");
+            myList1.Clean();
+            Assert.AreEqual(0, myList1.EachListContainsElements());
+        }
+
+        [TestMethod]
+        public void EachListContainsElements()
+        {
+            LinkedList<string> myList1 = new LinkedList<string>();
+            myList1.AddFirst("a");
+            myList1.AddLast("x");
+            Assert.AreEqual(2, myList1.EachListContainsElements());
+            myList1.AddLast("e");
+            Assert.AreEqual(3, myList1.EachListContainsElements());
+        }
+
         [TestMethod]
         public void InsertElementCharToList()
         {
-            List<char> list = new List<char>();
-            list.Insert('a','\0');
-            list.Insert('b', 'a');
-            list.Insert('c', 'b');
-            list.Insert('d', 'c');
-            Assert.AreEqual(4, list.Count());
+            LinkedList<string> myList1 = new LinkedList<string>();
+            myList1.AddFirst("a");
+            myList1.AddFirst("b");
+            myList1.AddFirst("c");
+            myList1.AddAfter("x", "a");
+            string result = myList1.TheLastItemInTheList();
+            Assert.IsTrue(result.Equals("x"));
         }
+
         [TestMethod]
-        public void CleanCharFromList()
+        public void IEnumerator()
         {
-            List<char> list = new List<char>();
-            list.Insert('a', '\0');
-            list.Insert('b', 'a');
-            list.Insert('c', 'b');
-            list.Insert('d', 'c');
-            list.Clean('a');
-            list.Clean('b');
-            Assert.AreEqual(2, list.Count());
+            LinkedList<string> myList1 = new LinkedList<string>();
+            myList1.AddFirst("a");
+            myList1.AddFirst("b");
+            myList1.AddFirst("c");
+            myList1.AddFirst("a");
+            myList1.AddFirst("b");
+            myList1.AddFirst("c");
+            int counter = 0;
+            foreach (var item in myList1)
+            {
+                counter++;
+            }
+            Assert.AreEqual(6, counter);
         }
+
         [TestMethod]
-        public void DeleteElementCharThatWasNotInTheList()
+        public void RemoveLast()
         {
-            List<char> list = new List<char>();
-            list.Insert('a', '\0');
-            list.Insert('b', 'a');
-            list.Insert('c', 'b');
-            list.Insert('d', 'c');
-            list.Clean('7');
-            Assert.AreEqual(4, list.Count());
-        } 
+            LinkedList<string> myList1 = new LinkedList<string>();
+            myList1.AddLast("a");
+            myList1.AddLast("b");
+            myList1.AddLast("c");
+            myList1.AddLast("d");
+            myList1.AddLast("e");
+            myList1.AddLast("f");
+            myList1.Remove("f");
+            string result=myList1.TheLastItemInTheList();
+            Assert.IsTrue(result.Equals("e"));     
+        }
+
     }
 }

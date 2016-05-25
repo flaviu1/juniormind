@@ -15,11 +15,11 @@ namespace DoubleChainedLists
             header = new Node<T>();
         }
 
-        public void Insert(T x, T dupa)
+        public void Insert(T x, T after)
         {
             Node<T> curent = new Node<T>();
             Node<T> nn = new Node<T>(x);
-            curent = SearchItem(dupa);
+            curent = SearchItem(after);
             nn.next = curent.next;
             nn.previous = curent;
             curent.next = nn;
@@ -37,7 +37,7 @@ namespace DoubleChainedLists
         public void Clear(T n)
         {
             Node<T> s = SearchItem(n);
-            if (!(s.next == null))
+            if (s.next != null)
             {
                 s.previous.next = s.next;
                 s.next.previous = s.previous;
@@ -50,7 +50,7 @@ namespace DoubleChainedLists
         {
             Node<T> curent = new Node<T>();
             curent = header;
-            while (!(curent.next == null))
+            while (curent.next !=null)
                 curent = curent.next;
             return curent;
         }
@@ -60,7 +60,7 @@ namespace DoubleChainedLists
             Node<T> curent = new Node<T>();
             curent = Search();
             int counter = 0;
-            while (!(curent.previous == null))
+            while (curent.previous != null)
             {
                 counter++;
                 curent = curent.previous;

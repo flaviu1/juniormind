@@ -7,60 +7,113 @@ using System.Threading.Tasks;
 
 namespace LinkedList
 {
-    public class List<T>
+    public class LinkedList<T> : IEnumerable<T>
     {
-        protected Node<T>  header;
-        public List()
-        {
-            header = new Node<T>();
-        }
+        private Node<T> head;
 
-        public void Insert(T valn, T after)
+        public int EachListContainsElements()
         {
-            Node<T> curent = new Node<T>();
-            Node<T> nn = new Node<T>(valn);
-            curent = Search(after);
-            nn.address = curent.address;
-            curent.address = nn;
-        }
-
-        private Node<T> Search(T item)
-        {
-            Node<T> curent = new Node<T>();
-            curent = header;
-            while (!curent.value.Equals(item))
-                curent = curent.address;
-            return curent;
-        }
-        private Node<T> SearchP(T n)
-        {
-            Node<T> curent = header;
-            while (curent.address != null && !curent.address.value.Equals(n))
-                curent = curent.address;
-            return curent;
-        }
-
-        public void Clean(T n)
-        {
-            Node<T> p = SearchP(n);
-            if (!(p.address == null))
-                p.address = p.address.address;
-        }
-        public int Count()
-        {
-            Node<T> curent = new Node<T>();
-            curent = header;
             int counter = 0;
-            while (curent.address != null)
+            Node<T> current = head;
+            while (current != null)
             {
-                curent = curent.address;
                 counter++;
+                current = current.address;
             }
             return counter;
         }
+        public T FierstElement()
+        {
+            return head.value;
+        }
+        
+        public T TheLastItemInTheList()
+        {
+            Node<T> current = head;
+            while (current.address != null)
+            {
+                current = current.address;
+            }
+            return current.value;
+        }
 
+        public void AddFirst(T node)
+        {
+            Node<T> newNode = new Node<T>();
+
+            newNode.value = node;
+            newNode.address = head;
+
+            head = newNode;
+        }
+
+        public void AddLast(T data)
+        {
+            if (head == null)
+            {
+                head = new Node<T>();
+
+                head.value = data;
+                head.address = null;
+            }
+            else
+            {
+                Node<T> toAdd = new Node<T>();
+                toAdd.value = data;
+
+                Node<T> current = head;
+                while (current.address != null)
+                {
+                    current = current.address;
+                }
+
+                current.address = toAdd;
+            }
+        }
+
+        public void AddAfter(T valn, T after)
+        {
+            Node<T> curent = head; ;
+            Node<T> nn = new Node<T>(valn);
+            while (!curent.value.Equals(after))
+                curent = curent.address;
+            nn.address = curent.address;
+            curent.address = nn;
+        }
+        public void Clean()
+        {
+            head = null;
+        }
+
+        public void Remove(T item)
+        {
+            Node<T> _current = head;
+            while (_current.address != null)
+            {
+                if (_current.address.value.Equals(item))
+                {
+                    _current.address = _current.address.address;
+                    break;
+                }
+                else
+                    _current = _current.address;
+            }
+        }
+
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            var curr = head;
+            while (curr != null)
+            {
+                yield return curr.value;
+                curr = curr.address;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
     }
 }
-
-
-
