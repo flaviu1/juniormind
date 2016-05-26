@@ -26,16 +26,6 @@ namespace LinkedList
         {
             return head.value;
         }
-        
-        public T TheLastItemInTheList()
-        {
-            Node<T> current = head;
-            while (current.address != null)
-            {
-                current = current.address;
-            }
-            return current.value;
-        }
 
         public void AddFirst(T node)
         {
@@ -98,6 +88,39 @@ namespace LinkedList
                 else
                     _current = _current.address;
             }
+        }
+        public void RemoveFirst()
+        {
+            head = head.address;
+        }
+
+        public void RemoveLast()
+        {
+            T result = FindLast();
+            Remove(result);
+        }
+        public bool Find(T item)
+        {
+            Node<T> curent = head;
+             
+            while (!curent.value.Equals(item) && curent.address != null)
+            {
+                curent = curent.address;
+                if (curent.value.Equals(item))
+                    return true;
+            }
+            if (curent.value.Equals(item))
+                return true;
+            return false;
+        }
+        public T FindLast()
+        {
+            Node<T> current = head;
+            while (current.address != null)
+            {
+                current = current.address;
+            }
+            return current.value;
         }
 
 

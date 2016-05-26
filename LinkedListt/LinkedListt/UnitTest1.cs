@@ -26,7 +26,7 @@ namespace LinkedList
             myList1.AddFirst("c");
             myList1.AddLast("d");
             myList1.AddLast("x");
-            string result = myList1.TheLastItemInTheList();
+            string result = myList1.FindLast();
             Assert.IsTrue(result.Equals("x"));
         }
 
@@ -35,7 +35,7 @@ namespace LinkedList
         {
             LinkedList<string> myList1 = new LinkedList<string>();
             myList1.AddLast("x");
-            string result = myList1.TheLastItemInTheList();
+            string result = myList1.FindLast();
             Assert.IsTrue(result.Equals("x"));
         }
 
@@ -64,14 +64,14 @@ namespace LinkedList
         }
 
         [TestMethod]
-        public void InsertElementCharToList()
+        public void AddAfter()
         {
             LinkedList<string> myList1 = new LinkedList<string>();
             myList1.AddFirst("a");
             myList1.AddFirst("b");
             myList1.AddFirst("c");
             myList1.AddAfter("x", "a");
-            string result = myList1.TheLastItemInTheList();
+            string result = myList1.FindLast();
             Assert.IsTrue(result.Equals("x"));
         }
 
@@ -94,6 +94,38 @@ namespace LinkedList
         }
 
         [TestMethod]
+        public void Remove()
+        {
+            LinkedList<string> myList1 = new LinkedList<string>();
+            myList1.AddLast("a");
+            myList1.AddLast("b");
+            myList1.AddLast("c");
+            myList1.AddLast("d");
+            myList1.AddLast("e");
+            myList1.AddLast("f");
+            myList1.Remove("b");
+            myList1.Remove("c");
+            myList1.Remove("d");
+            int counter = 0;
+            foreach (var item in myList1)
+                counter++;
+            Assert.AreEqual(3,counter);     
+        }
+        [TestMethod]
+        public void RemoveFirst()
+        {
+             LinkedList<string> myList1 = new LinkedList<string>();
+            myList1.AddLast("a");
+            myList1.AddLast("b");
+            myList1.AddLast("c");
+            myList1.AddLast("d");
+            myList1.AddLast("e");
+            myList1.AddLast("f");
+            myList1.RemoveFirst();
+            string result=myList1.FierstElement();
+            Assert.IsTrue(result.Equals("b"));  
+        }
+        [TestMethod]
         public void RemoveLast()
         {
             LinkedList<string> myList1 = new LinkedList<string>();
@@ -103,10 +135,35 @@ namespace LinkedList
             myList1.AddLast("d");
             myList1.AddLast("e");
             myList1.AddLast("f");
-            myList1.Remove("f");
-            string result=myList1.TheLastItemInTheList();
-            Assert.IsTrue(result.Equals("e"));     
+            myList1.RemoveLast();
+            string result = myList1.FindLast();
+            Assert.IsTrue(result.Equals("e"));
         }
-
+        [TestMethod]
+        public void Find()
+        {
+            LinkedList<string> myList1 = new LinkedList<string>();
+            myList1.AddLast("a");
+            myList1.AddLast("b");
+            myList1.AddLast("c");
+            myList1.AddLast("d");
+            myList1.AddLast("e");
+            myList1.AddLast("f");
+            Assert.IsFalse(myList1.Find("x"));
+            Assert.IsTrue(myList1.Find("a"));
+            Assert.IsTrue(myList1.Find("f"));
+        }
+        [TestMethod]
+        public void FindLast()
+        {
+            LinkedList<string> myList1 = new LinkedList<string>();
+            myList1.AddLast("a");
+            myList1.AddLast("b");
+            myList1.AddLast("c");
+            myList1.AddLast("d");
+            myList1.AddLast("e");
+            myList1.AddLast("f");
+            Assert.AreEqual("f", myList1.FindLast());         
+        }
     }
 }
