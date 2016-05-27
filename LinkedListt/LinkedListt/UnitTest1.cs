@@ -109,12 +109,12 @@ namespace LinkedList
             int counter = 0;
             foreach (var item in myList1)
                 counter++;
-            Assert.AreEqual(3,counter);     
+            Assert.AreEqual(3, counter);
         }
         [TestMethod]
         public void RemoveFirst()
         {
-             LinkedList<string> myList1 = new LinkedList<string>();
+            LinkedList<string> myList1 = new LinkedList<string>();
             myList1.AddLast("a");
             myList1.AddLast("b");
             myList1.AddLast("c");
@@ -122,8 +122,8 @@ namespace LinkedList
             myList1.AddLast("e");
             myList1.AddLast("f");
             myList1.RemoveFirst();
-            string result=myList1.FierstElement();
-            Assert.IsTrue(result.Equals("b"));  
+            string result = myList1.FierstElement();
+            Assert.IsTrue(result.Equals("b"));
         }
         [TestMethod]
         public void RemoveLast()
@@ -163,7 +163,7 @@ namespace LinkedList
             myList1.AddLast("d");
             myList1.AddLast("e");
             myList1.AddLast("f");
-            Assert.AreEqual("f", myList1.FindLast());         
+            Assert.AreEqual("f", myList1.FindLast());
         }
     }
 }

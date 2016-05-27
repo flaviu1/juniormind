@@ -102,15 +102,13 @@ namespace LinkedList
         public bool Find(T item)
         {
             Node<T> curent = head;
-             
-            while (!curent.value.Equals(item) && curent.address != null)
+            while ( curent != null)
             {
-                curent = curent.address;
                 if (curent.value.Equals(item))
                     return true;
+                curent = curent.address;
             }
-            if (curent.value.Equals(item))
-                return true;
+
             return false;
         }
         public T FindLast()
