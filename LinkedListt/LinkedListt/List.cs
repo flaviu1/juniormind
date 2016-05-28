@@ -77,16 +77,16 @@ namespace LinkedList
 
         public void Remove(T item)
         {
-            Node<T> _current = head;
-            while (_current.address != null)
+            Node<T> current = head;
+            while (current.address != null)
             {
-                if (_current.address.value.Equals(item))
+                if (current.address.value.Equals(item))
                 {
-                    _current.address = _current.address.address;
+                    current.address = current.address.address;
                     break;
                 }
                 else
-                    _current = _current.address;
+                    current = current.address;
             }
         }
         public void RemoveFirst()
