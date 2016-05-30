@@ -10,6 +10,10 @@ namespace LinkedList
     public class LinkedList<T> : IEnumerable<T>
     {
         private Node<T> head;
+        public LinkedList()
+        {
+            head = new Node<T>();
+        }
 
         public int EachListContainsElements()
         {
@@ -63,7 +67,7 @@ namespace LinkedList
 
         public void AddAfter(T valn, T after)
         {
-            Node<T> curent = head; ;
+            Node<T> curent = head;
             Node<T> nn = new Node<T>(valn);
             while (!curent.value.Equals(after))
                 curent = curent.address;
@@ -91,7 +95,7 @@ namespace LinkedList
         }
         public void RemoveFirst()
         {
-            head = head.address;
+            head = head.address.address;
         }
 
         public void RemoveLast()
@@ -101,8 +105,8 @@ namespace LinkedList
         }
         public bool Find(T item)
         {
-            Node<T> curent = head;
-            while ( curent != null)
+            Node<T> curent = head.address;
+            while (curent != null)
             {
                 if (curent.value.Equals(item))
                     return true;
@@ -124,7 +128,9 @@ namespace LinkedList
 
         public IEnumerator<T> GetEnumerator()
         {
-            var curr = head;
+            if (head == null)
+                yield return default(T);
+            var curr = head.address;
             while (curr != null)
             {
                 yield return curr.value;
