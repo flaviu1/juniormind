@@ -63,15 +63,14 @@ namespace LinkedList
         public void EachListContainsElements()
         {
             LinkedList<string> myList1 = new LinkedList<string>();
-            myList1.AddFirst("a");
-            myList1.AddLast("x");
+            myList1.AddFirst("x");
             myList1.AddLast("e");
             int counter = 0;
             foreach (var item in myList1)
             {
                 counter++;
             }
-            Assert.AreEqual(3, counter);
+            Assert.AreEqual(2, counter);
         }
 
         [TestMethod]
@@ -79,7 +78,7 @@ namespace LinkedList
         {
             LinkedList<string> myList1 = new LinkedList<string>();
             myList1.AddFirst("a");
-            myList1.AddAfter("b", "a");
+            myList1.AddAfter("b","a");
             myList1.AddAfter("c", "b");
             myList1.AddAfter("x", "c");
             Assert.IsTrue(myList1.Find("x"));

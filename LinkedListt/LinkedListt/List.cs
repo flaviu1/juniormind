@@ -28,17 +28,25 @@ namespace LinkedList
         }
         public T FierstElement()
         {
-            return head.value;
+            return head.address.value;
         }
 
         public void AddFirst(T node)
         {
-            Node<T> newNode = new Node<T>();
-
-            newNode.value = node;
-            newNode.address = head;
-
-            head = newNode;
+            Node<T> current = head;
+            Node<T> newNode = new Node<T>(node);
+            if (current.address == null)
+            {
+                current.address = newNode;
+            }
+            else
+            {
+                current=head.address;
+                head.address = newNode;
+                newNode.address = current;
+                //newNode.address = current.address.address;
+                //head.address.address = newNode;
+            }
         }
 
         public void AddLast(T data)
@@ -69,7 +77,7 @@ namespace LinkedList
         {
             Node<T> curent = head;
             Node<T> nn = new Node<T>(valn);
-            while (!curent.value.Equals(after))
+            while (!curent.address.value.Equals(after))
                 curent = curent.address;
             nn.address = curent.address;
             curent.address = nn;
@@ -95,7 +103,8 @@ namespace LinkedList
         }
         public void RemoveFirst()
         {
-            head = head.address.address;
+            Node<T> current = head.address.address;
+            head.address = current;
         }
 
         public void RemoveLast()
