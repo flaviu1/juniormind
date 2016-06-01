@@ -41,22 +41,17 @@ namespace LinkedList
             }
             else
             {
-                current=head.address;
+                current = head.address;
                 head.address = newNode;
                 newNode.address = current;
-                //newNode.address = current.address.address;
-                //head.address.address = newNode;
             }
         }
 
         public void AddLast(T data)
         {
-            if (head == null)
+            if (head.address == null)
             {
-                head = new Node<T>();
-
-                head.value = data;
-                head.address = null;
+                AddFirst(data);
             }
             else
             {
@@ -73,15 +68,20 @@ namespace LinkedList
             }
         }
 
+
         public void AddAfter(T valn, T after)
         {
             Node<T> curent = head;
-            Node<T> nn = new Node<T>(valn);
-            while (!curent.address.value.Equals(after))
-                curent = curent.address;
-            nn.address = curent.address;
-            curent.address = nn;
+            Node<T> newNode = new Node<T>(valn);
+            if (Find(after))
+            {
+                while (!curent.address.value.Equals(after))
+                    curent = curent.address;
+                newNode.address = curent.address;
+                curent.address = newNode;
+            }
         }
+
         public void Clean()
         {
             head = null;
@@ -121,7 +121,6 @@ namespace LinkedList
                     return true;
                 curent = curent.address;
             }
-
             return false;
         }
         public T FindLast()
@@ -137,8 +136,6 @@ namespace LinkedList
 
         public IEnumerator<T> GetEnumerator()
         {
-            if (head == null)
-                yield return default(T);
             var curr = head.address;
             while (curr != null)
             {
