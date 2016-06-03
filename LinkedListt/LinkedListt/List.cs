@@ -10,64 +10,44 @@ namespace LinkedList
     public class LinkedList<T> : IEnumerable<T>
     {
         private Node<T> head;
+        private int count = 0;
         public LinkedList()
         {
             head = new Node<T>();
+            count = 0;
         }
 
-        public int EachListContainsElements()
+        public int Count
         {
-            int counter = 0;
-            Node<T> current = head;
-            while (current != null)
-            {
-                counter++;
-                current = current.address;
-            }
-            return counter;
+            get { return count; }
         }
+
         public T FierstElement()
         {
-            return head.address.value;
+            return head.next.value;
         }
 
         public void AddFirst(T node)
         {
             Node<T> current = head;
             Node<T> newNode = new Node<T>(node);
-            if (current.address == null)
-            {
-                current.address = newNode;
-            }
-            else
-            {
-                current = head.address;
-                head.address = newNode;
-                newNode.address = current;
-            }
+            current = head.next;
+            head.next = newNode;
+            newNode.next = current;
+            count++;
         }
 
         public void AddLast(T data)
         {
-            if (head.address == null)
+            Node<T> toAdd = new Node<T>();
+            toAdd.value = data;
+            Node<T> current = head;
+            while (current.next != null)
             {
-                AddFirst(data);
+                current = current.next;
             }
-            else
-            {
-                Node<T> toAdd = new Node<T>();
-                toAdd.value = data;
-
-                Node<T> current = head;
-                while (current.address != null)
-                {
-                    current = current.address;
-                }
-
-                current.address = toAdd;
-            }
+            current.next = toAdd;
         }
-
 
         public void AddAfter(T valn, T after)
         {
@@ -75,72 +55,76 @@ namespace LinkedList
             Node<T> newNode = new Node<T>(valn);
             if (Find(after))
             {
-                while (!curent.address.value.Equals(after))
-                    curent = curent.address;
-                newNode.address = curent.address;
-                curent.address = newNode;
+                    newNode.next = curent.next;
+                    curent.next = newNode;
             }
         }
 
         public void Clean()
         {
             head = null;
+            count = 0;
         }
 
         public void Remove(T item)
         {
             Node<T> current = head;
-            while (current.address != null)
+            while (current.next != null)
             {
-                if (current.address.value.Equals(item))
+                if (current.next.value.Equals(item))
                 {
-                    current.address = current.address.address;
+                    current.next = current.next.next;
                     break;
                 }
                 else
-                    current = current.address;
+                    current = current.next;
             }
         }
         public void RemoveFirst()
         {
-            Node<T> current = head.address.address;
-            head.address = current;
+            if (head.next != null)
+            {
+                Node<T> current = head.next.next;
+                head.next = current;
+                count--;
+            }
         }
 
         public void RemoveLast()
         {
-            T result = FindLast();
-            Remove(result);
+            Node<T> result = FindLast();
+            Remove(result.value);
+
         }
         public bool Find(T item)
         {
-            Node<T> curent = head.address;
+            Node<T> curent = head.next;
             while (curent != null)
             {
                 if (curent.value.Equals(item))
                     return true;
-                curent = curent.address;
+                curent = curent.next;
             }
             return false;
         }
-        public T FindLast()
+        public  Node<T> FindLast()
         {
-            Node<T> current = head;
-            while (current.address != null)
-            {
-                current = current.address;
-            }
-            return current.value;
+                Node<T> current = head;
+                while (current.next != null)
+                {
+                    current = current.next;
+                }
+                return current;
         }
 
 
         public IEnumerator<T> GetEnumerator()
         {
-            var curr = head.address;
+            var curr = head.next;
             while (curr != null)
             {
                 yield return curr.value;
-                curr = curr.address;
+                curr = curr.next;
             }
         }
 

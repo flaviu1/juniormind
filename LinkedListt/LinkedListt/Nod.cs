@@ -9,16 +9,16 @@ namespace LinkedList
     public class Node<T>
     {
         public T value;
-        public Node<T> address; 
+        public Node<T> next; 
         public Node()
         {
             value = default(T);
-            address = null;
+            next = null;
         }
         public Node(T x)
         {
             value = x;
-            address = null;
+            next = null;
         }
     }
 

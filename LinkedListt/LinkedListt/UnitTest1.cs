@@ -35,8 +35,9 @@ namespace LinkedList
             myList1.AddFirst("c");
             myList1.AddLast("d");
             myList1.AddLast("x");
-            string result = myList1.FindLast();
-            Assert.IsTrue(result.Equals("x"));
+            
+            Node<string> result = myList1.FindLast();
+            Assert.AreEqual("x",result.value);
         }
 
         [TestMethod]
@@ -44,7 +45,9 @@ namespace LinkedList
         {
             LinkedList<string> myList1 = new LinkedList<string>();
             myList1.AddLast("x");
-            Assert.IsTrue(myList1.FindLast().Equals("x"));
+            Node<string> result = myList1.FindLast();
+            Assert.AreEqual("x", result.value);
+            //Assert.IsTrue(myList1.FindLast().Equals("x"));
         }
 
         [TestMethod]
@@ -57,21 +60,14 @@ namespace LinkedList
             myList1.AddLast("d");
             myList1.AddLast("x");
             myList1.Clean();
-            Assert.AreEqual(0, myList1.EachListContainsElements());
+            Assert.AreEqual(0, myList1.Count);
         }
-
         [TestMethod]
-        public void EachListContainsElements()
+        public void CleanEmptyList()
         {
             LinkedList<string> myList1 = new LinkedList<string>();
-            myList1.AddFirst("x");
-            myList1.AddLast("e");
-            int counter = 0;
-            foreach (var item in myList1)
-            {
-                counter++;
-            }
-            Assert.AreEqual(2, counter);
+            myList1.Clean();
+            Assert.AreEqual(0, myList1.Count);
         }
 
         [TestMethod]
@@ -113,7 +109,7 @@ namespace LinkedList
             Assert.AreEqual(6, counter);
         }
         [TestMethod]
-        public void AddLastWhenLIstIseMPTY()
+        public void AddLastWhenLIstIsEmpty()
         {
             LinkedList<string> myList1 = new LinkedList<string>();
             myList1.AddLast("a");
@@ -173,8 +169,15 @@ namespace LinkedList
             myList1.AddLast("e");
             myList1.AddLast("f");
             myList1.RemoveLast();
-            Assert.IsFalse(myList1.FindLast().Equals("f"));
-            Assert.IsTrue(myList1.FindLast().Equals("e"));
+            Node<string> result = myList1.FindLast();
+            Assert.AreEqual("e", result.value);
+        }
+
+        [TestMethod]
+        public void MyTestMethod()
+        {
+            LinkedList<string> myList1 = new LinkedList<string>();
+            myList1.Remove("s");
         }
         [TestMethod]
         public void Find()
@@ -200,8 +203,37 @@ namespace LinkedList
             myList1.AddLast("d");
             myList1.AddLast("e");
             myList1.AddLast("f");
-            Assert.IsFalse(myList1.FindLast().Equals("x"));
-            Assert.IsTrue(myList1.FindLast().Equals("f"));
+            Node<string> result = myList1.FindLast();
+            Assert.AreEqual("f", result.value);
+        }
+        [TestMethod]
+        public void FindLastListIsEmpty()
+        {
+            LinkedList<string> myList1 = new LinkedList<string>();
+            Node<string> result = myList1.FindLast();
+            Assert.AreEqual(null, result.value);
+        }
+        [TestMethod]
+        public void RemoveLastListIsEmpty()
+        {
+            LinkedList<string> myList1 = new LinkedList<string>();
+            myList1.RemoveLast();
+            Assert.AreEqual(0, myList1.Count);
+        }
+        [TestMethod]
+        public void RemoveFirstListIsEmpty()
+        {
+            LinkedList<string> myList1 = new LinkedList<string>();
+            myList1.RemoveFirst();
+            Assert.AreEqual(0, myList1.Count);
+        }
+        [TestMethod]
+        public void RemoveFirstListContainsWoneElement()
+        {
+            LinkedList<string> myList1 = new LinkedList<string>();
+            myList1.AddFirst("1");
+            myList1.RemoveFirst();
+            Assert.AreEqual(0, myList1.Count);
         }
     }
 }
