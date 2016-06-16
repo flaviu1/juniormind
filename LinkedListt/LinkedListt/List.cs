@@ -14,9 +14,10 @@ namespace LinkedList
         public LinkedList()
         {
             head = new Node<T>();
-            count = 0;
+            head.next = null;
+            head.prev=null;
         }
-
+      
         public int Count
         {
             get { return count; }
@@ -31,9 +32,10 @@ namespace LinkedList
         {
             Node<T> current = head;
             Node<T> newNode = new Node<T>(node);
-            current = head.next;
-            head.next = newNode;
-            newNode.next = current;
+            newNode.next = current.next;
+            current.next = newNode;
+            newNode.prev = current;
+            newNode.next.prev = newNode;
             count++;
         }
 
@@ -55,8 +57,8 @@ namespace LinkedList
             Node<T> newNode = new Node<T>(valn);
             if (Find(after))
             {
-                    newNode.next = curent.next;
-                    curent.next = newNode;
+                newNode.next = curent.next;
+                curent.next = newNode;
             }
         }
 
@@ -74,7 +76,6 @@ namespace LinkedList
                 if (current.next.value.Equals(item))
                 {
                     current.next = current.next.next;
-                    break;
                 }
                 else
                     current = current.next;
@@ -107,14 +108,14 @@ namespace LinkedList
             }
             return false;
         }
-        public  Node<T> FindLast()
+        public Node<T> FindLast()
         {
-                Node<T> current = head;
-                while (current.next != null)
-                {
-                    current = current.next;
-                }
-                return current;
+            Node<T> current = head;
+            while (current.next != null)
+            {
+                current = current.next;
+            }
+            return current;
         }
 
 

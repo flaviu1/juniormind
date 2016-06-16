@@ -10,15 +10,19 @@ namespace LinkedList
     {
         public T value;
         public Node<T> next; 
+        public Node<T> prev;
         public Node()
         {
             value = default(T);
+            prev = null;
             next = null;
+
         }
         public Node(T x)
         {
             value = x;
             next = null;
+            prev = null;
         }
     }
 
