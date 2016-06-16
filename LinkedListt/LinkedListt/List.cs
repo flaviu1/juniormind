@@ -14,8 +14,8 @@ namespace LinkedList
         public LinkedList()
         {
             head = new Node<T>();
-            head.next = null;
-            head.prev=null;
+            head.next = head;
+            head.prev=head;
         }
       
         public int Count
@@ -23,42 +23,52 @@ namespace LinkedList
             get { return count; }
         }
 
-        public T FierstElement()
+        public Node<T> LastElement()
         {
-            return head.next.value;
+            return head!=head.next?head.prev:null;
         }
 
-        public void AddFirst(T node)
+        public Node<T> FierstElement()
         {
-            Node<T> current = head;
-            Node<T> newNode = new Node<T>(node);
-            newNode.next = current.next;
-            current.next = newNode;
-            newNode.prev = current;
-            newNode.next.prev = newNode;
+            return head != head.next ? head.next : null;
+        }
+
+        public void AddFirst(T value)
+        {
+            Node<T> newNode = new Node<T>(value);
+            newNode.next = head.next;
+            newNode.prev = head;
+            head.next.prev = newNode;
+            head.next = newNode;
             count++;
+        }
+
+        public void Add(T data)
+        {
+           AddLast(data);
         }
 
         public void AddLast(T data)
         {
-            Node<T> toAdd = new Node<T>();
-            toAdd.value = data;
-            Node<T> current = head;
-            while (current.next != null)
-            {
-                current = current.next;
-            }
-            current.next = toAdd;
+            Node<T> newNode = new Node<T>(data);
+            newNode.next = head;
+            newNode.prev = head.prev;
+            head.prev.next = newNode;
+            head.prev = newNode;
+            count++;
         }
 
         public void AddAfter(T valn, T after)
         {
-            Node<T> curent = head;
             Node<T> newNode = new Node<T>(valn);
-            if (Find(after))
+            Node<T> nodeAfter = FindValueReturnNode(after);
+            if (nodeAfter != null)
             {
-                newNode.next = curent.next;
-                curent.next = newNode;
+                newNode.next = nodeAfter.next;
+                newNode.prev = nodeAfter;
+                nodeAfter.next.prev = newNode;
+                nodeAfter.next = newNode;
+                count++;
             }
         }
 
@@ -70,37 +80,41 @@ namespace LinkedList
 
         public void Remove(T item)
         {
-            Node<T> current = head;
-            while (current.next != null)
+            if (FindValueReturnNode(item) != null)
             {
-                if (current.next.value.Equals(item))
-                {
-                    current.next = current.next.next;
-                }
-                else
-                    current = current.next;
-            }
-        }
-        public void RemoveFirst()
-        {
-            if (head.next != null)
-            {
-                Node<T> current = head.next.next;
-                head.next = current;
+                var newNode = FindValueReturnNode(item);
+                newNode.prev.next = newNode.next;
+                newNode.next.prev = newNode.prev;
                 count--;
             }
         }
 
+        public void RemoveFirst()
+        {
+            Remove(head.next.value);
+        }
+
         public void RemoveLast()
         {
-            Node<T> result = FindLast();
-            Remove(result.value);
-
+            Remove(head.prev.value);
         }
+
+        public Node<T> FindValueReturnNode(T item)
+        {
+            Node<T> curent = head.next;
+            while (curent != null && Find(item)==true)
+            {
+                if (curent.value.Equals(item))
+                    return curent;
+                curent = curent.next;
+            }
+            return null;
+        }
+
         public bool Find(T item)
         {
             Node<T> curent = head.next;
-            while (curent != null)
+            while (curent!=head)
             {
                 if (curent.value.Equals(item))
                     return true;
@@ -108,21 +122,17 @@ namespace LinkedList
             }
             return false;
         }
+
         public Node<T> FindLast()
         {
-            Node<T> current = head;
-            while (current.next != null)
-            {
-                current = current.next;
-            }
-            return current;
+            return head.prev;
         }
 
 
         public IEnumerator<T> GetEnumerator()
         {
             var curr = head.next;
-            while (curr != null)
+            while (curr != head)
             {
                 yield return curr.value;
                 curr = curr.next;
