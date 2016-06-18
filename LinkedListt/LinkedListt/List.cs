@@ -80,7 +80,7 @@ namespace LinkedList
 
         public void Remove(T item)
         {
-            if (FindValueReturnNode(item) != null)
+           while (FindValueReturnNode(item) != null)
             {
                 var newNode = FindValueReturnNode(item);
                 newNode.prev.next = newNode.next;
