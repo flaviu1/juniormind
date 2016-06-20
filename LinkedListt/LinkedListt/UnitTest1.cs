@@ -207,14 +207,14 @@ namespace LinkedList
         public void FindLast()
         {
             LinkedList<string> myList1 = new LinkedList<string>() { "a", "b", "c", "d", "e", "f" };
-            Assert.AreEqual("f", myList1.FindLast().value);
+            Assert.AreEqual("f", myList1.FindLast("e").next.value);
         }
 
         [TestMethod]
         public void FindLastListIsEmpty()
         {
             LinkedList<string> list = new LinkedList<string>();
-            Assert.AreEqual(null, list.FindLast().value);
+            Assert.AreEqual(null, list.FindLast("").value);
         }
 
         [TestMethod]
@@ -238,8 +238,9 @@ namespace LinkedList
         {
             LinkedList<string> list = new LinkedList<string>();
             list.AddFirst("1");
+            list.AddFirst("1");
             list.RemoveFirst();
-            Assert.AreEqual(0, list.Count);
+            Assert.AreEqual(1, list.Count);
         }
     }
 }

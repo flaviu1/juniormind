@@ -61,6 +61,11 @@ namespace LinkedList
         public void AddAfter(T valn, T after)
         {
             Node<T> newNode = new Node<T>(valn);
+            AddNode(after, newNode);
+        }
+
+        private void AddNode(T after, Node<T> newNode)
+        {
             Node<T> nodeAfter = FindValueReturnNode(after);
             if (nodeAfter != null)
             {
@@ -91,12 +96,18 @@ namespace LinkedList
 
         public void RemoveFirst()
         {
-            Remove(head.next.value);
+            if (count != 0)
+            {
+                head.next = head.next.next;
+                head.next.next.prev = head;
+                count--;
+            }
         }
 
         public void RemoveLast()
         {
-            Remove(head.prev.value);
+            head.prev.prev.next = head.prev;
+            head.prev = head.prev.prev;
         }
 
         public Node<T> FindValueReturnNode(T item)
@@ -123,9 +134,18 @@ namespace LinkedList
             return false;
         }
 
-        public Node<T> FindLast()
+        public Node<T> FindLast(T item)
         {
-            return head.prev;
+            Node<T> curent = head.next;
+            Node<T> lastNode = head.next;
+            while (curent != head)
+            {
+                if (curent.value.Equals(item))
+                     lastNode=curent;
+                curent = curent.next;
+            }
+            return lastNode;
+ 
         }
 
 
