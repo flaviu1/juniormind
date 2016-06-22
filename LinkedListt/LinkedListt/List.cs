@@ -15,9 +15,9 @@ namespace LinkedList
         {
             head = new Node<T>();
             head.next = head;
-            head.prev=head;
+            head.prev = head;
         }
-      
+
         public int Count
         {
             get { return count; }
@@ -25,7 +25,7 @@ namespace LinkedList
 
         public Node<T> LastElement()
         {
-            return head!=head.next?head.prev:null;
+            return head != head.next ? head.prev : null;
         }
 
         public Node<T> FierstElement()
@@ -45,7 +45,7 @@ namespace LinkedList
 
         public void Add(T data)
         {
-           AddLast(data);
+            AddLast(data);
         }
 
         public void AddLast(T data)
@@ -85,7 +85,7 @@ namespace LinkedList
 
         public void Remove(T item)
         {
-           while (FindValueReturnNode(item) != null)
+            while (FindValueReturnNode(item) != null)
             {
                 var newNode = FindValueReturnNode(item);
                 newNode.prev.next = newNode.next;
@@ -106,14 +106,18 @@ namespace LinkedList
 
         public void RemoveLast()
         {
-            head.prev.prev.next = head.prev;
-            head.prev = head.prev.prev;
+            if (count > 0)
+            {
+                head.prev.prev.prev.next = head;
+                head.prev = head.prev.prev;
+                count--;
+            }
         }
 
         public Node<T> FindValueReturnNode(T item)
         {
             Node<T> curent = head.next;
-            while (curent != null && Find(item)==true)
+            while (curent != null && Find(item) == true)
             {
                 if (curent.value.Equals(item))
                     return curent;
@@ -125,7 +129,7 @@ namespace LinkedList
         public bool Find(T item)
         {
             Node<T> curent = head.next;
-            while (curent!=head)
+            while (curent != head)
             {
                 if (curent.value.Equals(item))
                     return true;
@@ -136,18 +140,16 @@ namespace LinkedList
 
         public Node<T> FindLast(T item)
         {
-            Node<T> curent = head.next;
+            Node<T> curent = head.prev;
             Node<T> lastNode = head.next;
             while (curent != head)
             {
                 if (curent.value.Equals(item))
-                     lastNode=curent;
-                curent = curent.next;
+                    lastNode = curent;
+                curent = curent.prev;
             }
             return lastNode;
- 
         }
-
 
         public IEnumerator<T> GetEnumerator()
         {
